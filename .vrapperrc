@@ -1,0 +1,24 @@
+set tabstop=4
+set shiftwidth=4
+set nu
+set ignorecase
+set smartcase
+set hlsearch
+
+nmap <Space>h <C-w>h
+nmap <Space>j <C-w>j
+nmap <Space>k <C-w>k
+nmap <Space>l <C-w>l
+nmap <Space>b :buffers<CR>
+nmap <Space>f *
+nmap <Space>d :noh<CR>
+nmap <C-h> ^
+nmap <C-l> $
+nmap <C-n> :bn<CR>
+nmap <C-p> :bp<CR>
+nmap ; :
+nmap u :u<CR>
+
+"対応する括弧に移動
+nnoremap [ %
+nnoremap ] %

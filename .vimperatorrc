@@ -1,0 +1,88 @@
+"3.3 (created: 2011/11/13 17:32:12)
+
+map y :echo<Space>'Yank!'<Return>Y
+map j 2<C-e>
+map k 2<C-y>
+map <BS> H
+map <A-Left> <C-p>
+map <A-Right> <C-n>
+map h <C-p>
+map l <C-n>
+map <A-Up> :tabonly<Return>
+map <S-Left> :tabmove!<Space>-1<Return>
+map <S-Right> :tabmove!<Space>+1<Return>
+map <A-r> :restart<Return>
+map <A-h> :help<Return>
+map <C-Del> :toggleHighlight<Return>
+map <F2> :toggleToolbar<Return>
+map <A-g> :gmset!<Return>
+map b :hbinfo<Return>
+map <C-c> :copy<Space>titleAndURL<Return>
+map S :Sub<Return>
+set hlsearch
+set titlestring=Firefox
+set visualbell
+source! /Users/shima/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+" ---------------
+" ---shima add---
+" ---------------
+set hintchars=ifjklasdhguonmerwc
+"hi Hint z-index:5000; font-size:14px; color:white; background-color:red; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute; font-family: Menlo, Consolas, Monaco, monospace; text-transform: uppercase;
+"hi Hint z-index:5000; font-size:14px; color:white; background-color:blue; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute; font-family: Menlo, Consolas, Monaco, monospace; text-transform: none;
+
+"hi Hint font-family: monospace; font-size: medium; font-weight: bold; text-transform: uppercase; line-height: 1; color: black; background-color: #5FF; border-color: ButtonShadow; border-width: 1px; border-style: solid; padding: 1px; z-index: 99999;
+"hi Hint font-family: monospace; font-size: 18px; font-weight: bold; text-transform: uppercase; line-height: 1; color: white; background-color: blue; border-color: ButtonShadow; border-width: 1px; border-style: solid; padding: 1px; z-index: 99999;
+
+highlight Hint z-index:9999; font-size:17px; font-weight: bold;color: #fff; text-shadow: 0 1px 0 #00F; line-height: 20px; background-color:rgba(0,0,1,0.8); border-width:0px; border-radius: 10px;box-shadow: 0 0 2px rgba(0,0,1, 0.5); padding: 0 0; min-width: 20px; text-indent: -1px;text-align: center; display: inline-block;position:absolute; text-align: cener; vertical-align: middle; font-family: Menlo, Consolas, Monaco, monospace; text-transform: uppercase; margin-top: --2px; margin-left: -7px;
+
+
+hi -append CompDesc color: #272;
+hi -append StatusLine color: #44A;
+
+
+"h/l でタブ移動
+map h <C-p><Esc>
+map l <C-n><Esc>
+
+"タイトルを Vimperator から Firefox に変更
+set titlestring=Firefox
+
+"ビープ音を鳴らさずビジュアルベルを使用
+set visualbell
+
+:style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+
+"" ステータスバーのフォントサイズを大きくする
+style chrome://* <<EOM
+#liberator-statusline {
+    font-family: Menlo, Consolas, Monaco, monospace !important;
+        font-weight: normal !important;
+            font-size: 10pt !important;
+                padding:2px 2px !important;
+}
+EOM
+"" ステータスバー
+hi StatusLine color: #000; background: #BBB; font-weight: normal; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace;
+hi StatusLineSecure color: #000; background: #9CF; font-weight: normal;
+hi StatusLineExtended color: #000; background: #9FF; font-weight: normal;
+hi StatusLineBroken color: #FFF; background: #900; font-weight: normal;
+"" コマンドライン
+hi CmdLine color: #000; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; padding: 2px;
+hi Normal color: #000; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 通常時テキスト
+hi InfoMsg color: #000; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; "通知メッセージ
+hi ModeMsg color: #000; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; "モード表示
+hi MoreMsg color: #000; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; "さらにモード表示
+hi ErrorMsg color: #FFF; background: #F00; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " エラーメッセージ
+hi LineNr color: #F00; background: #FFF; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " エラーの行番号
+"" 補完リスト
+hi CompTitle font-weight: bold; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " タイトル
+hi CompResult width: 45%; overflow: hidden; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 結果欄（左側）
+hi CompDesc width: 50%; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 説明欄（右側）
+hi CompItem font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 補完リストの1行
+hi CompItem[selected] color: #FFF; background: #000; font-weight: normal; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 補完リストの選択している行
+hi Filter color: #06E; font-weight: bold; " 補完リストでマッチしたテキスト
+

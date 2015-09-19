@@ -1,0 +1,12 @@
+" Solarized用
+syntax enable
+set background=dark
+" colorscheme solarized
+"let g:solarized_termcolors=256
+let g:solarized_termcolors=16
+call togglebg#map('<F5>')
+
+
+" hyblid, tomorrow-theme 用
+colorscheme Tomorrow-Night
+" colorscheme hybrid

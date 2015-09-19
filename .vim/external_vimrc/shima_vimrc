@@ -1,0 +1,103 @@
+set nu
+set ignorecase
+set smartcase
+set hidden
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=0
+set smartindent
+set history=50
+set backspace=indent,eol,start
+set hlsearch
+" set directory-=.
+set encoding=utf8
+set fileencodings=utf8,euc-jp,cp932,sjis
+" ステータスライン
+" set statusline=%{expand('%:p:t')}\ %<[%{expand('%:p:h')}]%=\ %m%r%y%w[%{&fenc!=''?&fenc:&enc}][%{&ff}][%3l,%3c,%3p]
+" ステータスラインを常に表示
+set laststatus=2
+
+"-------------------------------
+"-- autocmd
+
+" 挿入モードの時のみ、カーソル行をハイライトする
+" autocmd InsertEnter,InsertLeave * set cursorline!
+autocmd InsertEnter * set cursorline!
+autocmd InsertLeave * set nocursorline
+
+" FileType ruby  [ruby構文チェック,インデント]
+autocmd FileType ruby :map <C-m> <ESC>:!ruby -cW %<CR>
+autocmd FileType ruby setlocal ts=2 sw=2 sts=0
+
+" 画面分割したときに、サイズを自動調整
+nmap <C-w>w <C-w>w:call <SID>good_width()<CR>
+function! s:good_width()
+  if winwidth(0) < 80
+    vertical resize 80
+  endif
+endfunction
+"-------------------------------
+
+"-------------------------------
+"-- Key Map START
+
+" imap <C-a> <HOME>
+" imap <C-e> <end>
+" imap <C-j> <Down>
+" imap <C-k> <Up>
+" imap <C-h> <Left>
+" imap <C-l> <RIGHT>
+nnoremap <Space>h <C-w>h
+nnoremap <Space>j <C-w>j
+nnoremap <Space>k <C-w>k
+nnoremap <Space>l <C-w>l
+nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
+nnoremap ; :
+nnoremap ** :noh<CR>
+nnoremap <Left> ^
+nnoremap <Right> $
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+" nmap <C-n> :tabnext<CR>
+" nmap <C-p> :tabprevious<CR>
+" imap <Down> <C-[>
+" imap <LEFT> <BS>
+inoremap jj <C-[>
+inoremap kk <C-[>
+inoremap <C-j> j
+inoremap <C-k> k
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+" imap < <><C-[>i
+
+"<C-space>は<Nul>
+"inoremap <Nul> <BS>
+inoremap <LEFT> <BS>
+
+"-- Key Map END
+"-------------------------------
+"-------------------------------
+" 折り畳み
+"http://sugilog.hatenablog.com/entry/20110922/1316661437
+set foldmethod=syntax
+set foldlevel=1
+"set foldnestmax=2
+
+augroup foldmethod-syntax
+  autocmd!
+  autocmd InsertEnter * if &l:foldmethod ==# 'syntax'
+  \                   |   setlocal foldmethod=manual
+  \                   | endif
+  autocmd InsertLeave * if &l:foldmethod ==# 'manual'
+  \                   |   setlocal foldmethod=syntax
+  \                   | endif
+augroup END
+
+nmap <Space>d zc "クローズ
+nmap <Space>z zO "全てオープン
+"-------------------------------
+
