@@ -1,0 +1,38 @@
+set laststatus=2
+set nu
+
+"### ノーマルモード ###
+" ;でコマンド入力
+nnoremap ; :
+" **でハイライト削除
+nnoremap ** :noh<CR>
+" Ctrl+h,l で先端/末尾に移動
+nnoremap <Left> ^
+nnoremap <Right> $
+" Qを無効
+nnoremap Q <Nop>
+
+"### 挿入モード ###
+" Ctrl+h,dでバックスペース
+inoremap <LEFT> <BS>
+inoremap <C-d> <BS>
+" jj,kkでESC
+inoremap jj <C-[>
+inoremap kk <C-[>
+"inoremap <Down> j
+"inoremap <Up> k
+" カッコ系を１回で打てるようにする
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap < <><C-[>i
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+" ;と:をスワップ(javaだし不要)
+" inoremap : ;
+" inoremap ; :
+" -と_をスワップ
+" inoremap - _
+" inoremap _ -
+" Ctrl+m を{}の間で打つと便利
+inoremap <C-m> <Enter><C-[>ko

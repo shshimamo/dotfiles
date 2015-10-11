@@ -12,8 +12,10 @@ export PATH=$DERBY_HOME/bin/:$PATH
 
 # add PATH for RVM
 export PATH=/Users/shima/.rvm/bin/:$PATH
+
 # add PATH for mysql
-export PATH=/Users/shima/mysql/bin:$PATH
+# export PATH=/Users/shima/mysql/bin:$PATH
+
 # add PATH for gradle
 #export GRADLE_HOME=/Users/shima/gradle/gradle-1.12  zipから展開したやつ
 export GRADLE_HOME=/Users/shima/.gvm/gradle/current

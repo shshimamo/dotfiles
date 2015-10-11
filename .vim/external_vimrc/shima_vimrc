@@ -1,3 +1,4 @@
+set vb t_vb=
 set nu
 set ignorecase
 set smartcase
@@ -41,42 +42,60 @@ endfunction
 
 "-------------------------------
 "-- Key Map START
+"### ノーマルモード ###
+" ;でコマンド入力
+nnoremap ; :
+" 先頭/末尾に移動
+nnoremap <Left> ^
+nnoremap <Right> $
+" ハイライト削除
+nnoremap ** :noh<CR>
+" バッファ切り替え
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+" ウィンドウ移動
+nnoremap <Space>h <C-w>h
+nnoremap <Space>j <C-w>j
+nnoremap <Space>k <C-w>k
+nnoremap <Space>l <C-w>l
+" ウィンドウ横分割
+nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
+" タブ切り替え
+" nmap <C-n> :tabnext<CR>
+" nmap <C-p> :tabprevious<CR>
+" Qを無効
+nnoremap Q <Nop>
 
+"### 挿入モード ###
+" バックスペースの代替
+inoremap <LEFT> <BS>
+inoremap <C-d> <BS>
+" inoremap <Nul> <BS>
+" ESCの代替
+inoremap jj <C-[>
+inoremap kk <C-[>
+" inoremap <Down> j
+" inoremap <Up> k
+" カッコ系
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap < <><C-[>i
+" -と_をスワップ
+inoremap - _
+inoremap _ -
+inoremap ; :
+inoremap : ;
+" 昔の設定
 " imap <C-a> <HOME>
 " imap <C-e> <end>
 " imap <C-j> <Down>
 " imap <C-k> <Up>
 " imap <C-h> <Left>
 " imap <C-l> <RIGHT>
-nnoremap <Space>h <C-w>h
-nnoremap <Space>j <C-w>j
-nnoremap <Space>k <C-w>k
-nnoremap <Space>l <C-w>l
-nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
-nnoremap ; :
-nnoremap ** :noh<CR>
-nnoremap <Left> ^
-nnoremap <Right> $
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
-" nmap <C-n> :tabnext<CR>
-" nmap <C-p> :tabprevious<CR>
 " imap <Down> <C-[>
-" imap <LEFT> <BS>
-inoremap jj <C-[>
-inoremap kk <C-[>
-inoremap <C-j> j
-inoremap <C-k> k
-inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-" imap < <><C-[>i
-
-"<C-space>は<Nul>
-"inoremap <Nul> <BS>
-inoremap <LEFT> <BS>
 
 "-- Key Map END
 "-------------------------------
@@ -100,4 +119,5 @@ augroup END
 nmap <Space>d zc "クローズ
 nmap <Space>z zO "全てオープン
 "-------------------------------
+
 

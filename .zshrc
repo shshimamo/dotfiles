@@ -1,3 +1,4 @@
+setopt nolistbeep
 
 #######################################
 ## Color
@@ -42,8 +43,10 @@ export PATH=$DERBY_HOME/bin/:$PATH
 
 # add PATH for RVM
 export PATH=/Users/shima/.rvm/bin/:$PATH
+
 # add PATH for mysql
-export PATH=/Users/shima/mysql/bin:$PATH
+# export PATH=/Users/shima/mysql/bin:$PATH
+
 # add PATH for gradle
 #export GRADLE_HOME=/Users/shima/gradle/gradle-1.12  zipから展開したやつ
 export GRADLE_HOME=/Users/shima/.gvm/gradle/current
@@ -80,12 +83,7 @@ proml
 
 alias g='git'
 
-alias nch='cd /Users/shima/rails_app/nchak'
-alias r2='cd /Users/shima/rails_app/resource_reservation'
-alias g4='cd /Applications/NetBeans/glassfish-4.0/glassfish/domains/domain1'
-alias nb='cd /Users/shima/netbeans/netbeans7_4'
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
-alias sai='cd /Users/shima/saito_project/eclipse_checkout/ee6_study'
 
 # for GNU command
 # http://d.hatena.ne.jp/katz_24/20120126/1327586474
@@ -267,12 +265,21 @@ fi
 #        alias ls='ls -F --color=auto'
 #        ;;
 #esac
+
 # 少し凝った zshrc END
 ########################################
 
 
+########################################
+# shima
+
+#________________
+# エイリアス
+alias ei='exit'
+#________________
+
+
 # glsをsolarizedする為の設定
 eval $(/usr/local/bin/gdircolors ~/solarized/dircolors.ansi-universal)
-
-#
-alias ei='exit'
+# enhancdを読み込む
+source /Users/shima/enhancd/enhancd/enhancd.sh

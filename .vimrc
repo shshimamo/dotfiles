@@ -26,6 +26,7 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
 
+
 "## vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ
 if filereadable(expand('~/.vim/external_vimrc/alpaca_neobundle_vimrc'))
   source ~/.vim/external_vimrc/alpaca_neobundle_vimrc
@@ -97,6 +98,4 @@ endif
 
 " Include External File END
 "####################################
-
-
 

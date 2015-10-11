@@ -45,9 +45,9 @@ function! s:unite_my_settings()"{{{
 	"ctrl+jで縦に分割して開く => C+o
 	nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('split')
 	inoremap <silent> <buffer> <expr> <C-o> unite#do_action('split')
-	"ctrl+lで横に分割して開く => C+u
-  "nnoremap <silent> <buffer> <expr> <C-u> unite#do_action('vsplit')
-	"inoremap <silent> <buffer> <expr> <C-u> unite#do_action('vsplit')
+	"ctrl+lで横に分割して開く => C+o
+  nnoremap <silent> <buffer> <expr> <C-o><C-o> unite#do_action('vsplit')
+	inoremap <silent> <buffer> <expr> <C-o><C-o> unite#do_action('vsplit')
 	"ctrl+oでその場所に開く
 	"nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 	"inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
@@ -60,6 +60,7 @@ endfunction"}}}
 "vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ 9個
 "-- Unite-rails.vim
 function! UniteRailsSetting()
+  "<Up>は<C-k>のこと
   nnoremap <buffer><Up><Up><Up>  :<C-U>Unite rails/view<CR>
   nnoremap <buffer><Up><Up>       :<C-U>Unite rails/model<CR>
   nnoremap <buffer><Up>            :<C-U>Unite rails/controller<CR>
@@ -73,6 +74,8 @@ function! UniteRailsSetting()
   nnoremap <buffer><expr><Up>se    ':e '.b:rails_root.'/db/seeds.rb<CR>'
   nnoremap <buffer><Up>ra          :<C-U>Unite rails/rake<CR>
   nnoremap <buffer><Up>h           :<C-U>Unite rails/heroku<CR>
+  nnoremap <buffer><Up>st          :<C-U>Unite rails/stylesheet<CR>
+  nnoremap <buffer><Up>js          :<C-U>Unite rails/javascript<CR>
 endfunction
 aug MyAutoCmd
   au User Rails call UniteRailsSetting()
