@@ -8,7 +8,7 @@
 # hlsearch on (H) or off (h):
 ~H
 # Last Search Pattern:
-~MSle0~/match
+~MSle0~/tagu
 
 # Last Substitute Search Pattern:
 ~MSle0&panel
@@ -17,6 +17,25 @@
 $
 
 # Search String History (newest to oldest):
+?/tagu
+?/ma
+?/auto
+?/map
+?/mark
+?/mar
+? \<UILaunchStoryboardName\>
+?/version
+?/interface
+?/proper
+?/nsapp
+?/rails
+?/light
+?/inoremap
+?/reservation
+? \<tag_name\>
+?/hello
+?/create
+?/autoindent
 ?/match
 ?/mat
 ?/C-n
@@ -45,32 +64,22 @@ $
 ?/login-form
 ?/staff_login
 ?/CTRL-Q
-?/mar
 ? @$
 ?/host
 ?/namespace
-?/assign_attri
-? \<birthday\>
-?/edit
-?/customer
-?/constrain
-?/contain
-?/contailn
-?/advance
-?/date_field
-?/alpaca-tc
-?/alpaca
-?/notes
-?/staffmemberpresenter
-?/with_options
-?/)
-?/output
-?/row
-?/radio
 
 # Expression History (newest to oldest):
 
 # Input Line History (newest to oldest):
+@values
+@./
+@create
+@.
+@tableuser
+@.tableuser
+@users
+@tableusers
+@table
 @1_000_
 @./spec/
 @validate
@@ -112,1517 +121,704 @@ $
 @test_field
 @text_field_block
 @wih_option
-@/Users/shima/jissen_ruby_on_rails4/baukis/app/presenters/staff_member_form_presenter.rb
-@ErrorHand
-@./app/controllers/
-@errors
-@field_with_errors
-@staff_member_params
-@.
-@fing
-@./app/models/
 
 # Input Line History (newest to oldest):
 
 # Registers:
-"0	LINE	0
-	ln -s dotfiles/.xvimrc .xvimrc       
+""0	LINE	0
+	"x キー削除でデフォルトレジスタに入れない
+	nnoremap x "_x
+	vnoremap x "_x
 "1	LINE	0
-	" imap <C-a> <HOME>
-	" imap <C-e> <end>
-	" imap <C-j> <Down>
-	" imap <C-k> <Up>
-	" imap <C-h> <Left>
-	" imap <C-l> <RIGHT>
-	" imap <Down> <C-[>
+	"
 "2	LINE	0
-	nnoremap <C-n> :bn<CR>
-	nnoremap <C-p> :bp<CR>
+	"lfkhdal
 "3	LINE	0
-	nnoremap <Left> ^
-	nnoremap <Right> $
+	"lfkhdal
 "4	LINE	0
-	nnoremap ** :noh<CR>
-"5	LINE	0
-	nnoremap ; :
-"6	LINE	0
-	" Qを無効
-	nnoremap Q <Nop>
-"7	LINE	0
-	"inoremap <Nul> <BS>
-"8	LINE	0
-	
-"9	LINE	0
-	" imap <C-a> <HOME>
-	" imap <C-e> <end>
-	" imap <C-j> <Down>
-	" imap <C-k> <Up>
-	" imap <C-h> <Left>
-	" imap <C-l> <RIGHT>
+	"aaaaaa
+"5	CHAR	0
+	a
+"6	CHAR	0
+	l
+"7	CHAR	0
+	j
+"8	CHAR	0
+	f
+"9	CHAR	0
+	d
 "a	CHAR	0
 	<%=%>
 "b	CHAR	0
 	binding.pry
 "j	CHAR	0
 	jjuuujjkkkkkkkkkk+
-""-	CHAR	0
-	x
+"-	CHAR	0
+	-
 
 # File marks:
-'0  23  0  ~/.vimrc
-'1  12  30  ~/dotfiles/dotfilesLink.sh
-'2  30  0  ~/.xvimrc
-'3  53  11  ~/dotfiles/.vim/external_vimrc/shima_vimrc
-'4  1  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
-'5  62  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
-'6  9  33  ~/.ideavimrc
-'7  38  2  ~/.xvimrc
-'8  1  0  ~/.xvimrc
-'9  19  0  ~/.xvimrc
+'0  8  0  ~/dotfiles/.xvimrc
+'1  44  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+'2  46  12  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+'3  49  29  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+'4  86  0  ~/Library/Android/sdk/platform-tools/NOTICE.txt
+'5  20  38  ~/AndroidStudioProjects/MyDBApp/app/src/main/java/com/dotinstall/mydbapp/UserOpenHelper.java
+'6  13  1  ~/.ideavimrc
+'7  10  1  ~/.xvimrc
+'8  36  9  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+'9  52  2  ~/dotfiles/.vim/external_vimrc/shima_vimrc
 
 # Jumplist (newest first):
--'  23  0  ~/.vimrc
--'  1  0  ~/.vimrc
--'  12  30  ~/dotfiles/dotfilesLink.sh
--'  1  0  ~/dotfiles/dotfilesLink.sh
--'  30  0  ~/.xvimrc
--'  1  0  ~/.xvimrc
--'  53  11  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  8  0  ~/dotfiles/.xvimrc
 -'  44  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  1  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  62  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  9  33  ~/.ideavimrc
+-'  2  0  ~/.ideavimrc
 -'  1  0  ~/.ideavimrc
--'  38  2  ~/.xvimrc
--'  19  0  ~/.xvimrc
--'  24  0  ~/.xvimrc
--'  39  9  ~/.xvimrc
--'  32  18  ~/.xvimrc
--'  10  0  ~/.xvimrc
--'  35  11  ~/.xvimrc
--'  103  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  100  11  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  101  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
--'  57  0  ~/.vimrc
--'  3  0  ~/.ideavimrc
--'  10  0  ~/.ideavimrc
--'  22  11  ~/.ideavimrc
--'  23  0  ~/.ideavimrc
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  25  0  ~/.ideavimrc
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
--'  2  2  ~/tmp/javascript_sample_code/sample.js
--'  1  27  ~/tmp/javascript_sample_code/sample.js
--'  40  0  ~/tmp/javascript_sample_code/sample.js
--'  31  13  ~/tmp/javascript_sample_code/sample.js
+-'  1  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  46  12  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  49  29  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  86  0  ~/Library/Android/sdk/platform-tools/NOTICE.txt
+-'  1  0  ~/Library/Android/sdk/platform-tools/NOTICE.txt
+-'  20  38  ~/AndroidStudioProjects/MyDBApp/app/src/main/java/com/dotinstall/mydbapp/UserOpenHelper.java
+-'  1  0  ~/AndroidStudioProjects/MyDBApp/app/src/main/java/com/dotinstall/mydbapp/UserOpenHelper.java
+-'  13  1  ~/.ideavimrc
+-'  10  1  ~/.xvimrc
+-'  1  0  ~/.xvimrc
+-'  36  9  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  52  2  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  35  0  ~/.ideavimrc
+-'  145  13  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  138  35  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  130  7  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  80  6  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  37  0  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  140  5  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  9  5  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  10  1  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  129  0  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  128  0  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  126  34  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  125  8  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  35  42  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  33  43  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  4  6  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  10  5  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  9  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  45  0  ~/.ideavimrc
+-'  1  17  ~/Buffalo-G-B8C4
+-'  28  0  ~/.ideavimrc
+-'  35  12  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  25  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  33  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  26  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  21  14  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  1  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  17  19  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  11  28  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  3  7  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  44  12  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  10  45  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  2  80  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  22  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/Info.plist
+-'  23  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+-'  22  1  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+-'  23  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/Info.plist
+-'  1  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/Info.plist
+-'  5  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/NameScoreAppTests.swift
+-'  1  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/NameScoreAppTests.swift
+-'  14  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+-'  1  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+-'  20  1  ~/.xvimrc
+-'  43  0  ~/.xvimrc
+-'  110  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  16  0  ~/.xvimrc
+-'  44  0  ~/.xvimrc
+-'  1  21  ~/aws/s3-static-file/index.html
+-'  1  12  ~/aws/s3-static-file/error.html
+-'  1  0  ~/aws/account_access_key/ami_account_shima/access_key/credentials.csv
+-'  96  0  ~/dotfiles/.vim/external_vimrc/shima_vimrc
+-'  101  0  ~/.vimrc
+-'  1  0  ~/.vimrc
+-'  4  0  ~/dotfiles/.vim/external_vimrc/vim-tags_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/vim-tags_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/tab_vimrc
+-'  44  0  ~/dotfiles/.vim/external_vimrc/tab_vimrc
+-'  5  1  ~/dotfiles/.vim/external_vimrc/neocomplete_vimrc
+-'  90  0  ~/dotfiles/.vim/external_vimrc/neocomplete_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/neocomplete_vimrc
+-'  1  28  ~/dotfiles/.vim/external_vimrc/gundo_vimrc
+-'  62  0  ~/dotfiles/.vim/external_vimrc/alpaca_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/alpaca_vimrc
+-'  1  0  ~/dotfiles/.vim/external_vimrc/alpaca_
+-'  61  10  ~/dotfiles/.vim/external_vimrc/unite_vimrc
+-'  35  12  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  25  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  33  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  26  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  21  14  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  1  6  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  17  19  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  11  28  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  3  7  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  44  12  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  10  45  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  2  80  ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+-'  22  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/Info.plist
+-'  23  0  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+-'  22  1  ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
 
 # History of marks within files (newest to oldest):
 
-> ~/.vimrc
-	"	23	0
-
-> ~/dotfiles/dotfilesLink.sh
-	"	12	30
-	^	12	31
-	.	12	30
-	+	11	29
-	+	12	30
-
-> ~/.xvimrc
-	"	30	0
-	^	15	21
-	.	34	2
-	+	41	0
-	+	1	0
-	+	7	5
-	+	10	0
-	+	10	0
-	+	41	0
-	+	10	0
-	+	19	0
-	+	8	0
-	+	19	0
-	+	32	0
-	+	32	0
-	+	32	0
-	+	24	0
-	+	25	0
-	+	41	0
-	+	32	28
-	+	34	0
-	+	35	0
-	+	34	11
-	+	35	11
-	+	10	0
-	+	36	0
-	+	33	0
-	+	32	84
-	+	32	0
-	+	37	0
-	+	36	37
-	+	32	0
-	+	40	0
-	+	39	0
-	+	32	9
-	+	37	1
-	+	38	1
-	+	32	0
+> ~/.ideavimrc
+	"	8	0
+	^	13	2
+	.	8	0
 	+	30	0
-	+	26	47
-	+	21	12
-	+	18	14
-	+	32	0
-	+	14	0
-	+	17	0
-	+	9	25
-	+	11	17
-	+	1	14
-	+	2	0
-	+	11	17
-	+	9	38
-	+	16	9
-	+	9	20
-	+	32	0
-	+	8	0
-	+	6	0
-	+	31	2
-	+	5	1
+	+	29	0
+	+	29	0
+	+	29	0
+	+	29	0
+	+	39	1
+	+	40	1
+	+	39	1
+	+	40	1
+	+	38	36
 	+	3	0
-	+	5	21
-	+	4	27
-	+	15	7
-	+	4	26
-	+	15	20
-	+	31	2
-	+	34	2
+	+	5	0
+	+	39	0
+	+	40	0
+	+	38	54
+	+	13	11
+	+	11	13
+	+	12	1
+	+	13	1
+	+	8	0
 
 > ~/dotfiles/.vim/external_vimrc/shima_vimrc
-	"	53	11
-	^	91	14
-	.	91	11
-	+	101	1
-	+	101	15
-	+	101	15
-	+	101	21
-	+	101	1
-	+	101	0
-	+	101	0
-	+	101	1
-	+	101	0
-	+	101	19
-	+	101	0
-	+	101	0
-	+	101	24
-	+	80	0
-	+	81	0
-	+	101	0
-	+	101	0
-	+	101	11
-	+	101	0
-	+	101	0
-	+	99	0
-	+	100	0
-	+	99	11
-	+	100	11
-	+	101	0
-	+	57	0
-	+	70	0
-	+	69	26
-	+	57	0
-	+	45	0
-	+	57	0
-	+	68	0
-	+	69	8
-	+	70	1
-	+	71	0
-	+	73	0
-	+	74	4
-	+	70	28
-	+	74	11
-	+	73	1
-	+	70	1
-	+	77	1
-	+	78	1
-	+	79	11
-	+	86	19
-	+	89	0
-	+	66	0
-	+	56	20
-	+	61	14
-	+	64	0
-	+	47	0
-	+	46	21
-	+	64	0
-	+	51	1
-	+	52	0
-	+	51	25
-	+	64	0
+	"	44	0
+	.	44	0
 	+	49	0
-	+	48	8
-	+	51	2
-	+	64	0
+	+	62	0
+	+	73	0
+	+	74	8
+	+	75	1
+	+	76	0
+	+	78	0
+	+	79	4
+	+	75	28
+	+	79	11
+	+	78	1
+	+	75	1
+	+	82	1
+	+	83	1
+	+	84	11
+	+	91	19
+	+	95	0
+	+	71	0
+	+	61	20
+	+	66	14
+	+	69	0
+	+	50	14
+	+	50	21
+	+	69	0
+	+	57	1
+	+	57	0
+	+	57	25
+	+	69	0
 	+	54	0
-	+	53	23
-	+	63	17
-	+	70	0
-	+	92	0
-	+	91	11
-
-> ~/.ideavimrc
-	"	9	33
-	^	31	39
-	.	31	36
-	+	23	0
-	+	22	0
-	+	22	0
-	+	22	0
-	+	22	0
-	+	32	1
-	+	33	1
-	+	32	1
-	+	33	1
-	+	31	36
-
-> ~/tmp/javascript_sample_code/sample.js
-	"	40	0
-	^	30	0
-	.	30	0
-	+	1	32
-	+	41	0
-	+	1	32
-	+	10	0
-	+	2	24
-	+	3	0
+	+	53	8
+	+	57	2
+	+	69	0
+	+	59	0
+	+	58	23
+	+	68	17
+	+	75	0
+	+	99	0
+	+	98	11
 	+	2	23
-	+	4	31
-	+	9	0
-	+	5	20
-	+	7	0
-	+	6	12
-	+	8	20
-	+	9	3
-	+	10	3
-	+	1	29
-	+	10	3
-	+	12	12
-	+	12	12
-	+	12	12
-	+	12	12
-	+	12	12
-	+	12	12
+	+	3	2
+	+	4	108
+	+	5	111
+	+	5	12
+	+	4	0
+	+	5	0
+	+	4	13
+	+	5	0
+	+	3	0
+	+	4	0
+	+	3	14
+	+	4	0
+	+	2	0
+	+	3	0
+	+	2	12
+	+	3	0
+	+	1	0
+	+	6	51
+	+	7	30
+	+	8	48
+	+	7	89
+	+	9	78
+	+	10	110
+	+	19	0
+	+	19	0
+	+	73	0
+	+	48	1
+	+	25	0
+	+	24	0
+	+	48	0
+	+	50	0
+	+	48	0
+	+	56	0
+	+	48	10
+	+	94	6
+	+	95	2
+	+	96	1
+	+	97	0
+	+	109	0
+	+	50	14
+	+	53	0
+	+	50	14
+	+	51	0
+	+	52	11
+	+	51	1
+	+	52	1
+	+	44	51
+	+	44	60
+	+	45	15
+	+	46	14
+	+	44	0
+	+	45	0
+	+	46	13
+	+	47	33
+	+	44	0
+	+	44	0
+	+	45	12
+	+	46	12
+	+	44	0
+	+	44	0
+	+	44	0
+	a	54	0
+	b	54	0
+	c	54	0
+	d	54	0
+	e	54	0
+	f	54	0
+	g	54	0
+	h	54	0
+
+> ~/[unite] - files
+	"	2	0
+	^	2	0
+	.	2	0
+	+	1	0
+	+	16	0
+	+	16	0
+	+	16	0
+	+	15	0
+	+	1	0
+	+	15	0
+	+	15	0
+	+	15	0
+	+	3	0
+	+	1	0
+	+	2	0
+
+> ~/dotfiles/.xvimrc
+	"	8	0
+	.	8	0
+	+	8	0
+
+> ~/Library/Android/sdk/platform-tools/NOTICE.txt
+	"	86	0
+
+> ~/AndroidStudioProjects/MyDBApp/app/src/main/java/com/dotinstall/mydbapp/UserOpenHelper.java
+	"	20	38
+	^	21	36
+	.	21	35
+	+	14	25
+	+	20	37
+	+	21	35
+
+> ~/AndroidStudioProjects/MyDBApp/[unite] - search-buffer
+	"	29	0
+	^	1	0
+	.	41	0
+	+	1	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	77	0
+	+	2	0
 	+	41	0
-	+	18	0
-	+	18	0
-	+	13	23
-	+	14	2
-	+	13	25
-	+	18	0
-	+	15	25
-	+	17	0
-	+	16	33
-	+	41	0
-	+	41	0
-	+	20	16
-	+	21	14
-	+	25	14
-	+	26	14
-	+	27	16
+
+> ~/AndroidStudioProjects/MyDBApp/app/src/[unite] - search-buffer
+	"	5	0
+	^	1	0
+	.	2	0
+	+	1	0
+	+	15	0
+	+	15	0
+	+	1	0
+	+	15	0
+	+	2	0
+
+> ~/.xvimrc
+	"	10	1
+	^	10	2
+	.	10	1
+	+	47	0
+	+	1	0
+	+	11	5
+	+	14	0
+	+	14	0
+	+	47	0
+	+	14	0
+	+	23	0
+	+	12	0
+	+	23	0
+	+	36	0
+	+	36	0
+	+	36	0
 	+	28	0
 	+	29	0
-	+	22	21
-	+	24	0
-	+	25	0
-	+	23	0
-	+	31	15
-	+	31	15
-	+	32	24
-	+	33	30
+	+	47	0
+	+	36	28
+	+	38	0
 	+	39	0
-	+	39	0
-	+	34	20
+	+	38	11
+	+	39	11
+	+	14	0
+	+	40	0
 	+	37	0
-	+	35	43
-	+	36	20
-	+	38	20
-	+	39	4
-	+	40	1
-	+	31	12
-	+	40	1
-	+	30	0
+	+	36	84
+	+	36	0
+	+	41	0
+	+	40	37
+	+	36	0
+	+	46	0
+	+	45	0
+	+	36	9
+	+	41	1
+	+	42	1
+	+	36	0
+	+	34	0
+	+	30	47
+	+	25	12
+	+	22	14
+	+	36	0
+	+	18	0
+	+	21	0
+	+	13	25
+	+	15	17
+	+	1	14
+	+	2	0
+	+	15	17
+	+	13	38
+	+	20	9
+	+	13	20
+	+	36	0
+	+	12	0
+	+	9	0
+	+	35	2
+	+	8	1
+	+	6	0
+	+	8	21
+	+	7	27
+	+	19	7
+	+	7	26
+	+	19	20
+	+	35	2
+	+	38	2
+	+	3	0
+	+	5	0
+	+	36	2
+	+	37	1
+	+	44	0
+	+	43	0
+	+	44	0
+	+	44	0
+	+	44	0
+	+	8	12
+	+	10	11
+	+	9	1
+	+	10	1
 
-> ~/tmp/javascript_sample_code/.xvimrc
-	"	1	0
+> ~/[unite] - files-1
+	"	3	0
+	^	1	1
+	.	2	0
+	+	8	0
+	+	2	0
 
-> ~/tmp/javascript_sample_code/[unite] - files
+> ~/[unite] - files-2
+	"	9	0
+	^	1	5
+	.	2	0
+	+	16	0
+	+	2	0
+
+> ~/dotfiles/.vim/external_vimrc/unite_vimrc
+	"	145	13
+	.	129	0
+	+	118	0
+	+	118	0
+	+	129	0
+	a	116	0
+
+> ~/Buffalo-G-B8C4
+	"	1	17
+	^	1	18
+	.	1	17
+	+	1	17
+
+> ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/Info.plist
+	"	22	0
+	.	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	22	28
+	+	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+
+> ~/dotinstall/swift/NameScoreApp/[unite] - files
+	"	5	0
+	^	1	3
+	.	2	0
+	+	1	0
+	+	12	0
+	+	12	0
+	+	12	0
+	+	7	0
+	+	7	0
+	+	7	0
+	+	7	0
+	+	7	0
+	+	2	0
+
+> ~/dotinstall/swift/NameScoreApp/[unite] - files-1
+	"	2	0
+	^	1	0
+	.	2	0
+	+	8	0
+	+	6	0
+	+	6	0
+	+	2	0
+
+> ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/Info.plist
+	"	23	0
+	.	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+
+> ~/dotinstall/swift/NameScoreApp/NameScoreApp/Info.plist
+	"	35	12
+
+> ~/dotinstall/swift/NameScoreApp/[unite] - files-2
+	"	5	0
+	^	1	0
+	.	2	0
+	+	2	0
+
+> ~/dotinstall/swift/NameScoreApp/NameScoreAppTests/NameScoreAppTests.swift
+	"	5	0
+
+> ~/dotinstall/swift/NameScoreApp/[unite] - action-2
+	"	2	0
+	^	1	4
+	.	2	0
+	+	4	0
+	+	2	0
+
+> ~/dotinstall/swift/NameScoreApp/NameScoreAppUITests/NameScoreAppUITests.swift
+	"	22	0
+
+> ~/aws/s3-static-file/index.html
+	"	1	21
+	^	1	18
+	.	1	18
+	+	1	13
+	+	2	0
+	+	1	18
+
+> ~/aws/s3-static-file/error.html
 	"	1	12
 	^	1	13
-	.	1	0
-	+	1	0
-	+	1	0
-	+	1	0
+	.	1	12
+	+	1	12
 
-> ~/tmp/__MACOSX/._jquery.leanModal.min.js
+> ~/aws/account_access_key/ami_account_shima/access_key/credentials.csv
 	"	1	0
 
-> ~/.xvim
+> ~/.vimrc
+	"	101	0
+
+> ~/dotfiles/.vim/external_vimrc/vim-tags_vimrc
+	"	4	0
+
+> ~/dotfiles/.vim/external_vimrc/tab_vimrc
 	"	1	0
 
 > ~/dotfiles/.vim/external_vimrc/neocomplete_vimrc
-	"	44	0
-	^	48	0
-	.	48	0
+	"	5	1
+	^	3	2
+	.	3	1
 	+	48	0
+	+	3	1
 
-> ~/dotinstall/swift/MyPlayground.playground/contents.xcplayground
-	"	1	11
+> ~/dotfiles/.vim/external_vimrc/gundo_vimrc
+	"	1	28
 
-> ~/dotinstall/swift/MyPlayground.playground/Contents.swift
-	"	135	0
+> ~/dotfiles/.vim/external_vimrc/__Gundo_Preview__
+	"	1	0
+	.	1	0
+	+	1	0
 
-> ~/Library/Application Support/Xcode/plugin/XVim/.xvimrc
+> ~/dotfiles/.vim/external_vimrc/__Gundo__
+	"	6	1
+	.	1	0
+	+	1	0
+
+> ~/dotfiles/.vim/external_vimrc/alpaca_vimrc
+	"	62	0
+
+> ~/dotfiles/.vim/external_vimrc/alpaca_
 	"	1	0
 
-> ~/jissen_ruby_on_rails4/baukis/app/forms/staff/customer_form.rb
-	"	34	5
-	^	25	48
-	.	30	47
-	+	16	34
-	+	32	0
-	+	17	19
-	+	21	45
-	+	72	26
-	+	23	62
-	+	28	62
-	+	72	0
-	+	57	0
-	+	52	38
-	+	56	0
-	+	53	24
-	+	54	69
-	+	55	23
-	+	57	0
-	+	60	42
-	+	62	0
-	+	61	60
-	+	66	42
-	+	69	0
-	+	67	61
-	+	68	34
-	+	44	32
-	+	12	14
-	+	13	23
-	+	44	30
-	+	12	0
-	+	40	21
-	+	46	6
-	+	41	0
-	+	36	82
-	+	40	7
-	+	36	79
-	+	5	29
-	+	34	0
-	+	48	0
-	+	10	61
-	+	11	44
-	+	4	68
-	+	10	54
-	+	11	54
-	+	23	0
-	+	23	0
-	+	20	0
-	+	18	63
-	+	19	48
-	+	20	0
-	+	22	25
-	+	26	6
-	+	23	0
-	+	27	25
-	+	31	6
-	+	28	0
-	+	25	32
-	+	30	32
-	+	24	4
-	+	25	4
-	+	29	4
-	+	30	4
-	+	18	36
-	+	19	36
-	+	24	4
-	+	25	4
-	+	29	4
-	+	30	4
-	+	25	47
-	+	30	47
-	a	5	2
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files
-	"	3	0
-	^	1	0
+> ~/dotfiles/.vim/external_vimrc/[unite] - register
+	"	11	0
+	^	11	0
 	.	2	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	5	0
-	+	1	0
-	+	5	0
-	+	5	0
-	+	5	0
-	+	5	0
-	+	5	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-1
-	"	2	0
-	^	1	2
-	.	2	0
-	+	41	0
-	+	32	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	23	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	15	0
-	+	13	0
-	+	13	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	11	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-2
-	"	2	0
-	^	1	0
-	.	2	0
-	+	89	0
-	+	89	0
-	+	79	0
-	+	76	0
-	+	76	0
-	+	76	0
-	+	76	0
-	+	76	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	49	0
-	+	49	0
-	+	49	0
-	+	49	0
-	+	49	0
-	+	49	0
-	+	49	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	48	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	46	0
-	+	38	0
-	+	38	0
-	+	38	0
-	+	38	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	21	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	17	0
-	+	17	0
-	+	17	0
-	+	17	0
-	+	17	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-3
-	"	2	0
-	^	1	3
-	.	2	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	147	0
-	+	84	0
-	+	107	0
-	+	127	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	84	0
-	+	82	0
-	+	82	0
-	+	82	0
-	+	82	0
-	+	65	0
-	+	65	0
-	+	65	0
-	+	61	0
-	+	1	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	61	0
-	+	59	0
-	+	59	0
-	+	59	0
-	+	59	0
-	+	59	0
-	+	59	0
-	+	59	0
-	+	57	0
-	+	56	0
-	+	56	0
-	+	46	0
-	+	1	0
-	+	46	0
-	+	46	0
-	+	41	0
-	+	41	0
-	+	41	0
-	+	41	0
-	+	41	0
-	+	39	0
-	+	1	0
-	+	39	0
-	+	39	0
-	+	31	0
-	+	31	0
-	+	31	0
-	+	31	0
-	+	29	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	19	0
-	+	14	0
-	+	14	0
-	+	14	0
-	+	14	0
-	+	14	0
-	+	14	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - default
-	"	7	0
-	^	1	7
-	.	2	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	9	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/app/views/staff/customers/_form.html.erb
-	"	20	41
-	^	16	46
-	.	16	43
-	+	5	0
-	+	6	5
-	+	9	0
-	+	7	5
-	+	8	0
-	+	7	38
-	+	8	65
-	+	14	3
-	+	17	0
-	+	15	29
-	+	16	43
-
-> ~/jissen_ruby_on_rails4/baukis/app/assets/javascripts/staff/customer_form.js.coffee
-	"	27	0
-	^	27	57
-	.	27	56
-	+	12	29
-	+	13	12
-	+	14	52
-	+	15	31
-	+	16	26
-	+	17	14
-	+	19	33
-	+	20	62
-	+	21	67
-	+	22	41
-	+	23	0
-	+	24	0
-	+	26	19
-	+	27	19
-	+	19	0
-	+	24	12
-	+	19	0
-	+	24	0
-	+	20	0
-	+	21	0
 	+	22	0
-	+	25	0
-	+	26	0
-	+	27	0
-	+	21	55
-	+	22	56
-	+	25	36
-	+	26	55
-	+	27	56
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-4
-	"	3	0
-	^	1	2
-	.	2	0
-	+	67	0
-	+	67	0
-	+	67	0
-	+	67	0
-	+	52	0
-	+	52	0
-	+	52	0
-	+	47	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	43	0
-	+	33	0
-	+	33	0
-	+	33	0
-	+	33	0
-	+	33	0
-	+	31	0
-	+	26	0
-	+	19	0
-	+	19	0
-	+	17	0
-	+	17	0
-	+	15	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	7	0
-	+	7	0
 	+	2	0
 
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-5
-	"	5	0
-	^	1	0
-	.	2	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	0
-	+	9	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - files-6
+> ~/dotfiles/.vim/external_vimrc/[unite] - default
 	"	2	0
-	^	1	0
+	^	2	0
 	.	2	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	8	0
-	+	4	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - action-7
-	"	2	0
-	^	1	4
-	.	2	0
-	+	4	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-20-1/app/assets/javascripts/staff/customer_form.js.coffee
-	"	26	2
-
-> ~/jissen_ruby_on_rails4/baukis/spec/features/staff/customer_management_spec.rb
-	"	110	36
-	^	110	60
-	.	110	36
-	+	1	20
-	+	4	33
-	+	114	0
-	+	5	27
-	+	6	44
-	+	7	34
-	+	10	26
-	+	11	37
-	+	55	73
-	+	56	25
-	+	57	42
-	+	59	58
-	+	60	45
-	+	61	43
-	+	63	33
-	+	60	33
-	+	63	45
-	+	64	40
-	+	67	21
-	+	70	48
-	+	71	59
-	+	72	60
-	+	7	5
-	+	11	0
+	+	1	0
 	+	3	0
-	+	2	18
-	+	11	10
-	+	12	0
-	+	11	0
-	+	12	0
-	+	57	42
-	+	13	0
-	+	14	60
-	+	53	0
-	+	15	25
-	+	16	44
-	+	18	58
-	+	19	39
-	+	20	51
-	+	21	50
-	+	22	58
-	+	23	57
-	+	24	44
-	+	25	15
-	+	27	11
-	+	27	45
-	+	28	38
-	+	29	42
-	+	30	46
-	+	31	52
-	+	32	15
-	+	31	58
-	+	32	52
-	+	35	45
-	+	36	40
-	+	37	34
-	+	38	24
-	+	44	0
-	+	39	33
-	+	41	37
-	+	42	30
-	+	43	39
-	+	45	21
-	+	47	42
-	+	48	53
-	+	49	59
-	+	50	44
-	+	51	63
-	+	52	64
-	+	22	50
-	+	23	49
-	+	18	46
-	+	31	52
-	+	48	31
-	+	49	34
-	+	40	0
-	+	39	6
-	+	28	41
-	+	75	0
-	+	75	0
-	+	75	0
-	+	74	0
-	+	28	0
-	+	26	35
-	+	34	32
-	+	92	70
-	+	111	0
-	+	93	0
-	+	95	0
-	+	103	0
-	+	111	0
-	+	109	58
-	+	110	59
-	+	109	36
-	+	110	36
+	+	2	0
 
-> ~/jissen_ruby_on_rails4/baukis/db/migrate/20151005163802_create_phones.rb
-	"	14	33
-	^	17	39
-	.	17	38
-	+	4	40
-	+	5	26
-	+	6	21
-	+	7	31
-	+	8	52
-	+	13	34
-	+	14	30
-	+	15	39
+> ~/dotfiles/.vim/external_vimrc/solarized_vimrc
+	"	17	0
+	.	9	0
+	+	1	31
+	+	10	0
+	+	9	24
+	+	12	0
+	+	13	0
+	+	17	0
 	+	16	38
-	+	17	38
+	+	6	1
+	+	3	0
+	+	9	0
+	+	3	0
+	+	9	0
 
-> ~/.zshrc
-	"	279	0
-	.	279	0
-	+	279	0
+> ~/dotfiles/.vimrc
+	"	10	0
+	^	82	1
+	.	82	1
+	+	80	1
+	+	81	1
+	+	82	1
 
-> ~/jissen_ruby_on_rails4/baukis/[unite] - search-buffer
+> ~/dotfiles/.vim/external_vimrc/lightline_vimrc
+	"	1	0
+
+> ~/dotfiles/.vim/external_vimrc/buftabs_vimrc
+	"	12	0
+
+> ~/dotfiles/.vim/external_vimrc/alpaca_neobundle_vimrc
+	"	55	6
+
+> ~/aws/iam_account_access_key/ami_account_shima/access_key/credentials.csv
+	"	1	0
+
+> ~/aws/key_pair/AWS_Book_Key.pem
+	"	7	0
+
+> ~/aws/ruby_sdk_script/aws_sdk_sample.rb
+	"	12	18
+	^	12	19
+	.	12	18
+	+	1	16
+	+	2	15
+	+	4	31
+	+	24	0
+	+	6	56
+	+	8	53
+	+	8	53
+	+	9	53
+	+	10	64
+	+	9	60
+	+	10	64
+	+	10	64
+	+	24	0
+	+	12	18
+	+	13	37
+	+	14	14
+	+	15	29
+	+	17	0
+	+	16	47
+	+	18	52
+	+	19	59
+	+	20	44
+	+	21	61
+	+	22	28
+	+	22	0
+	+	4	2
+	+	12	18
+
+> ~/aws/ruby_sdk_script/[unite] - register
+	"	1	0
+	^	1	0
+	.	1	0
+	+	1	0
+
+> ~/aws/ruby_sdk_script/[unite] - default
 	"	2	0
 	^	1	0
 	.	2	0
-	+	1	0
-	+	7	0
-	+	7	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	1	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
-	+	3	0
 	+	2	0
 
-> ~/jissen_ruby_on_rails4/baukis/spec/controllers/admin/top_controller_spec.rb
-	"	11	8
+> ~/.aws/credentials
+	"	9	1
+	^	9	12
+	.	9	11
+	+	5	10
+	+	8	0
+	+	6	0
+	+	9	11
 
-> ~/jissen_ruby_on_rails4/baukis/app/views/staff/customers/index.html.erb
-	"	3	0
-
-> ~/jissen_ruby_on_rails4/baukis/spec/factories/customers.rb
-	"	8	4
-	^	7	19
-	.	7	18
-	+	3	50
-	+	4	20
-	+	5	19
-	+	6	31
-	+	7	22
-	+	8	15
-	+	9	31
-	+	10	15
-	+	11	46
-	+	12	20
-	+	14	0
-	+	7	18
-
-> ~/jissen_ruby_on_rails4/baukis/spec/support/features_spec_helper.rb
-	"	11	46
-	^	11	47
-	.	11	46
-	+	15	2
-	+	2	32
-	+	15	0
-	+	5	0
-	+	3	43
-	+	4	58
-	+	5	0
-	+	7	55
-	+	14	0
-	+	8	25
-	+	9	28
-	+	10	62
-	+	12	29
-	+	11	46
-
-> ~/jissen_ruby_on_rails4/baukis/spec/factories/staff_members.rb
-	"	27	14
-
-> ~/jissen_ruby_on_rails4/baukis/config/routes.rb
-	"	5	0
-
-> ~/jissen_ruby_on_rails4/baukis/app/views/staff/sessions/new.html.erb
-	"	3	0
-
-> ~/jissen_ruby_on_rails4/baukis/app/views/staff/customers/edit.html.erb
-	"	9	0
-	^	13	5
-	.	14	0
-	+	1	40
-	+	2	14
-	+	4	20
-	+	5	42
-	+	6	53
-	+	12	2
-	+	7	28
-	+	8	23
-	+	11	0
-	+	9	27
-	+	10	7
-	+	11	0
-	+	10	53
-	+	14	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-3/app/views/staff/customers/edit.html.erb
-	"	7	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-3/app/views/staff/customers/_form.html.erb
-	"	4	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-3/app/views/staff/customers/_customer_fields.html.erb
-	"	8	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-3/app/views/staff/customers/_home_address_fields.html.erb
-	"	1	0
-
-> ~/jissen_ruby_on_rails4/baukis/app/views/staff/customers/_home_address_fields.html.erb
-	"	13	8
-	.	13	0
-	+	1	68
-	+	13	6
-	+	2	19
-	+	12	0
-	+	3	40
-	+	4	39
-	+	10	0
-	+	5	63
-	+	6	62
-	+	7	57
-	+	8	60
-	+	9	70
-	+	11	74
-	+	5	55
-	+	11	64
-	+	13	0
-
-> ~/jissen_ruby_on_rails4/baukis/app/controllers/staff/customers_controller.rb
-	"	32	0
-	^	37	58
-	.	15	0
-	+	1	45
-	+	3	85
-	+	7	28
-	+	11	43
-	+	5	0
-	+	9	0
-	+	15	68
-	+	20	48
-	+	22	46
-	+	25	52
-	+	26	24
-	+	31	69
-	+	32	48
-	+	34	52
-	+	39	0
-	+	35	31
-	+	37	52
-	+	38	25
-	+	39	0
-	+	43	38
-	+	45	59
-	+	46	31
-	+	16	0
-	+	15	14
-	+	34	16
-	+	37	0
-	+	33	6
-	+	33	0
-	+	22	49
-	+	22	0
-	+	23	0
-	+	25	55
-	+	31	70
-	+	34	55
-	+	37	55
-	+	33	0
-	+	34	0
-	+	37	0
-	+	15	0
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - action-6
-	"	1	3
-	^	1	4
-	.	2	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	4	0
-	+	2	0
-
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-3/app/forms/staff/customer_form.rb
-	"	26	2
-
-> ~/jissen_ruby_on_rails4/baukis/[unite] - action-5
+> ~/.aws/[unite] - files
 	"	2	0
-	^	1	4
+	^	1	0
 	.	2	0
-	+	4	0
-	+	4	0
 	+	2	0
 
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-1/app/forms/staff/customer_form.rb
-	"	5	24
-	.	5	0
-	+	5	29
-	+	22	0
-	+	29	0
-	+	22	146
+> ~/.aws/config
+	"	8	0
+	^	8	0
+	.	9	1
+	+	4	0
 	+	5	0
+	+	8	0
+	+	9	0
+	+	5	1
+	+	9	1
+	+	5	1
+	+	9	1
 
-> ~/jissen_ruby_on_rails4/downloads/jissen-rails-src/section-19-1/app/controllers/staff/customers_controller.rb
+> ~/aws/ruby_sdk_script/credentials
 	"	1	0

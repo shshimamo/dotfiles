@@ -77,9 +77,9 @@ if filereadable(expand('~/.vim/external_vimrc/tab_vimrc'))
 endif
 
 "## lightline
-if filereadable(expand('~/.vim/external_vimrc/lightline_vimrc'))
-  source ~/.vim/external_vimrc/lightline_vimrc
-endif
+"if filereadable(expand('~/.vim/external_vimrc/lightline_vimrc'))
+"  source ~/.vim/external_vimrc/lightline_vimrc
+"endif
 
 "## solarized
 if filereadable(expand('~/.vim/external_vimrc/solarized_vimrc'))

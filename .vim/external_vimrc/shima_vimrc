@@ -1,13 +1,13 @@
-set vb t_vb=
 set nu
-set ignorecase
-set smartcase
-set hidden
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=0
-set smartindent
+set vb t_vb= "ビープ音をなくす
+set ignorecase "大文字小文字を区別しない
+set smartcase "ignorecaseを有効にしている時、大文字検索は大文字小文字を無視しないようになる
+set hidden "保存されていないファイルがあるときでも別のファイルを開くことが出来る"
+set expandtab "タブをスペースに置き換える
+set tabstop=2 "<TAB>を含むファイルを開いた際何文字の空白に変換するか
+set shiftwidth=2 "自動インデントの空白数
+set softtabstop=0 "キーボードで<TAB>を入力した際設定する空白数
+set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set history=50
 set backspace=indent,eol,start
 set hlsearch
@@ -16,8 +16,7 @@ set encoding=utf8
 set fileencodings=utf8,euc-jp,cp932,sjis
 " ステータスライン
 " set statusline=%{expand('%:p:t')}\ %<[%{expand('%:p:h')}]%=\ %m%r%y%w[%{&fenc!=''?&fenc:&enc}][%{&ff}][%3l,%3c,%3p]
-" ステータスラインを常に表示
-set laststatus=2
+set laststatus=2 "ステータスラインを常に表示 
 
 "-------------------------------
 "-- autocmd
@@ -42,9 +41,15 @@ endfunction
 
 "-------------------------------
 "-- Key Map START
+"x キー削除でデフォルトレジスタに入れない
+nnoremap x "_x
+vnoremap x "_x
+"mmで対応カッコにジャンプ
+nnoremap mm %
 "### ノーマルモード ###
-" ;でコマンド入力
-nnoremap ; :
+" :と;をswap
+" nnoremap ; :
+" nnoremap : ;
 " 先頭/末尾に移動
 nnoremap <Left> ^
 nnoremap <Right> $
@@ -86,8 +91,10 @@ inoremap < <><C-[>i
 " -と_をスワップ
 inoremap - _
 inoremap _ -
-inoremap ; :
-inoremap : ;
+" ;と:をスワップ
+" inoremap ; :
+" inoremap : ;
+
 " 昔の設定
 " imap <C-a> <HOME>
 " imap <C-e> <end>
@@ -99,6 +106,7 @@ inoremap : ;
 
 "-- Key Map END
 "-------------------------------
+
 "-------------------------------
 " 折り畳み
 "http://sugilog.hatenablog.com/entry/20110922/1316661437

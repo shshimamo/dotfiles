@@ -1,9 +1,16 @@
 set laststatus=2
 set nu
+set ignorecase "大文字小文字を区別しない
+set smartcase "ignorecaseを有効にしている時、大文字検索は大文字小文字を無視しないようになる
+set hlsearch
 
 "### ノーマルモード ###
-" ;でコマンド入力
-nnoremap ; :
+"x キー削除でデフォルトレジスタに入れない
+nnoremap x "_x
+vnoremap x "_x
+" :と;をswap
+" nnoremap ; :
+" nnoremap : ;
 " **でハイライト削除
 nnoremap ** :noh<CR>
 " Ctrl+h,l で先端/末尾に移動
@@ -29,10 +36,11 @@ inoremap < <><C-[>i
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 " ;と:をスワップ
-inoremap : ;
-inoremap ; :
+" inoremap : ;
+" inoremap ; :
 " -と_をスワップ
 " inoremap - _
 " inoremap _ -
 " Ctrl+m を{}の間で打つと便利
 inoremap <C-m> <Enter><C-[>ko
+
