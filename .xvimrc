@@ -21,8 +21,8 @@ nnoremap Q <Nop>
 
 "### 挿入モード ###
 " Ctrl+h,dでバックスペース
-inoremap <LEFT> <BS>
-inoremap <C-d> <BS>
+" inoremap <LEFT> <BS>
+" inoremap <C-d> <BS>
 " jj,kkでESC
 inoremap jj <C-[>
 inoremap kk <C-[>
@@ -41,6 +41,4 @@ inoremap ' ''<LEFT>
 " -と_をスワップ
 " inoremap - _
 " inoremap _ -
-" Ctrl+m を{}の間で打つと便利
-inoremap <C-m> <Enter><C-[>ko
 

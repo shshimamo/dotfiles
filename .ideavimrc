@@ -1,7 +1,16 @@
+set visualbell
+set noerrorbells
+
 set laststatus=2
 set nu
 set ignorecase "大文字小文字を区別しない
 set smartcase "ignorecaseを有効にしている時、大文字検索は大文字小文字を無視しないようになる
+
+set expandtab "タブをスペースに置き換える
+set tabstop=2 "<TAB>を含むファイルを開いた際何文字の空白に変換するか
+set shiftwidth=2 "自動インデントの空白数
+set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+
 set hlsearch
 
 "### ノーマルモード ###
@@ -14,20 +23,26 @@ vnoremap x "_x
 " **でハイライト削除
 nnoremap ** :noh<CR>
 " Ctrl+h,l で先端/末尾に移動
-nnoremap <Left> ^
-nnoremap <Right> $
+nnoremap <C-h> ^
+nnoremap <C-l> $
 " Qを無効
 nnoremap Q <Nop>
+" ウィンドウ移動
+nnoremap <Space>h <C-w>h
+nnoremap <Space>j <C-w>j
+nnoremap <Space>k <C-w>k
+nnoremap <Space>l <C-w>l
+" 横分割
+nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
 
 "### 挿入モード ###
+" 右へ移動
+inoremap <C-l> <RIGHT>
 " Ctrl+h,dでバックスペース
-inoremap <LEFT> <BS>
-inoremap <C-d> <BS>
+inoremap <C-h> <BS>
 " jj,kkでESC
 inoremap jj <C-[>
 inoremap kk <C-[>
-"inoremap <Down> j
-"inoremap <Up> k
 " カッコ系を１回で打てるようにする
 inoremap ( ()<LEFT>
 inoremap [ []<LEFT>
@@ -35,11 +50,10 @@ inoremap { {}<LEFT>
 inoremap < <><C-[>i
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
-" ;と:をスワップ(javaなのでセミコロン優先)
-inoremap : ;
-inoremap ; :
+" ;と:をスワップ(karabinerで;と:を入れ替えている前提。
+" android studioのときはこの設定を入れる。 rubymineのときは不要
+"inoremap : ;
+"inoremap ; :
 " -と_をスワップ
-" inoremap - _
-" inoremap _ -
-" Ctrl+m を{}の間で打つと便利
-inoremap <C-m> <Enter><C-[>ko
+inoremap - _
+inoremap _ -

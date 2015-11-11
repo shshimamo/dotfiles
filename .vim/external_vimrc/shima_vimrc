@@ -52,7 +52,9 @@ nnoremap mm %
 " nnoremap : ;
 " 先頭/末尾に移動
 nnoremap <Left> ^
+nnoremap <C-h> ^
 nnoremap <Right> $
+nnoremap <C-l> $
 " ハイライト削除
 nnoremap ** :noh<CR>
 " バッファ切り替え
@@ -72,9 +74,9 @@ nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
 nnoremap Q <Nop>
 
 "### 挿入モード ###
-" バックスペースの代替
-inoremap <LEFT> <BS>
-inoremap <C-d> <BS>
+" バックスペースの代替(デフォルトC-h)
+" inoremap <LEFT> <BS>
+" inoremap <C-d> <BS>
 " inoremap <Nul> <BS>
 " ESCの代替
 inoremap jj <C-[>

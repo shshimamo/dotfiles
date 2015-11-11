@@ -1,11 +1,11 @@
 "-------------------------------
 " Solarized用
-syntax enable
-set background=dark
+" syntax enable
+" set background=dark
 " colorscheme solarized
 " let g:solarized_termcolors=256
-let g:solarized_termcolors=16
-call togglebg#map('<F5>')
+" let g:solarized_termcolors=16
+" call togglebg#map('<F5>')
 " Solarized用 ここまで
 "-------------------------------
 

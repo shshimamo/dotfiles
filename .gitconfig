@@ -5,9 +5,16 @@
 	ui = auto
 [core]
 	editor = vim
+	excludesfile = /Users/shima/.gitignore_global
 [alias]
 	co = checkout
 	ci = commit
 	s = status
 	b = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

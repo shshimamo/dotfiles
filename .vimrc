@@ -18,13 +18,11 @@ NeoBundle 'szw/vim-tags'
 NeoBundle 'honza/vim-snippets'
 NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle "sjl/gundo.vim"
-" Solarizedとlightlineが競合
-" NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'basyura/unite-rails'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
+NeoBundle 'Shougo/neocomplete.vim'
 
 
 "## vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ
@@ -96,6 +94,10 @@ if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
   source ~/.vim/external_vimrc/buftabs_vimrc
 endif
 
+"## rsense
+"if filereadable(expand('~/.vim/external_vimrc/rsense_vimrc'))
+"  source ~/.vim/external_vimrc/rsense_vimrc
+"endif
+
 " Include External File END
 "####################################
-

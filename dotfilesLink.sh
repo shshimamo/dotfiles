@@ -1,12 +1,14 @@
 #! /bin/bash
-ln -s dotfiles/.bashrc .bashrc
-ln -s dotfiles/.gitconfig .gitconfig
-ln -s dotfiles/.screenrc .screenrc   
-ln -s dotfiles/.tmux.conf .tmux.conf 
-ln -s dotfiles/.vim .vim            
-ln -s dotfiles/.vimperatorrc .vimperatorrc
-ln -s dotfiles/.vimrc .vimrc              
-ln -s dotfiles/.vrapperrc .vrapperrc
-ln -s dotfiles/.zshrc .zshrc        
-ln -s dotfiles/.xvimrc .xvimrc       
-ln -s dotfiles/.ideavimrc .ideavimrc       
+mkdir ~/.vim/ 
+ln -s ~/dotfiles/.vim/externa_vimrc ~/.vim/externa_vimrc
+ln -s ~/dotfiles/.vim/plugin ~/.vim/plugin
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/.screenrc ~/.screenrc   
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf 
+ln -s ~/dotfiles/.vimperatorrc ~/.vimperatorrc
+ln -s ~/dotfiles/.vimrc ~/.vimrc              
+ln -s ~/dotfiles/.vrapperrc ~/.vrapperrc
+ln -s ~/dotfiles/.zshrc ~/.zshrc        
+ln -s ~/dotfiles/.xvimrc ~/.xvimrc       
+ln -s ~/dotfiles/.ideavimrc ~/.ideavimrc       

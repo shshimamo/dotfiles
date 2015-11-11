@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/shima/heroku_app/rails_projects/sample_app/vendor/bundle/ruby/2.2.0/bundler/gems/spork-224df492657e'
 let g:netrw_dirhist_2='/Users/shima/rails_app/railbook_sample/test/fixtures/notice_mailer'
 let g:netrw_dirhist_3='/Users/shima/.vim/external_vimrc/ruby_snip'
 let g:netrw_dirhist_4='/Users/shima/.vim/external_vimrc'
 let g:netrw_dirhist_5='/Users/shima/.heroku'
 let g:netrw_dirhist_6='/Users/shima/dotfiles/.vim/external_vimrc'
+let g:netrw_dirhist_7='/Users/shima/dotfiles/.vim/bundle'

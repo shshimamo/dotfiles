@@ -15,57 +15,27 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Color END
 #######################################
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/shima/.gvm/bin/gvm-init.sh" ]] && source "/Users/shima/.gvm/bin/gvm-init.sh"
 
 
-# 20150809 rbenv
+### 20150809 rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 export PATH=/Users/shima/.rbenv/shims/:$PATH
+### 20151027 rbenv gemにパスを通す
+export PATH=/Users/shima/.rbenv/versions/2.2.3/gemsets/first_gemset/bin:$PATH
 
-# 20150815 add vim 
+### 20150815 add vim 
 export PATH=/usr/local/bin:$PATH
 
-#######################
-# bashrcからもってきた START
+#################################
+### bashrcからもってきた START ###
 
 #PS1='\[\033[36m\][\u@:\[\033[33m\]\w\[\033[36m\]]\[\033[0m\] \$ '
 alias ls='/usr/local/bin/gls --color=auto'
 alias ll='ls -lahG'
 
-# add JBOSS_HOME
-export JBOSS_HOME=/Users/shima/wildfly/wildfly
-
-# add PATH for DERBY
-#export DERBY_HOME=/Applications/NetBeans/glassfish-4.0/javadb/
-export DERBY_HOME=/Users/shima/glassfish_zip/glassfish3/javadb/
-export PATH=$DERBY_HOME/bin/:$PATH
-
-# add PATH for RVM
-export PATH=/Users/shima/.rvm/bin/:$PATH
-
-# add PATH for mysql
-# export PATH=/Users/shima/mysql/bin:$PATH
-
-# add PATH for gradle
-#export GRADLE_HOME=/Users/shima/gradle/gradle-1.12  zipから展開したやつ
-export GRADLE_HOME=/Users/shima/.gvm/gradle/current
-export PATH=$GRADLE_HOME/bin:$PATH
-# add PATH for maven
-export M2_HOME=/Users/shima/maven/apache-maven-3.1.1
-export PATH=$M2_HOME/bin:$PATH
-# add PATH for java
-#export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
-#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=$CLASSPATH:./
-
-# add PATH for activator
-export PATH=/Users/shima/typesafe/activator-1.2.10-minimal:$PATH
-
-# for git
-
+### for git
 # brewのgitを参照
 alias git='/usr/local/bin/git'
 
@@ -85,12 +55,12 @@ alias g='git'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
-# for GNU command
+### for GNU command
 # http://d.hatena.ne.jp/katz_24/20120126/1327586474
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/shima/.gvm/bin/gvm-init.sh" ]] && source "/Users/shima/.gvm/bin/gvm-init.sh"
+# [[ -s "/Users/shima/.gvm/bin/gvm-init.sh" ]] && source "/Users/shima/.gvm/bin/gvm-init.sh"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -108,13 +78,12 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # 環境変数
 export LANG=ja_JP.UTF-8
 
-
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
 
 # emacs 風キーバインドにする
-bindkey -e
+# bindkey -e
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -280,6 +249,9 @@ alias ei='exit'
 
 
 # glsをsolarizedする為の設定
-eval $(/usr/local/bin/gdircolors ~/solarized/dircolors.ansi-universal)
+# eval $(/usr/local/bin/gdircolors ~/solarized/dircolors.ansi-universal)
+
 # enhancdを読み込む
 source /Users/shima/enhancd/enhancd/enhancd.sh
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
