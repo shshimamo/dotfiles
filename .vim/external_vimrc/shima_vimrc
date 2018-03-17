@@ -17,6 +17,7 @@ set fileencodings=utf8,euc-jp,cp932,sjis
 " ステータスライン
 " set statusline=%{expand('%:p:t')}\ %<[%{expand('%:p:h')}]%=\ %m%r%y%w[%{&fenc!=''?&fenc:&enc}][%{&ff}][%3l,%3c,%3p]
 set laststatus=2 "ステータスラインを常に表示 
+set nowrapscan "検索をファイルの先頭へループしない
 
 "-------------------------------
 "-- autocmd
@@ -51,9 +52,7 @@ nnoremap mm %
 " nnoremap ; :
 " nnoremap : ;
 " 先頭/末尾に移動
-nnoremap <Left> ^
 nnoremap <C-h> ^
-nnoremap <Right> $
 nnoremap <C-l> $
 " ハイライト削除
 nnoremap ** :noh<CR>
@@ -65,13 +64,17 @@ nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j
 nnoremap <Space>k <C-w>k
 nnoremap <Space>l <C-w>l
-" ウィンドウ横分割
-nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
+" ウィンドウ分割
+nnoremap <C-j>v :vsplit<CR><C-w><C-w>
+nnoremap <C-j>s :split<CR><C-w><C-w>
 " タブ切り替え
 " nmap <C-n> :tabnext<CR>
 " nmap <C-p> :tabprevious<CR>
 " Qを無効
 nnoremap Q <Nop>
+" 最後の編集位置に移動
+nnoremap <Space>o `. 
+
 
 "### 挿入モード ###
 " バックスペースの代替(デフォルトC-h)
@@ -84,27 +87,18 @@ inoremap kk <C-[>
 " inoremap <Down> j
 " inoremap <Up> k
 " カッコ系
-inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap < <><C-[>i
+" inoremap ( ()<LEFT>
+" inoremap [ []<LEFT>
+" inoremap { {}<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
+" inoremap < <><C-[>i
 " -と_をスワップ
-inoremap - _
-inoremap _ -
+"inoremap - _
+"inoremap _ -
 " ;と:をスワップ
 " inoremap ; :
 " inoremap : ;
-
-" 昔の設定
-" imap <C-a> <HOME>
-" imap <C-e> <end>
-" imap <C-j> <Down>
-" imap <C-k> <Up>
-" imap <C-h> <Left>
-" imap <C-l> <RIGHT>
-" imap <Down> <C-[>
 
 "-- Key Map END
 "-------------------------------
@@ -112,22 +106,26 @@ inoremap _ -
 "-------------------------------
 " 折り畳み
 "http://sugilog.hatenablog.com/entry/20110922/1316661437
-set foldmethod=syntax
-set foldlevel=1
-"set foldnestmax=2
-
-augroup foldmethod-syntax
-  autocmd!
-  autocmd InsertEnter * if &l:foldmethod ==# 'syntax'
-  \                   |   setlocal foldmethod=manual
-  \                   | endif
-  autocmd InsertLeave * if &l:foldmethod ==# 'manual'
-  \                   |   setlocal foldmethod=syntax
-  \                   | endif
-augroup END
-
-nmap <Space>d zc "クローズ
-nmap <Space>z zO "全てオープン
+" あまり使わないのでコメントアウト
+"set foldmethod=syntax
+"set foldlevel=1
+""set foldnestmax=2
+"
+"augroup foldmethod-syntax
+"  autocmd!
+"  autocmd InsertEnter * if &l:foldmethod ==# 'syntax'
+"  \                   |   setlocal foldmethod=manual
+"  \                   | endif
+"  autocmd InsertLeave * if &l:foldmethod ==# 'manual'
+"  \                   |   setlocal foldmethod=syntax
+"  \                   | endif
+"augroup END
+"
+"nmap <Space>d zc "クローズ
+"nmap <Space>z zO "全てオープン
 "-------------------------------
 
 
+"背景色をリセット
+"autocmd ColorScheme * highlight Normal ctermbg=none
+"autocmd ColorScheme * highlight LineNr ctermbg=none
