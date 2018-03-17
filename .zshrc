@@ -21,7 +21,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 ### 20150809 rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-export PATH=/Users/shima/.rbenv/shims/:$PATH
+export PATH=/Users/shima/.rbenv/shims:$PATH
 ### 20151027 rbenv gemにパスを通す
 export PATH=/Users/shima/.rbenv/versions/2.2.3/gemsets/first_gemset/bin:$PATH
 
@@ -52,6 +52,11 @@ function proml {
 proml
 
 alias g='git'
+alias gg='git grep'
+alias l='git log --stat --submodule'
+alias s='git status'
+alias t='tig'
+eval "$(hub alias -s)"
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
@@ -94,7 +99,8 @@ SAVEHIST=1000000
 # 1行表示
 # PROMPT="%~ %# "
 # 2行表示
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
 %# "
 
 
@@ -245,13 +251,55 @@ fi
 #________________
 # エイリアス
 alias ei='exit'
+alias fxg='find . -type f | xargs grep '
+alias fg='find . -type f | grep '
+alias fdxg='find . -type d | xargs grep '
+#alias b='bundle exec'
+alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
+alias gba='/Users/shima/git-branch-activity'
+alias stssh='ssh -i ~/.ssh/id_rsa_staca'
+
 #________________
 
 
 # glsをsolarizedする為の設定
-# eval $(/usr/local/bin/gdircolors ~/solarized/dircolors.ansi-universal)
+eval $(/usr/local/bin/gdircolors ~/solarized/dircolors-solarized/dircolors.ansi-universal)
 
 # enhancdを読み込む
 source /Users/shima/enhancd/enhancd/enhancd.sh
 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+# nvm Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+
+#=============================
+# source zsh-syntax-highlighting
+# http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
+#=============================
+if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+
+#=============================
+# nodebrew
+#=============================
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+#=============================
+# elasticsearch
+#=============================
+export ELASTICPATH=/usr/local/opt/elasticsearch/libexec/bin/
+export PATH=$PATH:$ELASTICPATH
+export LOGSTASHPATH=/usr/local/Cellar/logstash/5.6.0/bin
+export PATH=$PATH:$LOGSTASHPATH
+
+#=============================
+# qt55
+# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#homebrew
+#=============================
+export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
