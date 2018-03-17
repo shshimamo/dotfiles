@@ -1,5 +1,5 @@
 [user]
-	name = shima
+	name = hiroya.shimamoto
 	email = shshimamo@gmail.com
 [color]
 	ui = auto
@@ -11,16 +11,21 @@
 	com = checkout master
 	ci = commit
 	s = status
+	b = browse
+	br = branch
+	l = log
+  lf = log --
+	lsearch = log --no-merges --stat -S
+	ls = log --no-merges --stat
+	lo = log --no-merges --stat --oneline
+  la = log --no-merges --stat --author
+	d = diff
+	di = diff
 	st = stash
 	stl = stash list
 	stp = stash pop
-	b = browse
-	br = branch
-	d = diff
-	di = diff
-	l = log
-	lo = log --oneline
-	ls = log --stat
+	showname = show --name-only
+	shn = show --name-only
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
   pr = !"f() { git log --merges --oneline --reverse --ancestry-path $1...master | grep 'Merge pull request #' | head -n 1; }; f"
