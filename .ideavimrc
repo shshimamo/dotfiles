@@ -12,9 +12,10 @@ set shiftwidth=2 "自動インデントの空白数
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
 set hlsearch
+set nowrapscan "検索をファイルの先頭へループしない
 
 "### ノーマルモード ###
-"x キー削除でデフォルトレジスタに入れない
+" x キー削除でデフォルトレジスタに入れない
 nnoremap x "_x
 vnoremap x "_x
 " :と;をswap
@@ -34,6 +35,8 @@ nnoremap <Space>k <C-w>k
 nnoremap <Space>l <C-w>l
 " 横分割
 nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
+"最後の編集場所
+nnoremap <Space>o `.
 
 "### 挿入モード ###
 " 右へ移動
@@ -48,12 +51,15 @@ inoremap ( ()<LEFT>
 inoremap [ []<LEFT>
 inoremap { {}<LEFT>
 inoremap < <><C-[>i
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
 " ;と:をスワップ(karabinerで;と:を入れ替えている前提。
 " android studioのときはこの設定を入れる。 rubymineのときは不要
 "inoremap : ;
 "inoremap ; :
 " -と_をスワップ
-inoremap - _
-inoremap _ -
+"inoremap - _
+"inoremap _ -
+
+" clipboard共有
+set clipboard=unnamed
