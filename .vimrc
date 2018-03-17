@@ -23,6 +23,22 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'vim-scripts/grep.vim'
+
+" *** TypeScript ***
+""http://hachibeechan.hateblo.jp/entry/2015/03/13/Vim%E3%81%A7TypeScript%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%81%AA%E3%81%A9%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%97%E3%81%A6%E5%BF%AB%E9%81%A9%E3%81%AB%E3%82%A8%E3%83%87%E3%82%A3%E3%83%83%E3%83%88
+
+NeoBundleLazy 'leafgarland/typescript-vim', {
+\ 'autoload' : {
+\   'filetypes' : ['typescript'] }
+\}
+NeoBundleLazy 'jason0x43/vim-js-indent', {
+\ 'autoload' : {
+\   'filetypes' : ['javascript', 'typescript', 'html'],
+\}}
+let g:js_indent_typescript = 1
+" *** TypeScriptここまで ***
 
 
 "## vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ
