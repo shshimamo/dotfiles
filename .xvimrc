@@ -1,21 +1,30 @@
+set visualbell
+set noerrorbells
+
 set laststatus=2
 set nu
 set ignorecase "大文字小文字を区別しない
 set smartcase "ignorecaseを有効にしている時、大文字検索は大文字小文字を無視しないようになる
+
+set expandtab "タブをスペースに置き換える
+set tabstop=2 "<TAB>を含むファイルを開いた際何文字の空白に変換するか
+set shiftwidth=2 "自動インデントの空白数
+set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+
 set hlsearch
 
 "### ノーマルモード ###
 "x キー削除でデフォルトレジスタに入れない
-nnoremap x "_x
-vnoremap x "_x
+"nnoremap x "_x
+"vnoremap x "_x
 " :と;をswap
 " nnoremap ; :
 " nnoremap : ;
 " **でハイライト削除
 nnoremap ** :noh<CR>
 " Ctrl+h,l で先端/末尾に移動
-nnoremap <Left> ^
-nnoremap <Right> $
+nnoremap <C-h> ^
+nnoremap <C-l> $
 " Qを無効
 nnoremap Q <Nop>
 
@@ -41,4 +50,3 @@ inoremap ' ''<LEFT>
 " -と_をスワップ
 " inoremap - _
 " inoremap _ -
-
