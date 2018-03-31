@@ -57,7 +57,8 @@ alias l='git log --stat --submodule'
 alias lo='git log --oneline'
 alias s='git status'
 alias di='git diff'
-alias ref="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short)(%(authordate:relative)) %(refname:short)' "
+alias br='git branch -vv --sort=committerdate'
+alias ref="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias t='tig'
 eval "$(hub alias -s)"
 
