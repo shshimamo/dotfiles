@@ -1,60 +1,3 @@
-setopt nolistbeep
-
-#######################################
-## Color
-# 色の設定
-export LSCOLORS=Exfxcxdxbxegedabagacad
-# 補完時の色の設定
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# ZLS_COLORSとは？
-export ZLS_COLORS=$LS_COLORS
-# lsコマンド時、自動で色がつく(ls -Gのようなもの？)
-export CLICOLOR=true
-# 補完候補に色を付ける
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# Color END
-#######################################
-
-
-### 20150809 rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-export PATH=/Users/shima/.rbenv/shims:$PATH
-### 20151027 rbenv gemにパスを通す
-export PATH=/Users/shima/.rbenv/versions/2.2.3/gemsets/first_gemset/bin:$PATH
-
-### 20150815 add vim 
-export PATH=/usr/local/bin:$PATH
-
-#################################
-### bashrcからもってきた START ###
-
-alias ls='/usr/local/bin/gls --color=auto'
-alias ll='ls -lahG'
-
-### for git
-# brewのgitを参照
-alias git='/usr/local/bin/git'
-alias g='git'
-alias gg='git grep'
-alias l='git log --stat --submodule'
-alias lo='git log --oneline'
-alias s='git status'
-alias di='git diff'
-alias br='git branch -vv --sort=committerdate'
-alias ref="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
-alias t='tig'
-eval "$(hub alias -s)"
-
-alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# bashrcからもってきた END
-########################################
-
-
-
 ########################################
 # 少し凝った zshrc START
 # License : MIT
@@ -170,17 +113,6 @@ setopt extended_glob
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
 bindkey '^R' history-incremental-pattern-search-backward
 
-########################################
-# エイリアス
-
-alias rm='rm -i' # 削除前に確認
-alias cp='cp -i' # 上書き前に確認
-alias mv='mv -i' # 上書き前に確認
-
-alias mkdir='mkdir -p' # ディレクトリがなければ作成
-
-# sudo の後のコマンドでエイリアスを有効にする
-alias sudo='sudo '
 
 # 少し凝った zshrc END
 ########################################
@@ -188,9 +120,32 @@ alias sudo='sudo '
 
 ########################################
 # shima
+setopt nolistbeep
 
-#________________
+#=============================
+## Color
+# 色の設定
+export LSCOLORS=Exfxcxdxbxegedabagacad
+# 補完時の色の設定
+export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# ZLS_COLORSとは？
+export ZLS_COLORS=$LS_COLORS
+# lsコマンド時、自動で色がつく(ls -Gのようなもの？)
+export CLICOLOR=true
+# 補完候補に色を付ける
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# Color END
+#=============================
+
+#=============================
 # エイリアス
+alias rm='rm -i' # 削除前に確認
+alias cp='cp -i' # 上書き前に確認
+alias mv='mv -i' # 上書き前に確認
+alias mkdir='mkdir -p' # ディレクトリがなければ作成
+# sudo の後のコマンドでエイリアスを有効にする
+alias sudo='sudo '
+
 alias ei='exit'
 alias fxg='find . -type f | xargs grep '
 alias fg='find . -type f | grep '
@@ -200,48 +155,88 @@ alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
 alias gba='/Users/shima/git-branch-activity'
 alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias v='vim'
+alias ls='/usr/local/bin/gls --color=auto'
+alias ll='ls -lahG'
 
-#________________
+### for git
+# brewのgitを参照
+alias git='/usr/local/bin/git'
+alias g='git'
+alias gg='git grep'
+alias l='git log --stat --submodule'
+alias lo='git log --oneline'
+alias s='git status'
+alias di='git diff'
+alias br='git branch -vv --sort=committerdate'
+alias ref="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
+alias t='tig'
+eval "$(hub alias -s)"
 
+alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
+#=============================
 
+#=============================
 # glsをsolarizedする為の設定
 eval $(/usr/local/bin/gdircolors ~/solarized/dircolors-solarized/dircolors.ansi-universal)
+#=============================
 
+#=============================
 # enhancdを読み込む
 source /Users/shima/enhancd/enhancd/enhancd.sh
+#=============================
 
+#=============================
+# JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+#=============================
 
+#=============================
 # nvm Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-
+#=============================
 
 #=============================
 # source zsh-syntax-highlighting
 # http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
-#=============================
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-
+#=============================
 
 #=============================
 # nodebrew
-#=============================
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+#=============================
 
 #=============================
 # elasticsearch
-#=============================
 export ELASTICPATH=/usr/local/opt/elasticsearch/libexec/bin/
 export PATH=$PATH:$ELASTICPATH
 export LOGSTASHPATH=/usr/local/Cellar/logstash/5.6.0/bin
 export PATH=$PATH:$LOGSTASHPATH
+#=============================
 
 #=============================
 # qt55
 # https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#homebrew
-#=============================
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+#=============================
+
+#=============================
+# Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+#=============================
+
+#=============================
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+export PATH=/Users/shima/.rbenv/shims:$PATH
+#=============================
+
+#=============================
+### 20150815 add vim 
+export PATH=/usr/local/bin:$PATH
+#=============================
+
+
