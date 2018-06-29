@@ -15,9 +15,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Color END
 #######################################
 
-# THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/shima/.gvm/bin/gvm-init.sh" ]] && source "/Users/shima/.gvm/bin/gvm-init.sh"
-
 
 ### 20150809 rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
@@ -31,26 +28,12 @@ export PATH=/usr/local/bin:$PATH
 #################################
 ### bashrcからもってきた START ###
 
-#PS1='\[\033[36m\][\u@:\[\033[33m\]\w\[\033[36m\]]\[\033[0m\] \$ '
 alias ls='/usr/local/bin/gls --color=auto'
 alias ll='ls -lahG'
 
 ### for git
 # brewのgitを参照
 alias git='/usr/local/bin/git'
-
-function parse_git_branch {
-     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-function precmd() {
-     #PROMPT="\h@\u:\W\$(parse_git_branch) \$ "
-}
-function proml {
-     #PS1="\h@\u:\W\$(parse_git_branch) \$ "
-     #PS1='\[\033[36m\][\u@:\[\033[33m\]\W\[\033[36m\]]\[\033[0m\]$(parse_git_branch) \$ '
-}
-proml
-
 alias g='git'
 alias gg='git grep'
 alias l='git log --stat --submodule'
@@ -63,13 +46,6 @@ alias t='tig'
 eval "$(hub alias -s)"
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
-
-### for GNU command
-# http://d.hatena.ne.jp/katz_24/20120126/1327586474
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-# [[ -s "/Users/shima/.gvm/bin/gvm-init.sh" ]] && source "/Users/shima/.gvm/bin/gvm-init.sh"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -90,9 +66,6 @@ export LANG=ja_JP.UTF-8
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
-
-# emacs 風キーバインドにする
-# bindkey -e
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -163,7 +136,7 @@ setopt no_beep
 setopt no_flow_control
 
 # Ctrl+Dでzshを終了しない
-setopt ignore_eof
+# setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
@@ -200,50 +173,14 @@ bindkey '^R' history-incremental-pattern-search-backward
 ########################################
 # エイリアス
 
-alias la='ls -a'
-alias ll='ls -lh'
+alias rm='rm -i' # 削除前に確認
+alias cp='cp -i' # 上書き前に確認
+alias mv='mv -i' # 上書き前に確認
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
-alias mkdir='mkdir -p'
+alias mkdir='mkdir -p' # ディレクトリがなければ作成
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
-
-# グローバルエイリアス
-alias -g L='| less'
-alias -g G='| grep'
-
-# C で標準出力をクリップボードにコピーする
-# mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-    # Mac
-    alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-    # Linux
-    alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-    # Cygwin
-    alias -g C='| putclip'
-fi
-
-
-
-########################################
-# OS 別の設定
-#case ${OSTYPE} in
-#    darwin*)
-#        #Mac用の設定
-#        export CLICOLOR=1
-#        alias ls='ls -G -F'
-#        ;;
-#    linux*)
-#        #Linux用の設定
-#        alias ls='ls -F --color=auto'
-#        ;;
-#esac
 
 # 少し凝った zshrc END
 ########################################
@@ -262,6 +199,7 @@ alias fdxg='find . -type d | xargs grep '
 alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
 alias gba='/Users/shima/git-branch-activity'
 alias stssh='ssh -i ~/.ssh/id_rsa_staca'
+alias v='vim'
 
 #________________
 
