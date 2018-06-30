@@ -43,3 +43,5 @@
 	required = true
 [ghq]
   root = ~/src
+[grep]
+  lineNumber = true

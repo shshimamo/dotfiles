@@ -79,7 +79,7 @@ setopt no_beep
 setopt no_flow_control
 
 # Ctrl+Dでzshを終了しない
-# setopt ignore_eof
+setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
@@ -177,6 +177,63 @@ alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
+# Rubymineで開くコマンド
+# git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
+function ggm(){
+  name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
+  if [ -n "$name_number" ]; then
+    mine $name_number
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function ggv(){
+  name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
+  if [ -n "$name_number" ]; then
+    name=$(echo $name_number | cut -d ":" -f 1)
+    number=$(echo $name_number | cut -d ":" -f 2)
+    vim -c $number $name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function sm(){
+  file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
+  if [ -n "$file_name" ]; then
+    mine $file_name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function sv(){
+  file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
+  if [ -n "$file_name" ]; then
+    vim $file_name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function fm(){
+  file_name=$(find . -type f | peco)
+  if [ -n "$file_name" ]; then
+    mine $file_name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function fv(){
+  file_name=$(find . -type f | peco)
+  if [ -n "$file_name" ]; then
+    vim $file_name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
 #=============================
 
 #=============================
