@@ -157,13 +157,14 @@ alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias v='vim'
 alias ls='/usr/local/bin/gls --color=auto'
 alias ll='ls -lahG'
+alias la='ls -a'
 
 ### for git
 # brewのgitを参照
 alias git='/usr/local/bin/git'
 alias g='git'
 alias gg='git grep'
-alias l='git log --stat --submodule'
+alias l='git log --stat --submodule -p'
 alias lo='git log --oneline'
 alias s='git status'
 alias di='git diff'
@@ -229,14 +230,19 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
 
 #=============================
+### 20150815 add vim 
+export PATH=/usr/local/bin:$PATH
+#=============================
+
+#=============================
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 export PATH=/Users/shima/.rbenv/shims:$PATH
 #=============================
 
 #=============================
-### 20150815 add vim 
-export PATH=/usr/local/bin:$PATH
+# ghq
+# https://blog.kentarok.org/entry/2014/06/03/135300
+export GOPATH=$HOME
+export PATH=$PATH:$GOPATH/bin
 #=============================
-
-

@@ -12,3 +12,4 @@ ln -s ~/dotfiles/.vrapperrc ~/.vrapperrc
 ln -s ~/dotfiles/.zshrc ~/.zshrc        
 ln -s ~/dotfiles/.xvimrc ~/.xvimrc       
 ln -s ~/dotfiles/.ideavimrc ~/.ideavimrc       
+ln -s ~/dotfiles/.gemrc ~/.gemrc      
