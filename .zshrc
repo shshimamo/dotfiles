@@ -172,8 +172,11 @@ alias br='git branch -vv --sort=committerdate'
 alias ref="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias t='tig'
 eval "$(hub alias -s)"
+alias gh='cd $(ghq root)/$(ghq list | peco)'
+alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
+
 #=============================
 
 #=============================
