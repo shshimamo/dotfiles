@@ -1,6 +1,6 @@
 #! /bin/bash
 mkdir ~/.vim/ 
-ln -s ~/dotfiles/.vim/externa_vimrc ~/.vim/externa_vimrc
+ln -s ~/dotfiles/.vim/external_vimrc ~/.vim/external_vimrc
 ln -s ~/dotfiles/.vim/plugin ~/.vim/plugin
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
