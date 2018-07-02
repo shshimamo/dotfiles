@@ -12,7 +12,7 @@
 	ci = commit
 	s = status
 	b = browse
-  br = branch -vv --sort=committerdate
+  br = branch -vv --sort=-committerdate
 	l = log
   lf = log --
 	lsearch = log --no-merges --stat -S
