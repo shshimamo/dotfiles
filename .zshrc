@@ -234,6 +234,16 @@ function fv(){
     echo 'fileが見つかりません'
   fi
 }
+
+# checkout branch
+function co(){
+  branch_name=$(git branch --sort=-committerdate | peco | cut -d ' ' -f 3)
+  if [ -n "$branch_name" ]; then
+    git checkout $branch_name
+  else
+    echo 'branchが見つかりません'
+  fi
+}
 #=============================
 
 #=============================
@@ -305,4 +315,9 @@ export PATH=/Users/shima/.rbenv/shims:$PATH
 # https://blog.kentarok.org/entry/2014/06/03/135300
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
+#=============================
+
+#=============================
+# mysql5.6
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 #=============================
