@@ -244,6 +244,17 @@ function co(){
     echo 'branchが見つかりません'
   fi
 }
+
+# hash copy
+function hcp(){
+  commit_hash=$(git log --date=iso --pretty=format:"[%ad] %h %an : %s" | peco | cut -d ' ' -f 4)
+  if [ -n "$commit_hash" ]; then
+    echo $commit_hash | pbcopy
+  else
+    echo 'branchが見つかりません'
+  fi
+}
+
 #=============================
 
 #=============================
