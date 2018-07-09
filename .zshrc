@@ -170,6 +170,8 @@ alias s='git status'
 alias di='git diff'
 alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
+alias st="git stash list | grep $(git symbolic-ref --short HEAD)"
+
 alias t='tig'
 eval "$(hub alias -s)"
 alias gh='cd $(ghq root)/$(ghq list | peco)'
@@ -251,9 +253,30 @@ function hcp(){
   if [ -n "$commit_hash" ]; then
     echo $commit_hash | pbcopy
   else
-    echo 'branchが見つかりません'
+    echo 'hashが見つかりません'
   fi
 }
+
+# stash list & diff
+function std() {
+  result=$(st)
+  if [ -n "$result" ]; then
+    git diff HEAD..$(st | peco | cut -d ':' -f 1)
+  else
+    echo 'stashが見つかりません'
+  fi
+}
+
+# stash list & pop
+function stp() {
+  result=$(st)
+  if [ -n "$result" ]; then
+    git stash pop $(st | peco | cut -d ':' -f 1)
+  else
+    echo 'stashが見つかりません'
+  fi
+}
+
 
 #=============================
 
