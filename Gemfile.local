@@ -1,0 +1,10 @@
+# デフォルトのGemfileを読み込む
+eval_gemfile "Gemfile"
+
+# 自分が使いたいgemを宣言する
+gem "pry-rescue"
+gem 'pry-rails'
+gem 'pry-doc'
+gem 'pry-stack_explorer'
+gem 'pry-byebug'
+#gem "byebug"
