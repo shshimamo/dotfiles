@@ -151,7 +151,16 @@ alias fxg='find . -type f | xargs grep '
 alias fg='find . -type f | grep '
 alias fdxg='find . -type d | xargs grep '
 #alias b='bundle exec'
-alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
+#alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
+function b(){
+  gem_file_local=$(ls -a | grep Gemfile.local)
+  if [ -n "$gem_file_local" ]; then
+    BUNDLE_GEMFILE=Gemfile.local bundle $@
+  else
+    bundle $@
+  fi
+}
+
 alias gba='/Users/shima/git-branch-activity'
 alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias v='vim'
@@ -259,9 +268,9 @@ function hcp(){
 
 # stash list & diff
 function std() {
-  result=$(st)
+  result=$(git stash list)
   if [ -n "$result" ]; then
-    git diff HEAD..$(st | peco | cut -d ':' -f 1)
+    git diff HEAD..$(git stash list | peco | cut -d ':' -f 1)
   else
     echo 'stashが見つかりません'
   fi
