@@ -150,17 +150,8 @@ alias ei='exit'
 alias fxg='find . -type f | xargs grep '
 alias fg='find . -type f | grep '
 alias fdxg='find . -type d | xargs grep '
-#alias b='bundle exec'
-#alias b='BUNDLE_GEMFILE=Gemfile.local bundle'
-function b(){
-  gem_file_local=$(ls -a | grep Gemfile.local)
-  if [ -n "$gem_file_local" ]; then
-    BUNDLE_GEMFILE=Gemfile.local bundle $@
-  else
-    bundle $@
-  fi
-}
-
+alias b='bundle'
+alias lb='BUNDLE_GEMFILE=Gemfile.local bundle'
 alias gba='/Users/shima/git-branch-activity'
 alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias v='vim'
