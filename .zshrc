@@ -296,12 +296,6 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 #=============================
 
 #=============================
-# nvm Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-#=============================
-
-#=============================
 # source zsh-syntax-highlighting
 # http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
@@ -355,3 +349,10 @@ export PATH=$PATH:$GOPATH/bin
 # mysql5.6
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 #=============================
+
+#=============================
+# nvm Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+#=============================
+
