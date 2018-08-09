@@ -87,12 +87,13 @@ inoremap kk <C-[>
 " inoremap <Down> j
 " inoremap <Up> k
 " カッコ系
-" inoremap ( ()<LEFT>
-" inoremap [ []<LEFT>
-" inoremap { {}<LEFT>
-" inoremap " ""<LEFT>
-" inoremap ' ''<LEFT>
-" inoremap < <><C-[>i
+inoremap \| \|\|<LEFT>
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap < <><C-[>i
 " -と_をスワップ
 "inoremap - _
 "inoremap _ -
