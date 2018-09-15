@@ -40,6 +40,7 @@ NeoBundleLazy 'jason0x43/vim-js-indent', {
 let g:js_indent_typescript = 1
 " *** TypeScriptここまで ***
 
+NeoBundle 'fatih/vim-go' 
 
 "## vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ
 if filereadable(expand('~/.vim/external_vimrc/alpaca_neobundle_vimrc'))
