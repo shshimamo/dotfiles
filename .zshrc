@@ -304,8 +304,9 @@ fi
 #=============================
 
 #=============================
+# nodebrwe自体を削除した
 # nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# export PATH=$HOME/.nodebrew/current/bin:$PATH
 #=============================
 
 #=============================
