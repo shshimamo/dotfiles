@@ -357,3 +357,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 #=============================
 
+# See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
+export EDITOR="rubymine"
