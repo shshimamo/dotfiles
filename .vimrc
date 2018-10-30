@@ -16,7 +16,6 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'honza/vim-snippets'
 NeoBundle "Shougo/neosnippet-snippets"
-NeoBundle "sjl/gundo.vim"
 " NeoBundle 'basyura/unite-rails'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
@@ -83,11 +82,6 @@ endif
 "## colorscheme
 if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
   source ~/.vim/external_vimrc/colorscheme_vimrc
-endif
-
-"## gundo
-if filereadable(expand('~/.vim/external_vimrc/gundo_vimrc'))
-  source ~/.vim/external_vimrc/gundo_vimrc
 endif
 
 "## buftabs
