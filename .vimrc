@@ -14,7 +14,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'szw/vim-tags'
 NeoBundle 'honza/vim-snippets'
 NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle "sjl/gundo.vim"
@@ -74,11 +73,6 @@ endif
 "## alpaca 
 if filereadable(expand('~/.vim/external_vimrc/alpaca_vimrc'))
   source ~/.vim/external_vimrc/alpaca_vimrc
-endif
-
-"## vim-tags
-if filereadable(expand('~/.vim/external_vimrc/vim-tags_vimrc'))
-  source ~/.vim/external_vimrc/vim-tags_vimrc
 endif
 
 "## neocomplete
