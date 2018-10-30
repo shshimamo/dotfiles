@@ -80,11 +80,6 @@ if filereadable(expand('~/.vim/external_vimrc/neocomplete_vimrc'))
   source ~/.vim/external_vimrc/neocomplete_vimrc
 endif
 
-"## tab
-if filereadable(expand('~/.vim/external_vimrc/tab_vimrc'))
-  source ~/.vim/external_vimrc/tab_vimrc
-endif
-
 "## colorscheme
 if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
   source ~/.vim/external_vimrc/colorscheme_vimrc
