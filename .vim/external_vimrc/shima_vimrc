@@ -74,7 +74,8 @@ nnoremap <C-j>s :split<CR><C-w><C-w>
 nnoremap Q <Nop>
 " 最後の編集位置に移動
 nnoremap <Space>o `. 
-
+" tagsジャンプの時に複数ある時は一覧表示                                        
+nnoremap <C-]> g<C-]>
 
 "### 挿入モード ###
 " バックスペースの代替(デフォルトC-h)

@@ -53,6 +53,12 @@ NeoBundleLazy 'basyura/unite-rails', {
       \   ]
       \ }}
 
+NeoBundleLazy 'tsukkee/unite-tag', {
+      \ 'depends' : ['Shougo/unite.vim'],
+      \ 'autoload' : {
+      \   'unite_sources' : ['tag', 'tag/file', 'tag/include']
+      \ }}
+
 NeoBundle 'scrooloose/syntastic' "rubocop
 
 " *** TypeScript ***
@@ -123,6 +129,11 @@ endif
 "## buftabs
 if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
   source ~/.vim/external_vimrc/buftabs_vimrc
+endif
+
+"## unite-tag
+if filereadable(expand('~/.vim/external_vimrc/unite-tag_vimrc'))
+  source ~/.vim/external_vimrc/unite-tag_vimrc
 endif
 
 " Include External File END
