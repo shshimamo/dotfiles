@@ -16,13 +16,44 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'honza/vim-snippets'
 NeoBundle "Shougo/neosnippet-snippets"
-" NeoBundle 'basyura/unite-rails'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'tpope/vim-fugitive'
-" NeoBundle 'vim-scripts/grep.vim'
+
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+NeoBundle 'tpope/vim-rails', { 'autoload' : {
+      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
+
+NeoBundleLazy 'Shougo/neosnippet', {
+      \ 'autoload' : {
+      \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
+      \   'filetypes' : 'snippet',
+      \   'insert' : 1,
+      \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
+      \ }}
+
+NeoBundleLazy 'basyura/unite-rails', {
+      \ 'depends' : 'Shougo/unite.vim',
+      \ 'autoload' : {
+      \   'unite_sources' : [
+      \     'rails/bundle', 'rails/bundled_gem', 'rails/config',
+      \     'rails/controller', 'rails/db', 'rails/destroy', 'rails/features',
+      \     'rails/gem', 'rails/gemfile', 'rails/generate', 'rails/git', 'rails/helper',
+      \     'rails/heroku', 'rails/initializer', 'rails/javascript', 'rails/lib', 'rails/log',
+      \     'rails/mailer', 'rails/model', 'rails/rake', 'rails/route', 'rails/schema', 'rails/spec',
+      \     'rails/stylesheet', 'rails/view'
+      \   ]
+      \ }}
+
+NeoBundle 'scrooloose/syntastic' "rubocop
 
 " *** TypeScript ***
 ""http://hachibeechan.hateblo.jp/entry/2015/03/13/Vim%E3%81%A7TypeScript%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%81%AA%E3%81%A9%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%97%E3%81%A6%E5%BF%AB%E9%81%A9%E3%81%AB%E3%82%A8%E3%83%87%E3%82%A3%E3%83%83%E3%83%88
@@ -39,11 +70,6 @@ let g:js_indent_typescript = 1
 " *** TypeScriptここまで ***
 
 NeoBundle 'fatih/vim-go' 
-
-"## vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ
-if filereadable(expand('~/.vim/external_vimrc/alpaca_neobundle_vimrc'))
-  source ~/.vim/external_vimrc/alpaca_neobundle_vimrc
-endif
 
 call neobundle#end()
 " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
@@ -69,9 +95,19 @@ if filereadable(expand('~/.vim/external_vimrc/unite_vimrc'))
   source ~/.vim/external_vimrc/unite_vimrc
 endif
 
-"## alpaca 
-if filereadable(expand('~/.vim/external_vimrc/alpaca_vimrc'))
-  source ~/.vim/external_vimrc/alpaca_vimrc
+"## neosnippet_vimrc
+if filereadable(expand('~/.vim/external_vimrc/neosnippet_vimrc'))
+  source ~/.vim/external_vimrc/neosnippet_vimrc
+endif
+
+"## rubocop_vimrc
+if filereadable(expand('~/.vim/external_vimrc/rubocop_vimrc'))
+  source ~/.vim/external_vimrc/rubocop_vimrc
+endif
+
+"## vim-rails_vimrc
+if filereadable(expand('~/.vim/external_vimrc/vim-rails_vimrc'))
+  source ~/.vim/external_vimrc/vim-rails_vimrc
 endif
 
 "## neocomplete
