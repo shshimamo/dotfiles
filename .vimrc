@@ -90,9 +90,9 @@ endif
 "  source ~/.vim/external_vimrc/lightline_vimrc
 "endif
 
-"## solarized
-if filereadable(expand('~/.vim/external_vimrc/solarized_vimrc'))
-  source ~/.vim/external_vimrc/solarized_vimrc
+"## colorscheme
+if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
+  source ~/.vim/external_vimrc/colorscheme_vimrc
 endif
 
 "## gundo
