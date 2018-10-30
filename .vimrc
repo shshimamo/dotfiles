@@ -85,11 +85,6 @@ if filereadable(expand('~/.vim/external_vimrc/tab_vimrc'))
   source ~/.vim/external_vimrc/tab_vimrc
 endif
 
-"## lightline
-"if filereadable(expand('~/.vim/external_vimrc/lightline_vimrc'))
-"  source ~/.vim/external_vimrc/lightline_vimrc
-"endif
-
 "## colorscheme
 if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
   source ~/.vim/external_vimrc/colorscheme_vimrc
