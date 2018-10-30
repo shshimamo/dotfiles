@@ -95,10 +95,5 @@ if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
   source ~/.vim/external_vimrc/buftabs_vimrc
 endif
 
-"## rsense
-"if filereadable(expand('~/.vim/external_vimrc/rsense_vimrc'))
-"  source ~/.vim/external_vimrc/rsense_vimrc
-"endif
-
 " Include External File END
 "####################################
