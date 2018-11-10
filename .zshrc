@@ -282,12 +282,7 @@ function stp() {
 
 #=============================
 # glsをsolarizedする為の設定
-eval $(/usr/local/bin/gdircolors ~/solarized/dircolors-solarized/dircolors.ansi-universal)
-#=============================
-
-#=============================
-# enhancdを読み込む
-source /Users/shima/enhancd/enhancd/enhancd.sh
+eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 #=============================
 
 #=============================
