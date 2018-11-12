@@ -277,6 +277,22 @@ function stp() {
   fi
 }
 
+function spec() {
+  gemfile_local=$(ls ./ | grep 'Gemfile.local')
+  if [ -n "$gemfile_local" ]; then
+    BUNDLE_GEMFILE=Gemfile.local bundle exec rspec $@
+    return
+  fi
+
+  gemfile=$(ls ./ | grep 'Gemfile')
+  if [ -n "$gemfile" ]; then
+    bundle exec rspec $@
+    return
+  fi
+
+  echo 'Gemfileがありません'
+}
+
 
 #=============================
 
