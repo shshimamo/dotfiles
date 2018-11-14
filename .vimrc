@@ -21,6 +21,8 @@ NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'scrooloose/nerdtree'
+
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -129,6 +131,11 @@ endif
 "## unite-tag
 if filereadable(expand('~/.vim/external_vimrc/unite-tag_vimrc'))
   source ~/.vim/external_vimrc/unite-tag_vimrc
+endif
+
+"## nerdtree
+if filereadable(expand('~/.vim/external_vimrc/nerdtree_vimrc'))
+  source ~/.vim/external_vimrc/nerdtree_vimrc
 endif
 
 " Include External File END

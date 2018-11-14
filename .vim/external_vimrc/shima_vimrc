@@ -57,8 +57,8 @@ nnoremap <C-l> $
 " ハイライト削除
 nnoremap ** :noh<CR>
 " バッファ切り替え
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
+nnoremap <C-j><C-n> :bn<CR>
+nnoremap <C-j><C-p> :bp<CR>
 " ウィンドウ移動
 nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j

@@ -1,0 +1,5 @@
+map <C-n> :NERDTreeToggle<CR>
+
+nnoremap <C-d> :bp\|bd #<CR>
+
+
