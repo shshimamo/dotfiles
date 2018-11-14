@@ -2,7 +2,6 @@
 mkdir ~/.vim/ 
 
 ln -s ~/src/github.com/shshimamo/dotfiles/.vim/external_vimrc ~/.vim/external_vimrc
-ln -s ~/src/github.com/shshimamo/dotfiles/.vim/plugin ~/.vim/plugin
 ln -s ~/src/github.com/shshimamo/dotfiles/.bashrc ~/.bashrc
 ln -s ~/src/github.com/shshimamo/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/src/github.com/shshimamo/dotfiles/.screenrc ~/.screenrc   
