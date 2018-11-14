@@ -126,11 +126,6 @@ if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
   source ~/.vim/external_vimrc/colorscheme_vimrc
 endif
 
-"## buftabs
-if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
-  source ~/.vim/external_vimrc/buftabs_vimrc
-endif
-
 "## unite-tag
 if filereadable(expand('~/.vim/external_vimrc/unite-tag_vimrc'))
   source ~/.vim/external_vimrc/unite-tag_vimrc
