@@ -23,15 +23,6 @@ SAVEHIST=1000000
 PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
 %# "
 
-
-# 単語の区切り文字を指定する
-autoload -Uz select-word-style
-select-word-style default
-# ここで指定した文字は単語区切りとみなされる
-# / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
-zstyle ':zle:*' word-chars " /=;@:{},|"
-zstyle ':zle:*' word-style unspecified
-
 ########################################
 # 補完
 # 補完機能を有効にする
@@ -106,12 +97,6 @@ setopt hist_reduce_blanks
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
-
-########################################
-# キーバインド
-
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
 
 
 # 少し凝った zshrc END
