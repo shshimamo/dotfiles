@@ -164,6 +164,8 @@ alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
+alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
+
 # Rubymineで開くコマンド
 # git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
 function ggm(){

@@ -14,3 +14,4 @@ ln -s ~/src/github.com/shshimamo/dotfiles/.xvimrc ~/.xvimrc
 ln -s ~/src/github.com/shshimamo/dotfiles/.ideavimrc ~/.ideavimrc       
 ln -s ~/src/github.com/shshimamo/dotfiles/.gemrc ~/.gemrc      
 ln -s ~/src/github.com/shshimamo/dotfiles/.pryrc ~/.pryrc
+ln -s ~/src/github.com/shshimamo/dotfiles/.ctags ~/.ctags
