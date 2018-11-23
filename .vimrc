@@ -55,11 +55,7 @@ NeoBundleLazy 'basyura/unite-rails', {
       \   ]
       \ }}
 
-NeoBundleLazy 'tsukkee/unite-tag', {
-      \ 'depends' : ['Shougo/unite.vim'],
-      \ 'autoload' : {
-      \   'unite_sources' : ['tag', 'tag/file', 'tag/include']
-      \ }}
+NeoBundle 'tsukkee/unite-tag'
 
 NeoBundle 'scrooloose/syntastic' "rubocop
 
