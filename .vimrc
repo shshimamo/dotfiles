@@ -31,9 +31,6 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 
-NeoBundle 'tpope/vim-rails', { 'autoload' : {
-      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
-
 NeoBundleLazy 'Shougo/neosnippet', {
       \ 'autoload' : {
       \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
@@ -94,11 +91,6 @@ endif
 "## rubocop_vimrc
 if filereadable(expand('~/.vim/external_vimrc/rubocop_vimrc'))
   source ~/.vim/external_vimrc/rubocop_vimrc
-endif
-
-"## vim-rails_vimrc
-if filereadable(expand('~/.vim/external_vimrc/vim-rails_vimrc'))
-  source ~/.vim/external_vimrc/vim-rails_vimrc
 endif
 
 "## neocomplete
