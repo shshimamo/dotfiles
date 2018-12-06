@@ -1,10 +1,6 @@
 " Uniteデフォルトアクション
 " call unite#custom#default_action('file', 'tabopen')
 
-"------------------------------------
-"vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ 9個
-"-- Unite START --
-
 "unite prefix key.
 nnoremap [unite] <Nop>
 nmap <C-j> [unite]
@@ -17,6 +13,10 @@ let g:unite_source_file_mru_limit = 50
 
 "file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
 let g:unite_source_file_mru_filename_format = ''
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
 "現在開いているファイルのディレクトリ下のファイル一覧。
 "開いていない場合はカレントディレクトリ
@@ -52,114 +52,3 @@ function! s:unite_my_settings()"{{{
 	"nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 	"inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 endfunction"}}}
-
-"-- Unite END --
-"------------------------------------
-
-"------------------------------------
-"vim使っているrubyistで、これ入れていないのはヤバいプラグインまとめ 9個
-"-- Unite-rails.vim
-function! UniteRailsSetting()
-  "<Up>は<C-k>のこと
-"  nnoremap <buffer><Up><Up><Up>  :<C-U>Unite rails/view<CR>
-"  nnoremap <buffer><Up><Up>       :<C-U>Unite rails/model<CR>
-"  nnoremap <buffer><Up>            :<C-U>Unite rails/controller<CR>
-"
-"  nnoremap <buffer><Up>c           :<C-U>Unite rails/config<CR>
-"  nnoremap <buffer><Up>s           :<C-U>Unite rails/spec<CR>
-"  nnoremap <buffer><Up>m           :<C-U>Unite rails/db -input=migrate<CR>
-"  nnoremap <buffer><Up>l           :<C-U>Unite rails/lib<CR>
-"  nnoremap <buffer><expr><Up>g     ':e '.b:rails_root.'/Gemfile<CR>'
-"  nnoremap <buffer><expr><Up>r     ':e '.b:rails_root.'/config/routes.rb<CR>'
-"  nnoremap <buffer><expr><Up>se    ':e '.b:rails_root.'/db/seeds.rb<CR>'
-"  nnoremap <buffer><Up>ra          :<C-U>Unite rails/rake<CR>
-"  nnoremap <buffer><Up>h           :<C-U>Unite rails/heroku<CR>
-"  nnoremap <buffer><Up>st          :<C-U>Unite rails/stylesheet<CR>
-"  nnoremap <buffer><Up>js          :<C-U>Unite rails/javascript<CR>
-
-  nnoremap <buffer><C-k><C-k><C-k>  :<C-U>Unite rails/view<CR>
-  nnoremap <buffer><C-k><C-k>       :<C-U>Unite rails/model<CR>
-  nnoremap <buffer><C-k>            :<C-U>Unite rails/controller<CR>
-
-  nnoremap <buffer><C-k>c           :<C-U>Unite rails/config<CR>
-  nnoremap <buffer><C-k>s           :<C-U>Unite rails/spec<CR>
-  nnoremap <buffer><C-k>m           :<C-U>Unite rails/db -input=migrate<CR>
-  nnoremap <buffer><C-k>l           :<C-U>Unite rails/lib<CR>
-  nnoremap <buffer><expr><C-k>g     ':e '.b:rails_root.'/Gemfile<CR>'
-  nnoremap <buffer><expr><C-k>r     ':e '.b:rails_root.'/config/routes.rb<CR>'
-  nnoremap <buffer><expr><C-k>se    ':e '.b:rails_root.'/db/seeds.rb<CR>'
-  nnoremap <buffer><C-k>ra          :<C-U>Unite rails/rake<CR>
-  nnoremap <buffer><C-k>h           :<C-U>Unite rails/heroku<CR>
-  nnoremap <buffer><C-k>st          :<C-U>Unite rails/stylesheet<CR>
-  nnoremap <buffer><C-k>js          :<C-U>Unite rails/javascript<CR>
-
-endfunction
-aug MyAutoCmd
-  au User Rails call UniteRailsSetting()
-aug END
-"-- Unite-rails.vim END
-"------------------------------------
-
-
-"------------------------------------
-"http://blog.hello-world.jp.net/vim/2744/
-"-- unite.vim + ag (the_silver_searcher) --
-
-" 大文字小文字を区別しない
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-" grep検索
-nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-" ディレクトリを指定してgrep検索
-nnoremap <silent> ,dg  :<C-u>Unite grep -buffer-name=search-buffer<CR>
-" カーソル位置の単語をgrep検索
-nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR>
-" grep検索結果の再呼出
-nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
-" unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-"-- unite.vim + ag (the_silver_searcher) END --
-"------------------------------------
-
-"------------------------------------
-" yank  registerと同じ?
-"let g:unite_source_history_yank_enable =1  "history/yankの有効化
-"nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
-imap <C-r> <C-[>[unite]r
-
-"------------------------------------
-"http://qiita.com/syui/items/442fd0905a1f2005c10e
-
-" viminfo
-" http://vimwiki.net/?%27viminfo%27
-set viminfo='50,\"1000,:0,n~/.vim/viminfo
-
-" unite mark
-" https://github.com/tacroe/unite-mark
-" http://d.hatena.ne.jp/tacroe/20101119/1290115586
-nnoremap <silent> ,m :Unite mark<CR>
-
-" mark auto reg
-" http://saihoooooooo.hatenablog.com/entry/2013/04/30/001908
-if !exists('g:markrement_char')
-    let g:markrement_char = [
-    \     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-    \     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-    \ ]
-endif
-nnoremap <silent>m :<C-u>call <SID>AutoMarkrement()<CR>
-function! s:AutoMarkrement()
-    if !exists('b:markrement_pos')
-        let b:markrement_pos = 0
-    else
-        let b:markrement_pos = (b:markrement_pos + 1) % len(g:markrement_char)
-    endif
-    execute 'mark' g:markrement_char[b:markrement_pos]
-    echo 'marked' g:markrement_char[b:markrement_pos]
-endfunction
-"------------------------------------
