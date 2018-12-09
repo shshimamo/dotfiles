@@ -131,3 +131,9 @@ inoremap < <><C-[>i
 "背景色をリセット
 "autocmd ColorScheme * highlight Normal ctermbg=none
 "autocmd ColorScheme * highlight LineNr ctermbg=none
+
+" vimgrep で自動的にquickfix-window が開く
+autocmd QuickFixCmdPost *grep* cwindow
+nnoremap <C-c><C-n> :cn<CR>
+nnoremap <C-c><C-p> :cp<CR>
+nnoremap <C-c><C-c> :.cc<CR>
