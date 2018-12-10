@@ -323,7 +323,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-export PATH=/Users/shima/.rbenv/shims:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
 #=============================
 
 #=============================
