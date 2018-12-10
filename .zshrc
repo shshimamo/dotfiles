@@ -285,6 +285,7 @@ function spec() {
 
 #=============================
 # glsをsolarizedする為の設定
+# ghq get https://github.com/seebi/dircolors-solarized.git する
 eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 #=============================
 
@@ -357,3 +358,14 @@ export NVM_DIR="$HOME/.nvm"
 
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
 export EDITOR="rubymine"
+
+#
+# cpla start
+#
+
+# nodenv
+eval "$(nodenv init -)"
+
+#
+# cpla end
+#
