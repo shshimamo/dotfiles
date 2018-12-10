@@ -1,3 +1,5 @@
+export PATH=/usr/local/bin:$PATH
+
 ########################################
 # 少し凝った zshrc START
 # License : MIT
@@ -145,8 +147,6 @@ alias ll='ls -lahG'
 alias la='ls -a'
 
 ### for git
-# brewのgitを参照
-alias git='/usr/local/bin/git'
 alias g='git'
 alias gg='git grep'
 alias l='git log --stat --submodule -p'
@@ -320,11 +320,6 @@ export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 #=============================
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-#=============================
-
-#=============================
-### 20150815 add vim 
-export PATH=/usr/local/bin:$PATH
 #=============================
 
 #=============================
