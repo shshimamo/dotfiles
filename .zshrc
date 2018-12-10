@@ -290,11 +290,6 @@ eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dirc
 #=============================
 
 #=============================
-# JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-#=============================
-
-#=============================
 # source zsh-syntax-highlighting
 # http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
