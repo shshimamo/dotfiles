@@ -311,7 +311,8 @@ function searchpr() {
 #=============================
 # glsをsolarizedする為の設定
 # ghq get https://github.com/seebi/dircolors-solarized.git する
-eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+# eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+eval $(/usr/local/bin/gdircolors /usr/local/shima/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 #=============================
 
 #=============================
@@ -330,7 +331,8 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
-export GOPATH=$HOME
+#export GOPATH=$HOME
+export GOPATH=/usr/local/shima
 export GOBIN=$GOPATH/bin
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
@@ -340,3 +342,11 @@ export PATH=$PATH:$GOPATH/bin
 export EDITOR="rubymine"
 
 eval "$(anyenv init -)"
+
+#
+# cpla start
+#
+source /usr/local/shima/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#
+# cpla end
+#
