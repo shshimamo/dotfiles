@@ -294,7 +294,8 @@ function bpr(){
 #=============================
 # glsをsolarizedする為の設定
 # ghq get https://github.com/seebi/dircolors-solarized.git する
-eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+# eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+eval $(/usr/local/bin/gdircolors /usr/local/shima/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 #=============================
 
 #=============================
@@ -340,7 +341,8 @@ export PATH="$HOME/.rbenv/shims:$PATH"
 #=============================
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
-export GOPATH=$HOME
+#export GOPATH=$HOME
+export GOPATH=/usr/local/shima
 export PATH=$PATH:$GOPATH/bin
 #=============================
 
@@ -368,3 +370,4 @@ eval "$(nodenv init -)"
 #
 # cpla end
 #
+source /usr/local/shima/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
