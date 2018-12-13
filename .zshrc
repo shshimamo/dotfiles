@@ -278,6 +278,14 @@ function spec() {
   echo 'Gemfileがありません'
 }
 
+# browse PR
+function bpr(){
+  prno=$(git showpr $@ | cut -d ' ' -f 5 | cut -d '#' -f 2)
+  echo $prno
+  hub browse -- issues/$prno
+}
+
+
 
 #=============================
 
