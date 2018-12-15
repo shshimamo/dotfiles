@@ -5,7 +5,7 @@
 	ui = auto
 [core]
 	editor = vim
-	excludesfile = /Users/shima/.gitignore_global
+	excludesfile = /Users/clipla_user/.gitignore_global
 [alias]
   pushf = push --force-with-lease
 	co = checkout
