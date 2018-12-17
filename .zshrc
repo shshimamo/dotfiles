@@ -159,6 +159,7 @@ alias t='tig'
 eval "$(hub alias -s)"
 alias gh='cd $(ghq root)/$(ghq list | peco)'
 alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias see='hub browse'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
