@@ -2,3 +2,4 @@
 tags
 .idea/
 *.swp
+vendor/bundle/*
