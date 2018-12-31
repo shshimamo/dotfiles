@@ -105,29 +105,6 @@ inoremap < <><C-[>i
 "-- Key Map END
 "-------------------------------
 
-"-------------------------------
-" 折り畳み
-"http://sugilog.hatenablog.com/entry/20110922/1316661437
-" あまり使わないのでコメントアウト
-"set foldmethod=syntax
-"set foldlevel=1
-""set foldnestmax=2
-"
-"augroup foldmethod-syntax
-"  autocmd!
-"  autocmd InsertEnter * if &l:foldmethod ==# 'syntax'
-"  \                   |   setlocal foldmethod=manual
-"  \                   | endif
-"  autocmd InsertLeave * if &l:foldmethod ==# 'manual'
-"  \                   |   setlocal foldmethod=syntax
-"  \                   | endif
-"augroup END
-"
-"nmap <Space>d zc "クローズ
-"nmap <Space>z zO "全てオープン
-"-------------------------------
-
-
 "背景色をリセット
 "autocmd ColorScheme * highlight Normal ctermbg=none
 "autocmd ColorScheme * highlight LineNr ctermbg=none
