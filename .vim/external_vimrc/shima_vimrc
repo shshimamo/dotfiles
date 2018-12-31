@@ -48,9 +48,6 @@ vnoremap x "_x
 "mmで対応カッコにジャンプ
 nnoremap mm %
 "### ノーマルモード ###
-" :と;をswap
-" nnoremap ; :
-" nnoremap : ;
 " 先頭/末尾に移動
 nnoremap <C-h> ^
 nnoremap <C-l> $
@@ -98,9 +95,6 @@ inoremap < <><C-[>i
 " -と_をスワップ
 "inoremap - _
 "inoremap _ -
-" ;と:をスワップ
-" inoremap ; :
-" inoremap : ;
 
 "-- Key Map END
 "-------------------------------
