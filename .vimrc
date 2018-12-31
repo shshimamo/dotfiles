@@ -14,8 +14,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'honza/vim-snippets'
-NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
@@ -30,14 +28,6 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-
-NeoBundleLazy 'Shougo/neosnippet', {
-      \ 'autoload' : {
-      \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
-      \   'filetypes' : 'snippet',
-      \   'insert' : 1,
-      \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
-      \ }}
 
 NeoBundle 'tsukkee/unite-tag'
 
@@ -81,11 +71,6 @@ endif
 "## Unite 
 if filereadable(expand('~/.vim/external_vimrc/unite_vimrc'))
   source ~/.vim/external_vimrc/unite_vimrc
-endif
-
-"## neosnippet_vimrc
-if filereadable(expand('~/.vim/external_vimrc/neosnippet_vimrc'))
-  source ~/.vim/external_vimrc/neosnippet_vimrc
 endif
 
 "## rubocop_vimrc
