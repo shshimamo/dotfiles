@@ -7,7 +7,7 @@ path=$GOPATH
 
 if [ ! -e ~/.vim/bundle ]; then
   # 存在しない場合
-  mkdir -p ~/.vim/ 
+  mkdir -p ~/.vim/bundle 
 fi
 
 ln -ivs $path/src/github.com/shshimamo/dotfiles/.vim/external_vimrc ~/.vim/external_vimrc
