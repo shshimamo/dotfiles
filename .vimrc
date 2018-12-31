@@ -98,9 +98,9 @@ if filereadable(expand('~/.vim/external_vimrc/nerdtree_vimrc'))
   source ~/.vim/external_vimrc/nerdtree_vimrc
 endif
 
-"## command-gg
-if filereadable(expand('~/.vim/external_vimrc/command-gg'))
-  source ~/.vim/external_vimrc/command-gg
+"## command-git-grep
+if filereadable(expand('~/.vim/external_vimrc/command-git-grep'))
+  source ~/.vim/external_vimrc/command-git-grep
 endif
 " Include External File END
 "####################################
