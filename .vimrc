@@ -20,6 +20,7 @@ NeoBundle 'tacroe/unite-mark'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'vim-scripts/buftabs'
 
 
 NeoBundle 'Shougo/vimproc', {
@@ -101,6 +102,11 @@ endif
 "## command-git-grep
 if filereadable(expand('~/.vim/external_vimrc/command-git-grep'))
   source ~/.vim/external_vimrc/command-git-grep
+endif
+
+"## buftabs
+if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
+  source ~/.vim/external_vimrc/buftabs_vimrc
 endif
 " Include External File END
 "####################################
