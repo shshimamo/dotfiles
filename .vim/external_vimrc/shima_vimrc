@@ -78,8 +78,6 @@ nnoremap <C-]> g<C-]>
 " ESCの代替
 inoremap jj <C-[>
 inoremap kk <C-[>
-" inoremap <Down> j
-" inoremap <Up> k
 " カッコ系
 inoremap \| \|\|<LEFT>
 inoremap ( ()<LEFT>
