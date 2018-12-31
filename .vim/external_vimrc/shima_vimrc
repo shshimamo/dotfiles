@@ -88,9 +88,6 @@ inoremap { {}<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap < <><C-[>i
-" -と_をスワップ
-"inoremap - _
-"inoremap _ -
 
 "-- Key Map END
 "-------------------------------
