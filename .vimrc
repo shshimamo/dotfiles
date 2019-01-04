@@ -21,6 +21,7 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/buftabs'
+NeoBundle 'posva/vim-vue'
 
 
 NeoBundle 'Shougo/vimproc', {
