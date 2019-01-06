@@ -29,7 +29,6 @@ NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'posva/vim-vue'
 NeoBundle 'Yggdroot/indentLine'
 
-
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
@@ -122,5 +121,3 @@ if filereadable(expand('~/.vim/external_vimrc/indentLine_vimrc'))
 endif
 " Include External File END
 "####################################
-
-
