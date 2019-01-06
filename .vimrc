@@ -22,6 +22,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'posva/vim-vue'
+NeoBundle 'Yggdroot/indentLine'
 
 
 NeoBundle 'Shougo/vimproc', {
@@ -109,5 +110,12 @@ endif
 if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
   source ~/.vim/external_vimrc/buftabs_vimrc
 endif
+
+"## indentLine
+if filereadable(expand('~/.vim/external_vimrc/indentLine_vimrc'))
+  source ~/.vim/external_vimrc/indentLine_vimrc
+endif
 " Include External File END
 "####################################
+
+
