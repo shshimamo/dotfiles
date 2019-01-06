@@ -17,7 +17,12 @@ NeoBundle 'Shougo/vimproc'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 NeoBundle 'tacroe/unite-mark'
+" コードの自動補完
 NeoBundle 'Shougo/neocomplete.vim'
+" スニペットの補完機能
+NeoBundle "Shougo/neosnippet"
+" スニペット集
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/buftabs'
