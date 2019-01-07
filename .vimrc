@@ -28,6 +28,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'posva/vim-vue'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'elzr/vim-json'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
