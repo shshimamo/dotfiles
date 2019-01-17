@@ -48,6 +48,7 @@
 |---|---|---|---|
 |Quick Definition|Opt + Space|CTRL + J & Space|ポップアップでソース参照| 
 | Quick Documentation | F1 , CTRL + J |CTRL + J削除, CTRL + J & (CTRL) + D| ポップアップでドキュメント参照|
+|Jump to Source|Command + ↓|(追加)Control + Command + mouse click|ソースに飛ぶ
 ###Navigate
 |名前|key map|変更|説明| 
 |---|---|---|---|
@@ -62,9 +63,8 @@
 |Last Edit Location|Ctrl + Cmd Backspace|CTRL + J & CTRL + Shift + O|最後の編集に戻る|
 |Declaration|Cmd + B|CTRL + J & (CTRL +) B|定義へジャンプ|
 |Implementation(s)|Opt + Cmd + B||継承しているクラスへジャンプ|
-|Toggle Bookmark with Mnemonic|Opt + F3|||
-|Bookmark|F3|Ctrl + J & K|ブックマーク|
-|Bookmark List|Cmd + F3|Ctrl + J & L|ブックマークリスト|
+|Toggle Bookmark|F3|Ctrl + J & (CTRL +)K)|ブックマークのつけはずし|
+|Show Bookmarks|Cmd + F3|Ctrl + J & L|ブックマークリスト|
 |Related Symbol|Ctrl + Cmd + ↑|CTRL + K & CTRL + K|view,model,controller,testへジャンプ|
 ###Code
 |名前|key map|変更|説明| 
