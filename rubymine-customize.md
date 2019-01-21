@@ -33,6 +33,7 @@
 |Move Caret to Line Start|CTRL + A||行の先頭に移動|
 |Move Caret to Line End|CTRL + E||行の末尾に移動|
 |Coose Lookup Item and Insert Dot|CTRL + .||先頭の補完候補を選択して.も記入|
+|Add or Remove Caret|alt + クリック|削除(Jump to Sourceに使いたいので)|複数選択して同時編集とかできるみたいだけど使ったことないので削除
 
 ## 2.Main menu
 ###Run
@@ -48,7 +49,7 @@
 |---|---|---|---|
 |Quick Definition|Opt + Space|CTRL + J & Space|ポップアップでソース参照| 
 | Quick Documentation | F1 , CTRL + J |CTRL + J削除, CTRL + J & (CTRL) + D| ポップアップでドキュメント参照|
-|Jump to Source|Command + ↓|(追加)Control + Command + mouse click|ソースに飛ぶ
+|Jump to Source|Command + ↓|(追加)alt + クリック|ソースに飛ぶ
 ###Navigate
 |名前|key map|変更|説明| 
 |---|---|---|---|
