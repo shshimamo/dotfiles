@@ -99,3 +99,5 @@ autocmd QuickFixCmdPost *grep* cwindow
 nnoremap <C-c><C-n> :cn<CR>
 nnoremap <C-c><C-p> :cp<CR>
 nnoremap <C-c><C-c> :.cc<CR>
+
+set clipboard+=unnamed
