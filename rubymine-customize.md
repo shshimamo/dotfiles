@@ -100,6 +100,11 @@
 |---|---|---|---|
 |Run Rake Task|Opt + R|CTRL + K & (CTRL +) R|rake task実行|
 |Run Rails Generator|Opt + Cmd + G|CTRL + K & (CTRL +) G|migrate実行|
+###VCS > Git 
+|名前|key map|変更|説明| 
+|---|---|---|---|
+|compare with Branch...|-|(CTRL + G) & C|Branchと比較|
+
 
 
 ## 3.Tool Windows
