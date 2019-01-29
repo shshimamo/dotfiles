@@ -33,7 +33,7 @@
 |Move Caret to Line Start|CTRL + A||行の先頭に移動|
 |Move Caret to Line End|CTRL + E||行の末尾に移動|
 |Coose Lookup Item and Insert Dot|CTRL + .||先頭の補完候補を選択して.も記入|
-|Add or Remove Caret|alt + クリック|削除(Jump to Sourceに使いたいので)|複数選択して同時編集とかできるみたいだけど使ったことないので削除
+|Add or Remove Caret|alt + クリック|alt + shift + クリック(alt + クリックはJump to Sourceに割り当てる)|複数選択して同時編集とかできるみたいだけど使ったことないので削除
 
 ## 2.Main menu
 ###Run
@@ -174,6 +174,7 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
 |インデント縦線|Editor > Color Schema > General > Guides > Editor >　　Indent guide||606060|
 |インデント縦線選択中|Editor > Color Schema > General > Guides > Editor >　　Indent guide selected||E7E7E7|
 |メソッド横線|Editor > Color Schema > General > Code >　　Method separator color||606060|
+|Current row|Editor > Color Schema > General > Editor > Caret row|181818|282828|
 |ドット|Editor > Color Schema > Ruby >　　Dot||E5F1F3|
 |カンマ(Ruby)|Editor > Color Schema > Ruby > Comma||E5F1F3|
 |インスタンス変数|Editor > Color Scheme > Ruby||D0D0FF|
