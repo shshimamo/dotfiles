@@ -160,6 +160,7 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
 |---|---|---|---|
 |デフォルト文字色|Editor > Color Scheme > General > Default text > Foreground|EEFFFF|FFFFFF|
 |背景色|Editor > Color Scheme > General > Default text > Background|212121|000000|
+|選択時の背景色|Editor > Color Scheme > General > Selection background|353535|0A5E63|
 |メソッドの引数|Editor > ColorSchema > Ruby > Parameter||BBB941|
 |ローカル変数|Editor > ColorSchema > Ruby > Local Variable||E8A2B0|
 |ローカル変数|Editor > ColorSchema > CoffeeScript > Local Variable||E8A2B0|
