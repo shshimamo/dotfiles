@@ -344,7 +344,7 @@
     },
 
     {
-      "description": "コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (lazy: falseに変更)",
+      "description": "(fix lazy)コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (lazy: falseに変更)",
       "manipulators": [
         {
           "type": "basic",
@@ -373,18 +373,10 @@
           "from": {
             "key_code": "right_command",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "mandatory": ["left_command"]
             }
           },
           "to": [
-            {
-              "key_code": "right_command",
-              "lazy": false
-            }
-          ],
-          "to_if_alone": [
             {
               "key_code": "japanese_kana"
             }
@@ -475,7 +467,7 @@
           "type": "basic"
         }
       ]
-    }
+    }    
   ]
 }
 
