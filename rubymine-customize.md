@@ -34,6 +34,8 @@
 |Move Caret to Line End|CTRL + E||行の末尾に移動|
 |Coose Lookup Item and Insert Dot|CTRL + .||先頭の補完候補を選択して.も記入|
 |Add or Remove Caret|alt + クリック|alt + shift + クリック(alt + クリックはJump to Sourceに割り当てる)|複数選択して同時編集とかできるみたいだけど使ったことないので削除
+|Down|Ctrl + N|削除(Ctrl+NをFowardに割り当ててterminalの履歴進むと合わせる)|下に移動|
+|UP|Ctrl + P|削除(Ctrl+PをBackに割り当ててterminalの履歴戻ると合わせる)|上に移動|
 
 ## 2.Main menu
 ###Run
