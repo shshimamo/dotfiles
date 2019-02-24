@@ -146,9 +146,9 @@ alias la='ls -a'
 
 ### for git
 alias g='git'
-alias gg='git grep'
+alias gg='git grep -A 3'
 alias l='git log --stat --submodule -p'
-alias lo='git log -30 --oneline --reverse'
+alias lo='git log --oneline --reverse --no-merges master..head'
 alias s='git status'
 alias di='git diff'
 alias br='git branch -vv --sort=-committerdate'
