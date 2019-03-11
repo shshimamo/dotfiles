@@ -574,28 +574,72 @@
       ]
     },
 
-
     {
-      "description": "shif_R fでescを送信",
+      "description": "左Option + h で Rubymine",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "f",
+            "key_code": "h",
             "modifiers": {
               "mandatory": [
-                "right_shift"
+                "left_option"
               ]
             }
           },
           "to": [
             {
-              "key_code": "escape"
+              "shell_command": "open -a 'Rubymine'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "左Option + j で chrome",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "左Option + k で iTerm",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm'"
             }
           ]
         }
       ]
     }
+
   ]
 }
 
