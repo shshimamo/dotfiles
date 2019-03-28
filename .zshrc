@@ -157,6 +157,7 @@ alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias st="git stash list | grep $(git symbolic-ref --short HEAD)"
 alias show="git show --stat -p"
+alias ggreset="git reset --hard origin/$(g current-branch)"
 
 alias t='tig'
 eval "$(hub alias -s)"
