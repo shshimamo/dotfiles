@@ -147,6 +147,7 @@ alias la='ls -a'
 ### for git
 alias g='git'
 alias gg='git grep -A 3'
+alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias lo='git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
