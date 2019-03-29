@@ -344,6 +344,8 @@ export PATH="$HOME/.rbenv/shims:$PATH"
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
 export GOPATH=$HOME
+export GOBIN=$GOPATH/bin
+export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
 #=============================
 
