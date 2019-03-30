@@ -4,8 +4,6 @@
 |Cut up to Line End|CTRL + K|CTRL + K削除|末尾まで切り取る|
 |Right|→ , CTRL + F|CTRL + Fを削除|右へ|
 |Left|←, CTRL + B|CTRL + Bを削除|左へ|
-|Move Caret to Code Block Start|Opt + Cmd + [|CTRL + [|ブロックのスタートにジャンプ|
-|Move Caret to Code Block End|Opt + Cmd + [|CTRL + ]|ブロックのエンドにジャンプ|
 |Move Caret to Line Start|CTRL + A||行の先頭に移動|
 |Move Caret to Line End|CTRL + E||行の末尾に移動|
 |Coose Lookup Item and Insert Dot|CTRL + .||先頭の補完候補を選択して.も記入|
@@ -33,8 +31,9 @@
 |File Structure|Cmd + F12|CTRL + J & CTRL + J |クラスのメソッド、フィールドを見れる。さらにmodelではカラムも見れる|
 |Type Hierarchy|CTRL + H|CTRL + J & (CTRL +) H , CTRL + H削除|タイプヒエラルキー|
 |Back|Cmd + [|CTRL + J & CTRL + O|戻る|
-|Forward|Cmd + ]|CTRL + J & (CTRL +) I|進む|
+|Forward|Cmd + ]|CTRL + J & CTRL + I|進む|
 |Last Edit Location|Ctrl + Cmd Backspace|CTRL + J & O|最後の編集に戻る(CTRL + o は戻る。普通の o は最後の編集へ)|
+|Next Edit Location|-|CTRL + J & I|最後の編集に戻る(CTRL + o は戻る。普通の o は最後の編集へ)|
 |Declaration|Cmd + B|CTRL + J & (CTRL +) B|定義へジャンプ|
 |Implementation(s)|Opt + Cmd + B|-|継承しているクラスへジャンプ|
 |Toggle Bookmark|F3|Ctrl + J & (CTRL +)K)|ブックマークのつけはずし|
