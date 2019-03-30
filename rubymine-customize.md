@@ -96,7 +96,7 @@
 ###Refactor
 |名前|key map|変更|説明| 
 |---|---|---|---|
-|Refactor this|Ctrl + T||リファクタメニューを表示|
+|Refactor this|Ctrl + T|-|リファクタメニューを表示|
 ###Tools 
 |名前|key map|変更|説明| 
 |---|---|---|---|
@@ -110,9 +110,10 @@
 
 
 ## 3.Tool Windows
-|名前|Shortcut|説明|
+|名前|Shortcut|変更|説明|
 |---|---|---|
-|Version Control|Cmd + 9|gitのlocalchangesやlogを確認できる|
+|Version Control|Cmd + 9||gitのlocalchangesやlogを確認できる|
+|Terminal||CTRL + J & T|ターミナル起動|
 
 ## 5. Version Control Systems
 |名前|key map|変更|説明| 
