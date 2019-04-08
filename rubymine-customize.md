@@ -199,7 +199,7 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
     - ※.ideavimrcに`set clipboard=unnamed` を入れておくとclipboard共有できて便利
 - Railways
 - Material Theme UI
-
+- Rainbow Brackets
 
 # 設定画面以外の設定や使い方メモ
 ## Projectペイン
