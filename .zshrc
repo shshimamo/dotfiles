@@ -290,6 +290,9 @@ function bpr(){
   hub browse -- issues/$prno
 }
 
+function searchpr() {
+  open "https://github.com/search?q=is:merged $@"
+}
 
 
 #=============================
