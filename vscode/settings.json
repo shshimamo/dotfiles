@@ -1,0 +1,36 @@
+{
+    "editor.fontSize": 14,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["k","k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["leader","l"],
+            "after": ["<C-w>","l"]
+        },
+        {
+            "before": ["leader","h"],
+            "after": ["<C-w>","h"]
+        },
+        {
+            "before": ["<C-h>"],
+            "after": ["^"]
+        },
+        {
+            "before": ["<C-l>"],
+            "after": ["$"]
+        }
+    ]
+}
