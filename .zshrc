@@ -143,6 +143,7 @@ alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias ls='/usr/local/bin/gls --color=auto'
 alias ll='ls -lahG'
 alias la='ls -a'
+alias ee='tree -f'
 
 ### for git
 alias g='git'
