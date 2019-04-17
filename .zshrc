@@ -314,14 +314,6 @@ fi
 #=============================
 
 #=============================
-# elasticsearch
-export ELASTICPATH=/usr/local/opt/elasticsearch/libexec/bin/
-export PATH=$PATH:$ELASTICPATH
-export LOGSTASHPATH=/usr/local/Cellar/logstash/5.6.0/bin
-export PATH=$PATH:$LOGSTASHPATH
-#=============================
-
-#=============================
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
