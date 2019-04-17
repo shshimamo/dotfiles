@@ -322,12 +322,6 @@ export PATH=$PATH:$LOGSTASHPATH
 #=============================
 
 #=============================
-# qt55
-# https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#homebrew
-export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
-#=============================
-
-#=============================
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
