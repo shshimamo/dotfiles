@@ -159,6 +159,7 @@ alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authord
 alias st="git stash list | grep $(git symbolic-ref --short HEAD)"
 alias show="git show --stat -p"
 alias ggreset="git reset --hard origin/$(g current-branch)"
+alias com="git checkout master; git fetch; git merge origin/master"
 
 alias t='tig'
 eval "$(hub alias -s)"
@@ -313,12 +314,6 @@ fi
 #=============================
 
 #=============================
-# nodebrwe自体を削除した
-# nodebrew
-# export PATH=$HOME/.nodebrew/current/bin:$PATH
-#=============================
-
-#=============================
 # elasticsearch
 export ELASTICPATH=/usr/local/opt/elasticsearch/libexec/bin/
 export PATH=$PATH:$ELASTICPATH
@@ -338,13 +333,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
 
 #=============================
-# rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
-#=============================
-
-#=============================
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
 export GOPATH=$HOME
@@ -358,22 +346,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 #=============================
 
-#=============================
-# nvm Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-#=============================
-
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
 export EDITOR="rubymine"
 
-#
-# cpla start
-#
-
-# nodenv
-eval "$(nodenv init -)"
-
-#
-# cpla end
-#
+eval "$(anyenv init -)"
