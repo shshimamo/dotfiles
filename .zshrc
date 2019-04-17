@@ -341,11 +341,6 @@ export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
 #=============================
 
-#=============================
-# mysql5.6
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-#=============================
-
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
 export EDITOR="rubymine"
 
