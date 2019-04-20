@@ -193,6 +193,16 @@ function ggv(){
   fi
 }
 
+function eev(){
+  name=$(tree -f | grep $@ | peco | awk '{print $NF}')
+  if [ -n "$name" ]; then
+    vim $name
+    #echo $name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
 function sm(){
   file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
   if [ -n "$file_name" ]; then
@@ -295,7 +305,6 @@ function bpr(){
 function searchpr() {
   open "https://github.com/search?q=is:merged $@"
 }
-
 
 #=============================
 
