@@ -48,8 +48,6 @@ if defined? Hirb
      @output_method = nil
    end
  end
-
- # Hirb.enable
 end
 
 # refs: https://github.com/deivid-rodriguez/pry-byebug#matching-byebug-behaviour
@@ -60,10 +58,55 @@ if defined?(PryByebug)
   Pry.commands.alias_command 'f', 'finish'
   Pry.commands.alias_command 'q', 'quit'
 end
-Pry.commands.alias_command 'sr', 'show-routes'
-Pry.commands.alias_command 'srg', 'show-routes -G '
-Pry.commands.alias_command 'sm', 'show-model'
 
+
+if defined?(PryStackExplorer)
+  Pry.commands.alias_command 'stack', 'show-stack'
+end
+
+if defined?(PryRails)
+  Pry.config.prompt = Pry::Prompt[:rails][:value] if Pry::Prompt[:rails]
+
+  Pry.commands.alias_command 'find',    'find-route'
+  Pry.commands.alias_command 'routes',  'show-routes'
+  Pry.commands.alias_command 'groutes', 'show-routes -G '
+  Pry.commands.alias_command 'model',   'show-model'
+  Pry.commands.alias_command 'models',  'show-models'
+  Pry.commands.alias_command 'gmodels', 'show-models -G '
+  Pry.commands.alias_command 'path',   'recognize-path'
+  Pry.commands.alias_command 'middlewares',   'show-middleware'
+end
+
+def aliases
+  puts <<~ALIASES
+    # [find-route]:
+    #   find-route MyController#show
+    #   find-route MyController
+    #   find-route Admin              #=> Admin namespace
+    #   find-route Com                #=> regex matches /Comm/, e.g CommentsController
+    'find',        'find-route'
+
+    # [show-middleware]:
+    'middlewares', 'show-middleware'
+
+    # [show-model(s)]:  show-model <model name>
+    'model',       'show-model'
+    'models',      'show-models'
+    'gmodels',     'show-models -G '
+
+    # [show-routes]:
+    'routes',      'show-routes'
+    'groutes',     'show-routes -G '
+
+    # [show-stack]:
+    'stack',       'show-stack'
+
+    # [recognize-path]:
+    #   recognize-path example.com
+    #   recognize-path example.com -m post  #=> メソッド指定
+    'path',        'recognize-path'
+  ALIASES
+end
 
 # Hit Enter to repeat last command
 #Pry::Commands.command /^$/, "repeat last command" do
