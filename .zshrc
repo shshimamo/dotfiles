@@ -151,14 +151,13 @@ alias gg='git grep -A 3'
 alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
 alias l='git log --stat --submodule -p --no-merges master..head'
+alias glo='git log --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
 alias lo='git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
 alias s='git status'
 alias di='git diff'
 alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
-alias st="git stash list | grep $(git symbolic-ref --short HEAD)"
 alias show="git show --stat -p"
-alias ggreset="git reset --hard origin/$(g current-branch)"
 alias com="git checkout master; git fetch; git merge origin/master"
 
 alias t='tig'
@@ -166,6 +165,7 @@ eval "$(hub alias -s)"
 alias gh='cd $(ghq root)/$(ghq list | peco)'
 alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 alias see='hub browse'
+alias q='cd $(ghq root)/$(ghq list Qualizm)'
 
 alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
@@ -279,20 +279,10 @@ function stp() {
   fi
 }
 
-function spec() {
-  gemfile_local=$(ls ./ | grep 'Gemfile.local')
-  if [ -n "$gemfile_local" ]; then
-    BUNDLE_GEMFILE=Gemfile.local bundle exec rspec $@
-    return
-  fi
-
-  gemfile=$(ls ./ | grep 'Gemfile')
-  if [ -n "$gemfile" ]; then
-    bundle exec rspec $@
-    return
-  fi
-
-  echo 'Gemfileがありません'
+function sp() {
+  now_dir=$(pwd)
+  rails_root=$(ghq root)/$(ghq list Qualizm)
+  (cd $rails_root; bin/rspec $now_dir/$@)
 }
 
 # browse PR
@@ -306,21 +296,6 @@ function searchpr() {
   open "https://github.com/search?q=is:merged $@"
 }
 
-#=============================
-
-#=============================
-# glsをsolarizedする為の設定
-# ghq get https://github.com/seebi/dircolors-solarized.git する
-eval $(/usr/local/bin/gdircolors ~/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
-#=============================
-
-#=============================
-# source zsh-syntax-highlighting
-# http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
-if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-#=============================
 
 #=============================
 # Added by the Heroku Toolbelt
@@ -330,7 +305,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 #=============================
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
-export GOPATH=$HOME
+export GOPATH=$HOME/devel
 export GOBIN=$GOPATH/bin
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
@@ -340,3 +315,20 @@ export PATH=$PATH:$GOPATH/bin
 export EDITOR="rubymine"
 
 eval "$(anyenv init -)"
+
+#=============================
+# glsをsolarizedする為の設定
+# ghq get https://github.com/seebi/dircolors-solarized.git する
+if [ -f $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal ]; then
+  eval $(/usr/local/bin/gdircolors $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
+fi
+#=============================
+
+#=============================
+# source zsh-syntax-highlighting
+# http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
+if [ -f $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+#=============================
+

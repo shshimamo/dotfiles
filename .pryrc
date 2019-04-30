@@ -77,6 +77,10 @@ if defined?(PryRails)
   Pry.commands.alias_command 'middlewares',   'show-middleware'
 end
 
+if defined?(Rails)
+  include Rails.application.routes.url_helpers
+end
+
 def aliases
   puts <<~ALIASES
     # [find-route]:
