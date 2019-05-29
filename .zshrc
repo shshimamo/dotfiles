@@ -171,6 +171,8 @@ alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
 alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
 
+alias fig='docker-compose'
+
 # Rubymineで開くコマンド
 # git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
 function ggm(){
@@ -197,7 +199,15 @@ function eev(){
   name=$(tree -f | grep $@ | peco | awk '{print $NF}')
   if [ -n "$name" ]; then
     vim $name
-    #echo $name
+  else
+    echo 'fileが見つかりません'
+  fi
+}
+
+function eec(){
+  name=$(tree -f | grep $@ | peco | awk '{print $NF}')
+  if [ -n "$name" ]; then
+    cat $name
   else
     echo 'fileが見つかりません'
   fi
@@ -259,26 +269,6 @@ function hcp(){
   fi
 }
 
-# stash list & diff
-function std() {
-  result=$(git stash list)
-  if [ -n "$result" ]; then
-    git diff HEAD..$(git stash list | peco | cut -d ':' -f 1)
-  else
-    echo 'stashが見つかりません'
-  fi
-}
-
-# stash list & pop
-function stp() {
-  result=$(st)
-  if [ -n "$result" ]; then
-    git stash pop $(st | peco | cut -d ':' -f 1)
-  else
-    echo 'stashが見つかりません'
-  fi
-}
-
 function sp() {
   now_dir=$(pwd)
   rails_root=$(ghq root)/$(ghq list Qualizm)
@@ -294,6 +284,10 @@ function bpr(){
 
 function searchpr() {
   open "https://github.com/search?q=is:merged $@"
+}
+
+function full() {
+  realpath $@ | pbcopy
 }
 
 
