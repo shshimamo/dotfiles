@@ -11,6 +11,7 @@
 	co = checkout
 	com = checkout master
 	ci = commit
+  ciamend = commit -a --amend --no-edit
 	s = status
 	b = browse
   br = branch -vv --sort=-committerdate
