@@ -290,6 +290,13 @@ function full() {
   realpath $@ | pbcopy
 }
 
+# stash list & diff
+function stshow() {
+  git stash show stash@{$@}
+  echo '----------'
+  git stash show -p stash@{$@}
+}
+
 
 #=============================
 # Added by the Heroku Toolbelt
