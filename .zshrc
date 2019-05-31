@@ -147,7 +147,8 @@ alias ee='tree -f'
 
 ### for git
 alias g='git'
-alias gg='git grep -A 3'
+# -B, -C は意味なし
+alias gg='git grep -B 0 -C 0 -A 3'
 alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
 alias l='git log --stat --submodule -p --no-merges master..head'
