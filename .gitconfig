@@ -26,6 +26,9 @@
 	st = stash
 	stl = stash list
 	stp = stash pop
+	std = stash drop
+  sts = stash show
+	stclear = stash clear
 	showname = show --name-only
 	shn = show --name-only
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
