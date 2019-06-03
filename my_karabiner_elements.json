@@ -423,7 +423,7 @@
     },
 
     {
-      "description": "左Option + I => iTerm",
+      "description": "右Option + I => iTerm",
       "manipulators": [
         {
           "type": "basic",
@@ -431,7 +431,7 @@
             "key_code": "i",
             "modifiers": {
               "mandatory": [
-                "left_option"
+                "right_option"
               ]
             }
           },
@@ -488,9 +488,32 @@
       ]
     },
 
+    {
+      "description": "右Option + v => VSCode",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Visual Studio Code'"
+            }
+          ]
+        }
+      ]
+    },
+
+
 
     {
-      "description": "[MBP用] バックスラッシュ => バックスペース、左Option + バックスラッシュ => バックスラッシュ",
+      "description": "[MBP用] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
       "manipulators": [
         {
           "type": "basic",
@@ -510,6 +533,22 @@
             "modifiers": {
               "mandatory": [
                 "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "backslash"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "backslash",
+            "modifiers": {
+              "mandatory": [
+                "right_option"
               ]
             }
           },
@@ -554,7 +593,6 @@
         }
       ]
     }
-
   ]
 }
 
