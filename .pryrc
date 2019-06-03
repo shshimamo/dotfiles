@@ -79,6 +79,15 @@ end
 
 if defined?(Rails)
   include Rails.application.routes.url_helpers
+  Rails.application.eager_load!
+
+  def ars
+    ApplicationRecord.subclasses.map(&:name)
+  end
+
+  def rrr
+    reload!
+  end
 end
 
 def aliases
@@ -89,26 +98,23 @@ def aliases
     #   find-route Admin              #=> Admin namespace
     #   find-route Com                #=> regex matches /Comm/, e.g CommentsController
     'find',        'find-route'
-
     # [show-middleware]:
     'middlewares', 'show-middleware'
-
     # [show-model(s)]:  show-model <model name>
     'model',       'show-model'
     'models',      'show-models'
     'gmodels',     'show-models -G '
-
     # [show-routes]:
     'routes',      'show-routes'
     'groutes',     'show-routes -G '
-
     # [show-stack]:
     'stack',       'show-stack'
-
     # [recognize-path]:
     #   recognize-path example.com
     #   recognize-path example.com -m post  #=> メソッド指定
     'path',        'recognize-path'
+    # All ApplicationRecord.subclasses names
+    'ars',         'ApplicationRecord.subclasses.map(&:name)'
   ALIASES
 end
 
