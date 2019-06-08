@@ -8,10 +8,12 @@
 	excludesfile = ~/.gitignore_global
 [alias]
   pushf = push --force-with-lease
+  headpushf = push --force-with-lease origin head
 	co = checkout
 	com = checkout master
 	ci = commit
-  ciamend = commit -a --amend --no-edit
+  ciam = commit --amend --no-edit
+  ciaam = commit -a --amend --no-edit
 	s = status
 	b = browse
   br = branch -vv --sort=-committerdate
