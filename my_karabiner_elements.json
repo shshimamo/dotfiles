@@ -513,7 +513,7 @@
 
 
     {
-      "description": "[MBP用] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
+      "description": "[USキーボード] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
       "manipulators": [
         {
           "type": "basic",
