@@ -28,8 +28,8 @@
 |Cut up to Line End|CTRL + K|CTRL + K削除|末尾まで切り取る|
 |Right|→ , CTRL + F|CTRL + Fを削除|右へ|
 |Left|←, CTRL + B|CTRL + Bを削除|左へ|
-|Move Caret to Code Block Start|Opt + Cmd + [|CTRL + [|ブロックのスタートにジャンプ|
-|Move Caret to Code Block End|Opt + Cmd + [|CTRL + ]|ブロックのエンドにジャンプ|
+|Move Caret to Code Block Start|Opt + Cmd + [|CTRL + [ (Vim EmulationでHandlerをIDEにする必要がある)|ブロックのスタートにジャンプ|
+|Move Caret to Code Block End|Opt + Cmd + [|CTRL + ] (Vim EmulationでHandlerをIDEにする必要がある)|ブロックのエンドにジャンプ|
 |Move Caret to Line Start|CTRL + A||行の先頭に移動|
 |Move Caret to Line End|CTRL + E||行の末尾に移動|
 |Coose Lookup Item and Insert Dot|CTRL + .||先頭の補完候補を選択して.も記入|
