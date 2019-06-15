@@ -15,14 +15,40 @@
             "after": ["<Esc>"]
         }
     ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["x"],
+            "after": ["\"","_","x"]
+        }
+    ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["leader","l"],
-            "after": ["<C-w>","l"]
+            "before": ["x"],
+            "after": ["\"","_","x"]
+        },
+        {
+            "before": ["leader","j"],
+            "after": ["7","<C-e>","7","j"]
+        },
+        {
+            "before": ["leader","k"],
+            "after": ["7","<C-y>","7","k"]
         },
         {
             "before": ["leader","h"],
             "after": ["<C-w>","h"]
+        },
+        {
+            "before": ["leader","u"],
+            "after": ["<C-w>","j"]
+        },
+        {
+            "before": ["leader","i"],
+            "after": ["<C-w>","k"]
+        },
+        {
+            "before": ["leader","l"],
+            "after": ["<C-w>","l"]
         },
         {
             "before": ["<C-h>"],
@@ -31,6 +57,25 @@
         {
             "before": ["<C-l>"],
             "after": ["$"]
+        },
+        {
+            "before": ["*"],
+            "after": [],
+            "commands": ["actions.findWithSelection"]
+        },
+        {
+            "before": ["leader","["],
+            "after": [],
+            "commands": ["workbench.action.moveEditorToFirstGroup"]
+        },
+        {
+            "before": ["leader","]"],
+            "after": [],
+            "commands": ["workbench.action.moveEditorToLastGroup"]
         }
-    ]
+    ],
+    "editor.tabSize": 2,
+    "workbench.editor.enablePreview": false,
+    "workbench.colorTheme": "Material Theme High Contrast"
 }
+
