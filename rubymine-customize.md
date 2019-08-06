@@ -60,7 +60,8 @@
 |Symbol...|Opt + Cmd + O||プロジェクト内で変数名、メソッド名などで検索?|
 |Test|Shift + Cmd + T|CTRL + K & T|テストにジャンプ|
 |File Structure|Cmd + F12|CTRL + J & CTRL + J |クラスのメソッド、フィールドを見れる。さらにmodelではカラムも見れる|
-|Type Hierarchy|CTRL + H|CTRL + J & (CTRL +) H , CTRL + H削除|タイプヒエラルキー|
+|Type Hierarchy|CTRL + H|CTRL + J & H , CTRL + H削除|タイプヒエラルキー|
+|Call Hierarchy||CTRL + J & CTRL + H|コールヒエラルキー|
 |Back|Cmd + [|CTRL + J & (CTRL +) O|戻る|
 |Foard|Cmd + ]|CTRL + J & (CTRL +) I|進む|
 |Last Edit Location|Ctrl + Cmd Backspace|CTRL + J & CTRL + Shift + O|最後の編集に戻る|
