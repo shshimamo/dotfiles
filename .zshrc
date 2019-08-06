@@ -1,10 +1,5 @@
 export PATH=/usr/local/bin:$PATH
 
-########################################
-# 少し凝った zshrc START
-# License : MIT
-# http://mollifier.mit-license.org/
-
 # 環境変数
 export LANG=ja_JP.UTF-8
 
@@ -16,14 +11,16 @@ colors
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
+HISTIGNORE=history:history
 
 # プロンプト
 # 1行表示
 # PROMPT="%~ %# "
 # 2行表示
 #PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
-%# "
+#PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
+#%# "
 
 ########################################
 # 補完
@@ -50,12 +47,21 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+# See http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Configuration-1
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+# zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+# zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
+    # RPROMPT="${vcs_info_msg_0_}"
+
+    PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+%# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -100,17 +106,12 @@ setopt hist_reduce_blanks
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
-
-# 少し凝った zshrc END
-########################################
-
-
 ########################################
 # shima
 setopt nolistbeep
 
-#=============================
-## Color
+########################################
+# Color
 # 色の設定
 export LSCOLORS=Exfxcxdxbxegedabagacad
 # 補完時の色の設定
@@ -121,10 +122,8 @@ export ZLS_COLORS=$LS_COLORS
 export CLICOLOR=true
 # 補完候補に色を付ける
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# Color END
-#=============================
 
-#=============================
+########################################
 # エイリアス
 alias rm='rm -i' # 削除前に確認
 alias cp='cp -i' # 上書き前に確認
@@ -172,7 +171,11 @@ alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 
 alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
 
+alias d='docker'
 alias fig='docker-compose'
+
+########################################
+# functions
 
 # Rubymineで開くコマンド
 # git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
@@ -298,39 +301,52 @@ function stshow() {
   git stash show -p stash@{$@}
 }
 
+function google() {
+  open "https://www.google.co.jp/search?q=$@"
+}
 
-#=============================
+function github() {
+  open "https://github.com/pulls/review-requested"
+}
+
+function fixupstautosquash() {
+  git fixup $@
+  git stash
+  git rebase -i --autosquash $@~
+}
+
+########################################
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-#=============================
 
-#=============================
+########################################
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
 export GOPATH=$HOME/devel
 export GOBIN=$GOPATH/bin
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
-#=============================
 
+########################################
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
 export EDITOR="rubymine"
 
 eval "$(anyenv init -)"
 
-#=============================
+########################################
 # glsをsolarizedする為の設定
 # ghq get https://github.com/seebi/dircolors-solarized.git する
 if [ -f $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal ]; then
   eval $(/usr/local/bin/gdircolors $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
 fi
-#=============================
 
-#=============================
+########################################
 # source zsh-syntax-highlighting
 # http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
 if [ -f $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-#=============================
 
+########################################
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+export BUILDKITE_TOKEN=hoge
