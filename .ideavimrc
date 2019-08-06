@@ -33,6 +33,11 @@ nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j
 nnoremap <Space>k <C-w>k
 nnoremap <Space>l <C-w>l
+" 上下移動
+nnoremap <Space>e 5<C-e>
+nnoremap <Space>y 5<C-y>
+nnoremap <Down> 5j
+nnoremap <Up> 5k
 " 横分割
 nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
 "最後の編集場所
