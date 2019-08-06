@@ -17,18 +17,20 @@
 	s = status
 	b = browse
   br = branch -vv --sort=-committerdate
-	l = log
+	l = log --stat --submodule -p
   lf = log --
 	lsearch = log --no-merges --stat -S
-	ls = log --no-merges --stat
+	ls = ls-files
+	lsg = ls-files | grep
 	lo = log --no-merges --oneline
   la = log --no-merges --stat --author
 	d = diff
 	di = diff
 	st = stash
 	stl = stash list
+	stlshow = stash list -p
 	stp = stash pop
-	std = stash drop
+	stdrop = stash drop
   sts = stash show
 	stclear = stash clear
 	showname = show --name-only
@@ -38,6 +40,9 @@
   pr = !"f() { git log --merges --oneline --reverse --ancestry-path $1...master | grep 'Merge pull request #' | head -n 1; }; f"
   showpr = !"f() { git log --merges --oneline --reverse --ancestry-path $1...master | grep 'Merge pull request #' | head -n 1; }; f"
   current-branch = rev-parse --abbrev-ref HEAD
+  autosquash = rebase -i --autosquash
+  fixup = commit --fixup
+  stautosquash = commit --fixup
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
