@@ -497,7 +497,6 @@
       ]
     },
 
-
     {
       "description": "右Option + R => Rubymine",
       "manipulators": [
@@ -631,6 +630,136 @@
     },
 
 
+    {
+      "description": "[BAROCCO] 右Alt(キーボード:右Ctrl)でChrome 起動",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_alt"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "[BAROCCO] PGDNでiTerm起動",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "page_down"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "[BAROCCO] PGUPでRubymine起動",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "page_up"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Rubymine'"
+            }
+          ]
+        }
+      ]
+    },
+
+   {
+      "description": "Shift_L + R/T/F => Rubymine, iTerm, Chrome",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.googlecode\\.iterm2"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Rubymine'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        }
+      ]
+    },
+
 
     {
       "description": "[USキーボード] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
@@ -715,59 +844,7 @@
           ]
         }
       ]
-    },
-
-    {
-      "description": "[BAROCCO]右Alt(キーボード:右Ctrl)でChrome 起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "right_alt"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Google Chrome'"
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "description": "[BAROCCO]PGDNでiTerm起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "page_down"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'iTerm'"
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "description": "[BAROCCO]PGUPでRubymine起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "page_up"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Rubymine'"
-            }
-          ]
-        }
-      ]
     }
-    
     
   ]
 }
