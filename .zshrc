@@ -78,7 +78,7 @@ setopt no_beep
 setopt no_flow_control
 
 # Ctrl+Dでzshを終了しない
-setopt ignore_eof
+# setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
@@ -150,7 +150,6 @@ alias g='git'
 alias gg='git grep -B 0 -C 0 -A 3'
 alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
-alias l='git log --stat --submodule -p --no-merges master..head'
 alias glo='git log --reverse --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
 alias s='git status'
 alias di='git diff'
@@ -172,6 +171,16 @@ alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude
 
 alias d='docker'
 alias fig='docker-compose'
+
+# tmux new -s {Session Name}
+alias tn='tmux new -s'
+# tmux a -t {Session Name}
+alias ta='tmux a -t'
+# tmux rename -t {Old Session Name} {New Session Name}
+alias trename='tmux rename -t'
+# tmux kill-session -t {Session Name}
+alias tkill='tmux kill-session -t'
+alias tkillserver='tmux kill-server'
 
 ########################################
 # functions
@@ -318,6 +327,30 @@ function lo() {
     git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
   else
     git log --reverse --no-merges $1..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
+  fi
+}
+
+#alias l='git log --stat --submodule -p --no-merges master..head'
+function l() {
+  if [ "$1" = "" ]; then
+    git log --stat --submodule -p --no-merges master..head
+  else
+    git log --stat --submodule -p --no-merges $1..head
+  fi
+}
+
+# tmux ls
+function tls() {
+  session=$(tmux ls | peco | cut -d ':' -f 1)
+  tmux a -t $session
+}
+
+
+function tabname() {
+  if [ "$1" = "" ]; then
+    echo -ne "\033]0;$PWD\007"
+  else
+    echo -ne "\033]0;$1\007"
   fi
 }
 
