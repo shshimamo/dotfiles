@@ -52,7 +52,7 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:*' actionformats '%F{red}[%b|%a]%f'
 # zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 # zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
@@ -152,7 +152,6 @@ alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias glo='git log --reverse --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
-alias lo='git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
 alias s='git status'
 alias di='git diff'
 alias br='git branch -vv --sort=-committerdate'
@@ -296,8 +295,6 @@ function full() {
 
 # stash list & diff
 function stshow() {
-  git stash show stash@{$@}
-  echo '----------'
   git stash show -p stash@{$@}
 }
 
@@ -313,6 +310,15 @@ function fixupstautosquash() {
   git fixup $@
   git stash
   git rebase -i --autosquash $@~
+}
+
+# alias lo='git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
+function lo() {
+  if [ "$1" = "" ]; then
+    git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
+  else
+    git log --reverse --no-merges $1..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
+  fi
 }
 
 ########################################
