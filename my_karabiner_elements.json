@@ -368,7 +368,7 @@
     },
 
     {
-      "description": "Shift + Space => =(イコール)",
+      "description": "Left Shift + Space => =(イコール)",
       "manipulators": [
         {
           "type": "basic",
@@ -389,54 +389,46 @@
       ]
     },
 
-        
-    
     {
-      "description": "[Chrome] 'Cmd+Shift+L/H' でタブ移動",
+      "description": "Right Shift + Space => =(イコール)",
       "manipulators": [
         {
-          "conditions": [
-            {
-              "bundle_identifiers": ["^com\\.google\\.Chrome"],
-              "type": "frontmost_application_if"
-            }
-          ],
+          "type": "basic",
           "from": {
-            "key_code": "l",
+            "key_code": "spacebar",
             "modifiers": {
-              "mandatory": ["command", "shift"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_shift"
+              ]
             }
           },
           "to": [
             {
-              "key_code": "right_arrow",
-              "modifiers": ["left_command", "left_option"]
+              "key_code": "equal_sign"
             }
-          ],
-          "type": "basic"
-        },
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Left Shift + Space => ESC",
+      "manipulators": [
         {
-          "conditions": [
-            {
-              "bundle_identifiers": ["^com\\.google\\.Chrome"],
-              "type": "frontmost_application_if"
-            }
-          ],
+          "type": "basic",
           "from": {
-            "key_code": "h",
+            "key_code": "spacebar",
             "modifiers": {
-              "mandatory": ["command", "shift"],
-              "optional": ["any"]
+              "mandatory": [
+                "left_shift"
+              ]
             }
           },
           "to": [
             {
-              "key_code": "left_arrow",
-              "modifiers": ["left_command", "left_option"]
+              "key_code": "escape"
             }
-          ],
-          "type": "basic"
+          ]
         }
       ]
     },
@@ -498,16 +490,74 @@
     },
 
     {
-      "description": "右Option + R => Rubymine",
+      "description": "[Kinesis]左Optionを単体で押したときにLastApp",
       "manipulators": [
         {
           "type": "basic",
           "from": {
+            "key_code": "left_option",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_option"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "[Kinesis]右Optionを 単体=>ESC, +R/T/F/C=> Rubymine, iTerm, Chrome, VSCode",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_option",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "escape" }
+          ]
+        },
+
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
             "key_code": "r",
             "modifiers": {
-              "mandatory": [
-                "right_option"
-              ]
+              "optional": [ "any" ] 
             }
           },
           "to": [
@@ -515,43 +565,28 @@
               "shell_command": "open -a 'Rubymine'"
             }
           ]
-        }
-      ]
-    },
-
-    {
-      "description": "右Option + C => Chrome",
-      "manipulators": [
+        },
         {
           "type": "basic",
-          "from": {
-            "key_code": "c",
-            "modifiers": {
-              "mandatory": [
-                "right_option"
-              ]
-            }
-          },
-          "to": [
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
             {
-              "shell_command": "open -a 'Google Chrome'"
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "description": "右Option + I => iTerm",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "i",
-            "modifiers": {
-              "mandatory": [
-                "right_option"
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
               ]
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "optional": [ "any" ] 
             }
           },
           "to": [
@@ -559,21 +594,115 @@
               "shell_command": "open -a 'iTerm'"
             }
           ]
-        }
-      ]
-    },
-
-    {
-      "description": "右Option + S => Slack",
-      "manipulators": [
+        },
         {
           "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Visual Studio Code'"
+            }
+          ]
+        },
+
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "g",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'GitHub Desktop'"
+            }
+          ]
+        },
+
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
           "from": {
             "key_code": "s",
             "modifiers": {
-              "mandatory": [
-                "right_option"
-              ]
+              "optional": [ "any" ] 
             }
           },
           "to": [
@@ -582,105 +711,12 @@
             }
           ]
         }
+
       ]
     },
 
     {
-      "description": "右Option + G => goland",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "g",
-            "modifiers": {
-              "mandatory": [
-                "right_option"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Goland'"
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "description": "右Option + v => VSCode",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "v",
-            "modifiers": {
-              "mandatory": [
-                "right_option"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Visual Studio Code'"
-            }
-          ]
-        }
-      ]
-    },
-
-
-    {
-      "description": "[BAROCCO] 右Alt(キーボード:右Ctrl)でChrome 起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "right_alt"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Google Chrome'"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "[BAROCCO] PGDNでiTerm起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "page_down"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'iTerm'"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "description": "[BAROCCO] PGUPでRubymine起動",
-      "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "page_up"
-          },
-          "to": [
-            {
-              "shell_command": "open -a 'Rubymine'"
-            }
-          ]
-        }
-      ]
-    },
-
-   {
-      "description": "Shift_L + R/T/F => Rubymine, iTerm, Chrome",
+      "description": "Shift_L + Left_Command + R/T/F/C/G => Rubymine, iTerm, Chrome, VSCode, GithubDesktop",
       "manipulators": [
         {
           "type": "basic",
@@ -689,7 +725,12 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.google\\.Chrome",
-                "^com\\.googlecode\\.iterm2"
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
               ]
             }
           ],
@@ -697,7 +738,7 @@
             "key_code": "r",
             "modifiers": {
               "mandatory": [
-                "left_shift"
+                "left_shift", "left_command"
               ]
             }
           },
@@ -714,7 +755,12 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.google\\.Chrome",
-                "^com\\.jetbrains\\.rubymine"
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
               ]
             }
           ],
@@ -722,7 +768,7 @@
             "key_code": "t",
             "modifiers": {
               "mandatory": [
-                "left_shift"
+                "left_shift", "left_command"
               ]
             }
           },
@@ -739,7 +785,12 @@
               "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "^com\\.jetbrains\\.rubymine",
-                "^com\\.googlecode\\.iterm2"
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
               ]
             }
           ],
@@ -747,7 +798,7 @@
             "key_code": "f",
             "modifiers": {
               "mandatory": [
-                "left_shift"
+                "left_shift", "left_command"
               ]
             }
           },
@@ -756,10 +807,387 @@
               "shell_command": "open -a 'Google Chrome'"
             }
           ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Visual Studio Code'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "g",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'GitHub Desktop'"
+            }
+          ]
         }
       ]
     },
 
+    {
+      "description": "Shift_L + Right_Command + R/T/F/C => Rubymine, iTerm, Chrome, VSCode",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "right_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Rubymine'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "right_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "right_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "right_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Visual Studio Code'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Shift_L + Command + R/T/F/C => Rubymine, iTerm, Chrome, VSCode",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Rubymine'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.microsoft\\.VSCode",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.google\\.Chrome",
+                "^com\\.jetbrains\\.rubymine",
+                "^com\\.googlecode\\.iterm2",
+                "^com\\.happenapps\\.Quiver",
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.kapeli\\.dashdoc",
+                "^com\\.github\\.GitHubClient"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Visual Studio Code'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Shift_L + Left_Command + S => Slack",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Slack'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Shift_L + Right_Command + S => Slack",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "right_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Slack'"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Shift_L + Command + S => Slack",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_shift", "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Slack'"
+            }
+          ]
+        }
+      ]
+    },
 
     {
       "description": "[USキーボード] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
