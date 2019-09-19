@@ -51,8 +51,10 @@ autoload -Uz add-zsh-hook
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '%F{red}[%b|%a]%f'
+# zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' formats "%F{green}%c%u %b %f"
+# zstyle ':vcs_info:*' actionformats '%F{red}[%b|%a]%f'
+zstyle ':vcs_info:*' actionformats '%F{red} %b|%a %f'
 # zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 # zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
@@ -157,6 +159,8 @@ alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
+alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(blue)%h%Creset"'
+alias l='git log --stat --submodule -p --no-merges master..head'
 
 alias t='tig'
 eval "$(hub alias -s)"
@@ -181,6 +185,7 @@ alias trename='tmux rename -t'
 # tmux kill-session -t {Session Name}
 alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
+
 
 ########################################
 # functions
@@ -321,24 +326,6 @@ function fixupstautosquash() {
   git rebase -i --autosquash $@~
 }
 
-# alias lo='git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
-function lo() {
-  if [ "$1" = "" ]; then
-    git log --reverse --no-merges master..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
-  else
-    git log --reverse --no-merges $1..head --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"
-  fi
-}
-
-#alias l='git log --stat --submodule -p --no-merges master..head'
-function l() {
-  if [ "$1" = "" ]; then
-    git log --stat --submodule -p --no-merges master..head
-  else
-    git log --stat --submodule -p --no-merges $1..head
-  fi
-}
-
 # tmux ls
 function tls() {
   session=$(tmux ls | peco | cut -d ':' -f 1)
@@ -352,6 +339,14 @@ function tabname() {
   else
     echo -ne "\033]0;$1\007"
   fi
+}
+
+# $1: dir, $2: tabname
+function tabnew() {
+  cd $1
+  #tabname $2
+  tabset $2
+  tmux new -s $2
 }
 
 ########################################
