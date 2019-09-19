@@ -18,6 +18,8 @@ set nowrapscan "検索をファイルの先頭へループしない
 " x キー削除でデフォルトレジスタに入れない
 nnoremap x "_x
 vnoremap x "_x
+nnoremap s "_s
+vnoremap s "_s
 " :と;をswap
 " nnoremap ; :
 " nnoremap : ;
