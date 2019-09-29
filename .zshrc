@@ -343,10 +343,10 @@ function tabname() {
 
 # $1: dir, $2: tabname
 function tabnew() {
-  cd $1
-  #tabname $2
-  tabset $2
-  tmux new -s $2
+  cd `pwd`
+  tabset $1
+  tabset --title $1
+  tmux new -s $1
 }
 
 ########################################

@@ -1,0 +1,9 @@
+{
+  "colors": {
+    "server": "blue",
+    "console": "yellow",
+    "develop": "orchid",
+    "yarn": "gold",
+    "docker": "silver"
+  }
+}
