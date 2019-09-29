@@ -23,8 +23,8 @@
 	lsearch = log --no-merges --stat -S
 	ls = ls-files
 	lsg = ls-files | grep
-	lo = log --no-merges --oneline
-  la = log --no-merges --stat --author
+	lo = log --oneline
+  la = log --stat --author
 	d = diff
 	di = diff
 	st = stash
