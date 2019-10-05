@@ -42,16 +42,14 @@
     },
 
     {
-      "description": "[MyCustom] Commandを単体で押したときに、英数/かなキーを送信する。（左は英数、右はかな） (lazy: falseに変更)",
+      "description": "Commandを単体で英数/かな（左は英数、右はかな） (lazy: falseに変更)",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "key_code": "left_command",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": [ "any" ]
             }
           },
           "to": [
@@ -69,9 +67,7 @@
           "from": {
             "key_code": "right_command",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": [ "any" ]
             }
           },
           "to": [
@@ -82,6 +78,97 @@
           ],
           "to_if_alone": [
             { "key_code": "japanese_kana" }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "description": "左Command単体で英数,  左Option単体でかな, 右Command単体でLastApp, 左Command単体でanother app",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_command",
+            "modifiers": {
+              "optional": [ "any" ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "lazy": false
+            }
+          ],
+          "to_if_alone": [
+            { "key_code": "japanese_eisuu" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_option",
+            "modifiers": {
+              "optional": [ "any" ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_option",
+              "lazy": false
+            }
+          ],
+          "to_if_alone": [
+            { "key_code": "japanese_kana" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "input_sources": [ { "language": "en" } ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": [ "any" ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command",
+              "lazy": false
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_option",
+            "modifiers": {
+              "optional": [ "any" ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_option",
+              "lazy": false
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["left_command"]
+            }
           ]
         }
       ]
@@ -301,6 +388,28 @@
     },
 
     {
+      "description": "'をvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "'",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "'" }
+          ]
+        }
+      ]
+    },
+
+    {
       "description": "vk1+hjklで移動",
       "manipulators": [
         {
@@ -438,6 +547,21 @@
           "to": [
             { "shell_command": "open -a 'Slack'" }
           ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Quiver'" }
+          ]
         }
       ]
     },
@@ -503,6 +627,16 @@
           },
           "to": [
             { "shell_command": "open -a 'Slack'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "q",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Quiver'" }
           ]
         }
       ]
@@ -701,118 +835,38 @@
       ]
     },
 
+
     {
-      "description": "[Kinesis]右Optionを 単体=>ESC, +R/T/F/C=> Rubymine, iTerm, Chrome, VSCode",
+      "description": "[HHKBJP]上矢印を単体で押したときにshift",
       "manipulators": [
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
-            "key_code": "right_option",
-            "modifiers": { "optional": [ "any" ] }
+            "key_code": "up_arrow",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
-            { "set_variable": { "name": "vk1", "value": 1 } }
-          ],
-          "to_after_key_up": [
-            { "set_variable": { "name": "vk1", "value": 0 } }
+            {
+              "key_code": "right_shift"
+            }
           ],
           "to_if_alone": [
-            { "key_code": "escape" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "r",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Rubymine'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "t",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'iTerm'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "f",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Google Chrome'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "c",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Visual Studio Code'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "g",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'GitHub Desktop'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "s",
-            "modifiers": {
-              "optional": [ "any" ] 
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Slack'" }
+            { "key_code": "up_arrow" }
           ]
         }
       ]
     },
-
+    
     {
       "description": "Shift_L + Left_Command + R/T/F/C/G => Rubymine, iTerm, Chrome, VSCode, GithubDesktop",
       "manipulators": [
@@ -1113,6 +1167,98 @@
             { "key_code": "grave_accent_and_tilde" }
           ]
         }
+      ]
+    },
+
+    {
+      "description": "`を英数、かなトグル, +右Optionで`",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "input_sources": [ { "language": "ja" } ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde"
+          },
+          "to": [
+            { "key_code": "japanese_eisuu" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "input_sources": [ { "language": "en" } ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde"
+          },
+          "to": [
+            { "key_code": "japanese_kana" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": {
+              "mandatory": [
+                "right_option"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "grave_accent_and_tilde" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "Homeで`, +shiftで~",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "home",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": {
+                "mandatory": [
+                  "left_shift"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { 
+            "key_code": "home",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "grave_accent_and_tilde" }
+          ]
+        }
+        
       ]
     }
   ]
