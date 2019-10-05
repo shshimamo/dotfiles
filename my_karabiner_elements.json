@@ -167,9 +167,53 @@
         }
       ]
     },
-    
+
     {
-      "description": "スペースを単体はスペース, +hjklで移動,+rtfcgでアプリ起動",
+      "description": "d をvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "d",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "d" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "s をvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "s" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "スペースをvk1",
       "manipulators": [
         {
           "type": "basic",
@@ -186,8 +230,79 @@
           "to_if_alone": [
             { "key_code": "spacebar" }
           ]
-        },
+        }
+      ]
+    },
 
+    {
+      "description": "バックスペースをvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "delete_or_backspace" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "上矢印をvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "up_arrow",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "up_arrow" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "'をvk1",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "'",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "set_variable": { "name": "vk1", "value": 1 } }
+          ],
+          "to_after_key_up": [
+            { "set_variable": { "name": "vk1", "value": 0 } }
+          ],
+          "to_if_alone": [
+            { "key_code": "'" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "description": "vk1+hjklで移動",
+      "manipulators": [
         {
           "type": "basic",
           "conditions": [
@@ -239,8 +354,13 @@
           "to": [
             { "key_code": "right_arrow" }
           ]
-        },
-
+        }
+      ]
+    },
+    
+    {
+      "description": "vk1+rtfcgでアプリ起動",
+      "manipulators": [
         {
           "type": "basic",
           "conditions": [
@@ -323,10 +443,82 @@
     },
 
     {
+      "description": "右Option+rtfcgでアプリ起動",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "r",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Rubymine'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "t",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'iTerm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Google Chrome'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Visual Studio Code'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "g",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'GitHub Desktop'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": { "mandatory": [ "right_option" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Slack'" }
+          ]
+        }
+      ]
+    },
+
+    {
       "description": "Swap ;(セミコロン) and :(コロン)",
       "manipulators": [
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
             "key_code": "semicolon",
             "modifiers": {
@@ -341,6 +533,12 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
             "key_code": "semicolon"
           },
@@ -760,12 +958,18 @@
         }
       ]
     },
-    
+
     {
-      "description": "[USキーボード] バックスラッシュ => バックスペース、左右Option + バックスラッシュ => バックスラッシュ",
+      "description": "[USキーボード] バックスラッシュをバックスペース、左右Option+ で バックスラッシュ",
       "manipulators": [
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
             "key_code": "backslash"
           },
@@ -775,6 +979,12 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
             "key_code": "backslash",
             "modifiers": {
@@ -789,6 +999,12 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [ { "vendor_id": 1278, "product_id": 13 } ]
+            }
+          ],
           "from": {
             "key_code": "backslash",
             "modifiers": {
