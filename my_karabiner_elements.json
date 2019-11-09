@@ -307,7 +307,8 @@
             {
               "key_code": "tab",
               "modifiers": ["left_command"]
-            }
+            },
+            { "set_variable": { "name": "vk1", "value": 0 } }
           ],
           "conditions": [
             {
@@ -327,8 +328,7 @@
             { "key_code": "right_shift" }
           ],
           "to_if_alone": [
-            { "set_variable": { "name": "vk1", "value": 1 } },
-            { "key_code": "right_shift" }
+            { "set_variable": { "name": "vk1", "value": 1 } }
           ],
           "to_delayed_action": {
             "to_if_invoked": [
