@@ -1,4 +1,5 @@
 export PATH=/usr/local/bin:$PATH
+export PATH="/usr/local/sbin:$PATH"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
@@ -174,6 +175,8 @@ alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
 alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
 
 alias d='docker'
+alias dockeri='docker image'
+alias dockerc='docker container'
 alias fig='docker-compose'
 
 # tmux new -s {Session Name}
@@ -192,7 +195,7 @@ alias tkillserver='tmux kill-server'
 
 # Rubymineで開くコマンド
 # git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
-function ggm(){
+function ggmine(){
   name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
   if [ -n "$name_number" ]; then
     mine $name_number
@@ -201,7 +204,7 @@ function ggm(){
   fi
 }
 
-function ggv(){
+function ggvim(){
   name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
   if [ -n "$name_number" ]; then
     name=$(echo $name_number | cut -d ":" -f 1)
@@ -212,7 +215,7 @@ function ggv(){
   fi
 }
 
-function eev(){
+function treevim(){
   name=$(tree -f | grep $@ | peco | awk '{print $NF}')
   if [ -n "$name" ]; then
     vim $name
@@ -221,7 +224,7 @@ function eev(){
   fi
 }
 
-function eec(){
+function treecat(){
   name=$(tree -f | grep $@ | peco | awk '{print $NF}')
   if [ -n "$name" ]; then
     cat $name
@@ -230,7 +233,7 @@ function eec(){
   fi
 }
 
-function sm(){
+function statusmine(){
   file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
   if [ -n "$file_name" ]; then
     mine $file_name
@@ -239,7 +242,7 @@ function sm(){
   fi
 }
 
-function sv(){
+function statusvim(){
   file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
   if [ -n "$file_name" ]; then
     vim $file_name
@@ -248,7 +251,7 @@ function sv(){
   fi
 }
 
-function fm(){
+function findmine(){
   file_name=$(find . -type f | peco)
   if [ -n "$file_name" ]; then
     mine $file_name
@@ -257,7 +260,7 @@ function fm(){
   fi
 }
 
-function fv(){
+function findvim(){
   file_name=$(find . -type f | peco)
   if [ -n "$file_name" ]; then
     vim $file_name
@@ -277,7 +280,7 @@ function co(){
 }
 
 # hash copy
-function hcp(){
+function hashcp(){
   commit_hash=$(git log --date=iso --pretty=format:"[%ad] %h %an : %s" | peco | cut -d ' ' -f 4)
   if [ -n "$commit_hash" ]; then
     echo $commit_hash | pbcopy
@@ -293,7 +296,7 @@ function sp() {
 }
 
 # browse PR
-function bpr(){
+function browsepr(){
   prno=$(git showpr $@ | cut -d ' ' -f 5 | cut -d '#' -f 2)
   echo $prno
   hub browse -- issues/$prno
@@ -320,7 +323,7 @@ function github() {
   open "https://github.com/pulls/review-requested"
 }
 
-function fixupstautosquash() {
+function fixupstashautosquash() {
   git fixup $@
   git stash
   git rebase -i --autosquash $@~
@@ -347,6 +350,13 @@ function tabnew() {
   tabset $1
   tabset --title $1
   tmux new -s $1
+}
+
+function hardco() {
+  branch=`git symbolic-ref --short HEAD`
+  git fetch
+  git checkout $branch
+  git reset --hard origin/$branch
 }
 
 ########################################
@@ -384,3 +394,4 @@ fi
 ########################################
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 export BUILDKITE_TOKEN=hoge
+export PATH="$HOME/.anyenv/bin:$PATH"
