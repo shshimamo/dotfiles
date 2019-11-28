@@ -307,6 +307,7 @@ function searchpr() {
 }
 
 function full() {
+  realpath $@
   realpath $@ | pbcopy
 }
 
