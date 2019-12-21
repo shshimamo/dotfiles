@@ -106,6 +106,25 @@
     },
 
     {
+      "description": "CapsLock => LastApp",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
       "description": "左オプション=>アプリ内ウィンドウ切り替え",
       "manipulators": [
         {
@@ -341,7 +360,7 @@
         }
       ]
     },
-    
+
     {
       "description": "vk1+rtfcgでアプリ起動",
       "manipulators": [
@@ -351,37 +370,11 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
-            "key_code": "r",
+            "key_code": "b",
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
-            { "shell_command": "open -a 'Rubymine'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "t",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'iTerm'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "f",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'Google Chrome'" }
+            { "shell_command": "open -a 'books'" }
           ]
         },
         {
@@ -403,11 +396,78 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
+            "key_code": "d",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'dash'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Google Chrome'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
             "key_code": "g",
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
             { "shell_command": "open -a 'GitHub Desktop'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'kindle'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Quiver'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Rubymine'" }
           ]
         },
         {
@@ -429,13 +489,76 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
-            "key_code": "q",
+            "key_code": "t",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'iTerm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "4",
             "modifiers": {
               "optional": [ "any" ] 
             }
           },
           "to": [
-            { "shell_command": "open -a 'Quiver'" }
+            {
+              "key_code": "4",
+              "modifiers": ["left_shift", "left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "5",
+            "modifiers": {
+              "optional": [ "any" ] 
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'screenshot'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            {
+              "key_code": "m",
+              "modifiers": ["left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["left_command"]
+            }
           ]
         }
       ]
