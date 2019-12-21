@@ -74,18 +74,13 @@ nnoremap <Space>o `.
 " tagsジャンプの時に複数ある時は一覧表示                                        
 nnoremap <C-]> g<C-]>
 
+nnoremap <Space>e 5<C-e>
+nnoremap <Space>y 5<C-y>
+
 "### 挿入モード ###
 " ESCの代替
 inoremap jj <C-[>
 inoremap kk <C-[>
-" カッコ系
-inoremap \| \|\|<LEFT>
-inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap < <><C-[>i
 
 "-- Key Map END
 "-------------------------------
