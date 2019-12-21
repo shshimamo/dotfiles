@@ -44,6 +44,7 @@ nnoremap <Up> 5k
 nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
 "最後の編集場所
 nnoremap <Space>o `.
+nnoremap Y Du
 
 "### 挿入モード ###
 " 右へ移動

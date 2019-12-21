@@ -77,6 +77,8 @@ nnoremap <C-]> g<C-]>
 nnoremap <Space>e 5<C-e>
 nnoremap <Space>y 5<C-y>
 
+nnoremap Y Du
+
 "### 挿入モード ###
 " ESCの代替
 inoremap jj <C-[>
