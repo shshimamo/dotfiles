@@ -74,6 +74,8 @@ nnoremap <Space>o `.
 " tagsジャンプの時に複数ある時は一覧表示                                        
 nnoremap <C-]> g<C-]>
 
+nnoremap <Down> 5j
+nnoremap <Up> 5k
 nnoremap <Space>e 5<C-e>
 nnoremap <Space>y 5<C-y>
 
