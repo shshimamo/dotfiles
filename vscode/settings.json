@@ -1,8 +1,11 @@
+
 {
-    "editor.fontSize": 14,
     "editor.minimap.enabled": false,
     "editor.wordWrap": "on",
 
+    "bookmarks.navigateThroughAllFiles": true,
+
+    // vim
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.insertModeKeyBindings": [
@@ -27,27 +30,27 @@
             "after": ["\"","_","x"]
         },
         {
-            "before": ["leader","j"],
-            "after": ["7","<C-e>","7","j"]
+            "before": ["<down>"],
+            "after": ["7","j"]
         },
         {
-            "before": ["leader","k"],
-            "after": ["7","<C-y>","7","k"]
+            "before": ["<up>"],
+            "after": ["7","k"]
         },
         {
-            "before": ["leader","h"],
+            "before": ["<leader>","h"],
             "after": ["<C-w>","h"]
         },
         {
-            "before": ["leader","u"],
+            "before": ["<leader>","j"],
             "after": ["<C-w>","j"]
         },
         {
-            "before": ["leader","i"],
+            "before": ["<leader>","k"],
             "after": ["<C-w>","k"]
         },
         {
-            "before": ["leader","l"],
+            "before": ["<leader>","l"],
             "after": ["<C-w>","l"]
         },
         {
@@ -64,18 +67,20 @@
             "commands": ["actions.findWithSelection"]
         },
         {
-            "before": ["leader","["],
+            "before": ["<leader>","["],
             "after": [],
             "commands": ["workbench.action.moveEditorToFirstGroup"]
         },
         {
-            "before": ["leader","]"],
+            "before": ["<leader>","]"],
             "after": [],
             "commands": ["workbench.action.moveEditorToLastGroup"]
         }
     ],
     "editor.tabSize": 2,
     "workbench.editor.enablePreview": false,
-    "workbench.colorTheme": "Material Theme High Contrast"
+    "workbench.colorTheme": "Material Theme High Contrast",
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "window.zoomLevel": 0
 }
 
