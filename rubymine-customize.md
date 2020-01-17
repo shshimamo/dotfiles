@@ -134,6 +134,15 @@
 |Switch to Model||CTRL + K & (CTRL + )M| Modelへジャンプ|
 |Switch to View||CTRL + K & (CTRL +) V| Viewへジャンプ|
 
+## TabMover(plugin)
+
+|名前|key map|変更|説明| 
+|---|---|---|---|
+|Move To First|Ctrl + Command + P||タブを先頭に移動|
+|Move To Last|Ctrl + Command + \||タブを最後に移動|
+|Move To Next|Ctrl + Command + ]||タブを右に移動|
+|Move To Previous|Ctrl + Command + [||タブを左に移動|
+
 # Editor
 ## 1. General
 
