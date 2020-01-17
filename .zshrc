@@ -63,7 +63,7 @@ function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
     # RPROMPT="${vcs_info_msg_0_}"
 
-    PROMPT="%{${bg[black]} ${fg[blue]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+    PROMPT="%{${bg[black]} ${fg[yellow]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
 %# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -160,7 +160,7 @@ alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
-alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(blue)%h%Creset"'
+alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
 
 alias t='tig'
