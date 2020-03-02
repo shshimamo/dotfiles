@@ -86,6 +86,8 @@
 |Move Right||Ctrl + J & (Ctrl +) V|右分割|
 |Move To Opposite Group||Ctrl + J & (Ctrl +)[ |別のウインドウに移動|
 |Close Others||Ctrl + J & Q|他のタブを閉じる|
+|Show Tabs In Single Row||Ctrl + J & A|タブ表示スタイル切り替え(1行/複数行)
+
 ###Edit
 |名前|key map|変更|説明| 
 |---|---|---|---|
