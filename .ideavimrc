@@ -31,10 +31,13 @@ nnoremap <C-l> $
 " Qを無効
 nnoremap Q <Nop>
 " ウィンドウ移動
-nnoremap <Space>h <C-w>h
+" nnoremap <Space>h <C-w>h
 nnoremap <Space>j <C-w>j
 nnoremap <Space>k <C-w>k
-nnoremap <Space>l <C-w>l
+" nnoremap <Space>l <C-w>l
+nnoremap <Space><Space> <C-w>w
+nnoremap <Space>l <C-w>w
+nnoremap <Space>h <C-w>W
 " 上下移動
 nnoremap <Space>e 5<C-e>
 nnoremap <Space>y 5<C-y>
