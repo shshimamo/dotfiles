@@ -52,6 +52,7 @@
 |Quick Definition|Opt + Space|CTRL + J & Space|ポップアップでソース参照| 
 | Quick Documentation | F1 , CTRL + J |CTRL + J削除, CTRL + J & (CTRL) + D| ポップアップでドキュメント参照|
 |Jump to Source|Command + ↓|(追加)alt + クリック|ソースに飛ぶ
+|Toggle Distraction Free mode||CTRL + K & D|ファイル以外を隠す
 ###Navigate
 |名前|key map|変更|説明| 
 |---|---|---|---|
@@ -191,6 +192,7 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
 |インデント縦線選択中|Editor > Color Schema > General > Guides > Editor >　　Indent guide selected||E7E7E7|
 |メソッド横線|Editor > Color Schema > General > Code >　　Method separator color||606060|
 |Current row|Editor > Color Schema > General > Editor > Caret row|181818|282828|
+|Identifier under current|Editor > Color Schema > General > Editor > Identifier under current|033E5D||
 |ドット|Editor > Color Schema > Ruby >　　Dot||E5F1F3|
 |カンマ(Ruby)|Editor > Color Schema > Ruby > Comma||E5F1F3|
 |インスタンス変数|Editor > Color Scheme > Ruby||D0D0FF|
