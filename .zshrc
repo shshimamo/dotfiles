@@ -360,6 +360,25 @@ function hardco() {
   git reset --hard origin/$branch
 }
 
+function ggx(){
+  excepts="--"
+  for x in "${@:2}"
+  do
+    excepts="$excepts ':!$x'"
+  done
+  eval "git grep $1 $excepts"
+}
+
+function ggxl(){
+  excepts="--"
+  for x in "${@:2}"
+  do
+    excepts="$excepts ':!$x'"
+  done
+  eval "git grep -l $1 $excepts"
+}
+
+
 ########################################
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
