@@ -160,7 +160,7 @@ alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
-alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
+#alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
 
 alias t='tig'
@@ -376,6 +376,14 @@ function ggxl(){
     excepts="$excepts ':!$x'"
   done
   eval "git grep -l $1 $excepts"
+}
+
+function lo(){
+  if [ "$1" = "" ]; then
+    git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+  else
+    git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+  fi
 }
 
 
