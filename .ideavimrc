@@ -39,10 +39,8 @@ nnoremap <Space><Space> <C-w>w
 nnoremap <Space>l <C-w>w
 nnoremap <Space>h <C-w>W
 " 上下移動
-nnoremap <Space>e 5<C-e>
-nnoremap <Space>y 5<C-y>
-nnoremap <Down> 5j
-nnoremap <Up> 5k
+nnoremap <Down> }
+nnoremap <Up> {
 " 横分割
 nnoremap <Space>v :vsplit<CR><C-w><C-w>:b
 "最後の編集場所
@@ -71,6 +69,28 @@ inoremap kk <C-[>
 " -と_をスワップ
 "inoremap - _
 "inoremap _ -
+"
+nnoremap , f,
+nnoremap ' f'
+nnoremap " f"
+nnoremap ( f(
+nnoremap ) f)
+nnoremap { f{
+nnoremap } f}
+nnoremap [ f[
+nnoremap ] f]
+
+vnoremap <Space> f<Space>
+vnoremap , f,
+vnoremap ' f'
+vnoremap " f"
+vnoremap . f.
+vnoremap ( f(
+vnoremap ) f)
+vnoremap { f{
+vnoremap } f}
+vnoremap [ f[
+vnoremap ] f]
 
 " clipboard共有
 set clipboard=unnamed
