@@ -2,12 +2,12 @@
 Pry.config.color = true
 Pry.config.editor = "vim"
 
-Pry.config.prompt = proc do |obj, level, _|
-  prompt = ""
-  prompt << "#{Rails.version}@" if defined?(Rails)
-  prompt << "#{RUBY_VERSION}"
-  "#{prompt} (#{obj})> "
-end
+#Pry.config.prompt = proc do |obj, level, _|
+#  prompt = ""
+#  prompt << "#{Rails.version}@" if defined?(Rails)
+#  prompt << "#{RUBY_VERSION}"
+#  "#{prompt} (#{obj})> "
+#end
 
 
 ## Alias
@@ -65,16 +65,16 @@ if defined?(PryStackExplorer)
 end
 
 if defined?(PryRails)
-  Pry.config.prompt = Pry::Prompt[:rails][:value] if Pry::Prompt[:rails]
+  #Pry.config.prompt = Pry::Prompt[:rails][:value] if Pry::Prompt[:rails]
 
-  Pry.commands.alias_command 'find',    'find-route'
-  Pry.commands.alias_command 'routes',  'show-routes'
-  Pry.commands.alias_command 'groutes', 'show-routes -G '
-  Pry.commands.alias_command 'model',   'show-model'
-  Pry.commands.alias_command 'models',  'show-models'
-  Pry.commands.alias_command 'gmodels', 'show-models -G '
-  Pry.commands.alias_command 'path',   'recognize-path'
-  Pry.commands.alias_command 'middlewares',   'show-middleware'
+  #Pry.commands.alias_command 'find',    'find-route'
+  Pry.commands.alias_command 'sroutes',  'show-routes'
+  Pry.commands.alias_command 'sgroutes', 'show-routes -G '
+  Pry.commands.alias_command 'smodel',   'show-model'
+  Pry.commands.alias_command 'smodels',  'show-models'
+  Pry.commands.alias_command 'sgmodels', 'show-models -G '
+  #Pry.commands.alias_command 'path',   'recognize-path'
+  Pry.commands.alias_command 'smiddlewares',   'show-middleware'
 end
 
 if defined?(Rails)
@@ -88,6 +88,10 @@ if defined?(Rails)
   def rrr
     reload!
   end
+
+  # if Rails.application.class.to_s == "Application Name"
+  #   @xxx = ModelName.first
+  # end
 end
 
 def aliases
