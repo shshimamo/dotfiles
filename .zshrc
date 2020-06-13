@@ -398,6 +398,8 @@ export GOPATH=$HOME/devel
 export GOBIN=$GOPATH/bin
 export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin
+export GEMSRC_USE_GHQ=true
+export GEMSRC_CLONE_ROOT=$GOPATH
 
 ########################################
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
