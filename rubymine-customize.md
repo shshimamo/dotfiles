@@ -214,6 +214,8 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
 - Railways
 - Material Theme UI
 - Rainbow Brackets
+- Frame Switcher
+  - Switch Frame: Shift + Command + w に変更
 
 # 設定画面以外の設定や使い方メモ
 ## Projectペイン
