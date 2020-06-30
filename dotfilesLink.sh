@@ -26,3 +26,4 @@ ln -ivs $path/src/github.com/shshimamo/dotfiles/.pryrc ~/.pryrc
 ln -ivs $path/src/github.com/shshimamo/dotfiles/.ctags ~/.ctags
 ln -ivs $path/src/github.com/shshimamo/dotfiles/.gitignore_global ~/.gitignore_global
 ln -ivs $path/src/github.com/shshimamo/dotfiles/.tabset ~/.tabset
+ln -ivs $path/src/github.com/shshimamo/dotfiles/rails-log-tail-tmux.sh ~/rails-log-tail-tmux.sh
