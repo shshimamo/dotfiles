@@ -63,7 +63,7 @@ function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
     # RPROMPT="${vcs_info_msg_0_}"
 
-    PROMPT="%{${bg[black]} ${fg[yellow]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+    PROMPT="%{${bg[blue]} ${fg[white]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
 %# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -160,6 +160,7 @@ alias br='git branch -vv --sort=-committerdate'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
+alias codev="git checkout develop; git fetch; git merge origin/develop"
 #alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
 
@@ -188,7 +189,6 @@ alias trename='tmux rename -t'
 # tmux kill-session -t {Session Name}
 alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
-
 
 ########################################
 # functions
@@ -381,7 +381,7 @@ function ggxl(){
 
 function lo(){
   if [ "$1" = "" ]; then
-    git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+    git log --reverse develop..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   else
     git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   fi
@@ -398,10 +398,13 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ########################################
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
+export GO_VERSION=1.15.6
+export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
 export GOPATH=$HOME/devel
-export GOBIN=$GOPATH/bin
-export GO111MODULE=on
-export PATH=$PATH:$GOPATH/bin
+export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+
 export GEMSRC_USE_GHQ=true
 export GEMSRC_CLONE_ROOT=$GOPATH
 
