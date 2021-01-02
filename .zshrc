@@ -325,7 +325,8 @@ function github() {
 }
 
 function fixupstashautosquash() {
-  git fixup $@
+  #git fixup $@
+  git commit --no-verify --fixup $@
   git stash
   git rebase -i --autosquash $@~
 }
