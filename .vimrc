@@ -1,125 +1,40 @@
-"####################################
-"## NeoBundle START  
-set nocompatible               " be iMproved
-filetype off
-
-if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-" NeoBundleを初期化
-call neobundle#begin(expand('~/.vim/bundle/'))
+" Required:
+set runtimepath+=/Users/shimamoto.h/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" ここでunite.vimをbundleしないと補完が効かない
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-NeoBundle 'tacroe/unite-mark'
-" コードの自動補完
-NeoBundle 'Shougo/neocomplete.vim'
-" スニペットの補完機能
-NeoBundle "Shougo/neosnippet"
-" スニペット集
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'vim-scripts/buftabs'
-NeoBundle 'posva/vim-vue'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'jacoborus/tender.vim'
+" Required:
+if dein#load_state('/Users/shimamoto.h/.cache/dein')
+  call dein#begin('/Users/shimamoto.h/.cache/dein')
 
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/shimamoto.h/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-NeoBundle 'tsukkee/unite-tag'
+  " Add or remove your plugins here like this:
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
 
-NeoBundle 'scrooloose/syntastic' "rubocop
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
-" *** TypeScript ***
-""http://hachibeechan.hateblo.jp/entry/2015/03/13/Vim%E3%81%A7TypeScript%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%81%AA%E3%81%A9%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%97%E3%81%A6%E5%BF%AB%E9%81%A9%E3%81%AB%E3%82%A8%E3%83%87%E3%82%A3%E3%83%83%E3%83%88
-
-NeoBundleLazy 'leafgarland/typescript-vim', {
-\ 'autoload' : {
-\   'filetypes' : ['typescript'] }
-\}
-NeoBundleLazy 'jason0x43/vim-js-indent', {
-\ 'autoload' : {
-\   'filetypes' : ['javascript', 'typescript', 'html'],
-\}}
-let g:js_indent_typescript = 1
-" *** TypeScriptここまで ***
-
-NeoBundle 'fatih/vim-go' 
-
-call neobundle#end()
-" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
-NeoBundleCheck
-" ファイルタイプ別のプラグイン/インデントを有効にする
+" Required:
 filetype plugin indent on
-filetype indent on
-syntax on
-"## NeoBundle END  
-"####################################
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 
-"####################################
-"# Include External File START
-
-"## shima
 if filereadable(expand('~/.vim/external_vimrc/shima_vimrc'))
   source ~/.vim/external_vimrc/shima_vimrc
 endif
-
-"## Unite 
-if filereadable(expand('~/.vim/external_vimrc/unite_vimrc'))
-  source ~/.vim/external_vimrc/unite_vimrc
-endif
-
-"## rubocop_vimrc
-if filereadable(expand('~/.vim/external_vimrc/rubocop_vimrc'))
-  source ~/.vim/external_vimrc/rubocop_vimrc
-endif
-
-"## neocomplete
-if filereadable(expand('~/.vim/external_vimrc/neocomplete_vimrc'))
-  source ~/.vim/external_vimrc/neocomplete_vimrc
-endif
-
-"## colorscheme
-if filereadable(expand('~/.vim/external_vimrc/colorscheme_vimrc'))
-  source ~/.vim/external_vimrc/colorscheme_vimrc
-endif
-
-"## unite-tag
-if filereadable(expand('~/.vim/external_vimrc/unite-tag_vimrc'))
-  source ~/.vim/external_vimrc/unite-tag_vimrc
-endif
-
-"## nerdtree
-if filereadable(expand('~/.vim/external_vimrc/nerdtree_vimrc'))
-  source ~/.vim/external_vimrc/nerdtree_vimrc
-endif
-
-"## command-git-grep
-if filereadable(expand('~/.vim/external_vimrc/command-git-grep'))
-  source ~/.vim/external_vimrc/command-git-grep
-endif
-
-"## buftabs
-if filereadable(expand('~/.vim/external_vimrc/buftabs_vimrc'))
-  source ~/.vim/external_vimrc/buftabs_vimrc
-endif
-
-"## indentLine
-if filereadable(expand('~/.vim/external_vimrc/indentLine_vimrc'))
-  source ~/.vim/external_vimrc/indentLine_vimrc
-endif
-" Include External File END
-"####################################
