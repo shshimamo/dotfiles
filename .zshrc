@@ -386,6 +386,9 @@ function lo(){
   fi
 }
 
+########################################
+# anyenv
+eval "$(anyenv init -)"
 
 ########################################
 # Added by the Heroku Toolbelt
@@ -404,8 +407,6 @@ export GEMSRC_CLONE_ROOT=$GOPATH
 ########################################
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
 export EDITOR="rubymine"
-
-eval "$(anyenv init -)"
 
 ########################################
 # glsをsolarizedする為の設定
