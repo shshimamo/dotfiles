@@ -191,6 +191,8 @@ https://plugins.jetbrains.com/plugin/8006-material-theme-ui
 |インデント縦線|Editor > Color Schema > General > Guides > Editor >　　Indent guide||606060|
 |インデント縦線選択中|Editor > Color Schema > General > Guides > Editor >　　Indent guide selected||E7E7E7|
 |メソッド横線|Editor > Color Schema > General > Code >　　Method separator color||606060|
+|キャレット下の単語背景|Editor > Color Schema > General > Code > Identifier under caret|||
+|キャレット下の単語背景(write)|Editor > Color Schema > General > Code > Identifier under caret(write)|||
 |Current row|Editor > Color Schema > General > Editor > Caret row|181818|282828|
 |Identifier under current|Editor > Color Schema > General > Editor > Identifier under current|033E5D||
 |ドット|Editor > Color Schema > Ruby >　　Dot||E5F1F3|
