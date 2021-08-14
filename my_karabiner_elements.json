@@ -249,32 +249,6 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
-            "key_code": "b",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'books'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "c",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'Visual Studio Code'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
             "key_code": "f",
             "modifiers": { "optional": [ "any" ] }
           },
@@ -293,36 +267,6 @@
           },
           "to": [
             { "shell_command": "open -a 'GitHub Desktop'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "p",
-            "modifiers": {
-              "optional": [ "any" ]
-            }
-          },
-          "to": [
-            { "shell_command": "open -a '1Password 7'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "optional": [ "any" ]
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Quiver'" }
           ]
         },
         {
@@ -370,19 +314,6 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
-            "key_code": "e",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'Sequel Pro.app'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
             "key_code": "4",
             "modifiers": {
               "optional": [ "any" ]
@@ -408,19 +339,6 @@
           },
           "to": [
             { "shell_command": "open -a 'screenshot'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "m",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'miro'" }
           ]
         },
         {
@@ -451,32 +369,6 @@
             { "type": "variable_if", "name": "vk2", "value": 1 }
           ],
           "from": {
-            "key_code": "b",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'books'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "c",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'Visual Studio Code'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
             "key_code": "f",
             "modifiers": { "optional": [ "any" ] }
           },
@@ -495,36 +387,6 @@
           },
           "to": [
             { "shell_command": "open -a 'GitHub Desktop'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "p",
-            "modifiers": {
-              "optional": [ "any" ]
-            }
-          },
-          "to": [
-            { "shell_command": "open -a '1Password 7'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "q",
-            "modifiers": {
-              "optional": [ "any" ]
-            }
-          },
-          "to": [
-            { "shell_command": "open -a 'Quiver'" }
           ]
         },
         {
@@ -597,19 +459,6 @@
           },
           "to": [
             { "shell_command": "open -a 'screenshot'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "m",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'miro'" }
           ]
         },
         {
