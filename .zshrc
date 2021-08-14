@@ -387,6 +387,13 @@ function lo(){
   fi
 }
 
+function his() {
+  command=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+  # eval $command
+  echo $command | tr -d '\n' | pbcopy
+  echo "COPY> ${command}"
+}
+
 ########################################
 # anyenv
 eval "$(anyenv init -)"
