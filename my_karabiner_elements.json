@@ -219,28 +219,6 @@
     },
 
     {
-      "description": "vk2+spacebarで別ウィンドウ",
-      "manipulators": [
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            {
-              "key_code": "grave_accent_and_tilde",
-              "modifiers": ["left_command"]
-            }
-          ]
-        }
-      ]
-    },
-
-    {
       "description": "vk1+rtfcgでアプリ起動",
       "manipulators": [
         {
