@@ -466,19 +466,6 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
-            "key_code": "d",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'dash'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
             "key_code": "f",
             "modifiers": { "optional": [ "any" ] }
           },
@@ -497,19 +484,6 @@
           },
           "to": [
             { "shell_command": "open -a 'GitHub Desktop'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk1", "value": 1 }
-          ],
-          "from": {
-            "key_code": "k",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'kindle'" }
           ]
         },
         {
@@ -587,6 +561,19 @@
             { "type": "variable_if", "name": "vk1", "value": 1 }
           ],
           "from": {
+            "key_code": "e",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'Sequel Pro.app'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
             "key_code": "4",
             "modifiers": {
               "optional": [ "any" ] 
@@ -624,10 +611,7 @@
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
-            {
-              "key_code": "m",
-              "modifiers": ["left_command"]
-            }
+            { "shell_command": "open -a 'miro'" }
           ]
         },
         {
@@ -684,19 +668,6 @@
             { "type": "variable_if", "name": "vk2", "value": 1 }
           ],
           "from": {
-            "key_code": "d",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'dash'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
             "key_code": "f",
             "modifiers": { "optional": [ "any" ] }
           },
@@ -715,19 +686,6 @@
           },
           "to": [
             { "shell_command": "open -a 'GitHub Desktop'" }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            { "type": "variable_if", "name": "vk2", "value": 1 }
-          ],
-          "from": {
-            "key_code": "k",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "shell_command": "open -a 'kindle'" }
           ]
         },
         {
@@ -842,10 +800,7 @@
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
-            {
-              "key_code": "m",
-              "modifiers": ["left_command"]
-            }
+            { "shell_command": "open -a 'miro'" }
           ]
         },
         {
