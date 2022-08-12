@@ -63,7 +63,7 @@ function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
     # RPROMPT="${vcs_info_msg_0_}"
 
-    PROMPT="%{${bg[blue]} ${fg[white]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+    PROMPT="%{${bg[black]} ${fg[white]}%}%~%{${reset_color}%} %* ${vcs_info_msg_0_}
 %# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -405,9 +405,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ########################################
 # ghq
 # https://blog.kentarok.org/entry/2014/06/03/135300
-export GO_VERSION=1.15.6
+export GO_VERSION=1.19.0
 export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
-export GOPATH=$HOME/devel
+export GOPATH=$HOME/go
 export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
