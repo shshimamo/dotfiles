@@ -18,13 +18,13 @@
 	s = status
 	b = browse
   br = branch -vv --sort=-committerdate
-	l = log --stat --submodule -p
+	l = log --follow --stat --submodule -p
   lf = log --
 	lsearch = log --no-merges --stat -S
 	ls = ls-files
 	lsg = ls-files | grep
-	lo = log --oneline
-  la = log --stat --author
+	lo = log --follow --oneline
+  la = log --follow --stat --author
 	d = diff
 	di = diff --word-diff
 	st = stash
@@ -48,6 +48,19 @@
   gw = grep -B 0 -C 0 -A 3 -w
   gE = grep -B 0 -C 0 -A 3 -E
   gl = grep -l
+  cob = !"f(){ \
+          read -p '(1)feature (2)bugfix (3)migration (4)refactor (5)chore: ' NUM ;\
+          case \"$NUM\" in [12345]*) ;; *) echo '12345から選択.' ; exit ;; esac ;\
+          case \"$NUM\" in\
+            '1') PREFIX='feature' ;;\
+            '2') PREFIX='bugfix' ;;\
+            '3') PREFIX='migration' ;;\
+            '4') PREFIX='refactor' ;;\
+            '5') PREFIX='chore' ;;\
+          esac;\
+          read -p \"$PREFIX/に続くブランチ名を入力: \" BRANCH ;\
+          git checkout -b $PREFIX/$BRANCH ;\
+        }; f"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -63,6 +76,7 @@
   root = ~/devel/src
 [grep]
   lineNumber = true
+	extendedRegexp = true
 [secrets]
 	providers = git secrets --aws-provider
 	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
@@ -71,4 +85,6 @@
 	allowed = AKIAIOSFODNN7EXAMPLE
 	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 [init]
-	templateDir = ~/.git-templates/git-secrets
+	templatedir = ~/.git-templates/git-secrets
+[credential]
+	helper = osxkeychain
