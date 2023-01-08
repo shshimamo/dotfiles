@@ -9,3 +9,4 @@ tags
 # config/database.yml
 vendor/bundle/*
 vendor/cache/*
+.solargraph.yml
