@@ -449,3 +449,16 @@ eval "$(pyenv init --path)"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
+
+
+########################################
+ZSH_DIR="${HOME}/.zsh_local"
+
+# .zsh_localがディレクトリで、読み取り、実行、が可能なとき
+if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
+    # zshディレクトリより下にある、.zshファイルの分、繰り返す
+    for file in ${ZSH_DIR}/**/*.zsh; do
+        # 読み取り可能ならば実行する
+        [ -r $file ] && source $file
+    done
+fi
