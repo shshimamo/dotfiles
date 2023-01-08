@@ -381,6 +381,7 @@ function ggxl(){
 
 function lo(){
   if [ "$1" = "" ]; then
+    # 引数なし -> developと比較
     git log --reverse develop..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   else
     git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
@@ -411,9 +412,9 @@ export GOPATH=$HOME/go
 export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
+export GO111MODULE=on
 
 export GEMSRC_USE_GHQ=true
-export GEMSRC_CLONE_ROOT=$GOPATH
 
 ########################################
 # See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
@@ -437,3 +438,14 @@ fi
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 export BUILDKITE_TOKEN=hoge
 export PATH="$HOME/.anyenv/bin:$PATH"
+
+
+########################################
+# For WARNING `pyenv init -`
+# https://github.com/pyenv/pyenv/issues/1906
+export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
