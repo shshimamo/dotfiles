@@ -181,6 +181,8 @@ alias trename='tmux rename -t'
 alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
 
+alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
+
 ########################################
 # functions
 
