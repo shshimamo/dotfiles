@@ -141,11 +141,9 @@ alias fg='find . -type f | grep '
 alias fdxg='find . -type d | xargs grep '
 alias b='bundle'
 alias bl='BUNDLE_GEMFILE=Gemfile.local bundle'
-alias stssh='ssh -i ~/.ssh/id_rsa_staca'
 alias ls='/usr/local/bin/gls --color=auto'
 alias ll='ls -lahG'
 alias la='ls -a'
-alias ee='tree -f'
 
 ### for git
 alias g='git'
@@ -164,20 +162,13 @@ alias codev="git checkout develop; git fetch; git merge origin/develop"
 #alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
 
-alias t='tig'
-eval "$(hub alias -s)"
-alias gh='cd $(ghq root)/$(ghq list | peco)'
-alias gb='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
-alias see='hub browse'
-alias q='cd $(ghq root)/$(ghq list Qualizm)'
+alias see='gh browse'
 
-alias jirb='java -cp /Users/shima/Downloads/bsh-2.0b4.jar bsh.Console'
+alias ghl='cd $(ghq root)/$(ghq list | peco)'
 
 alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
 
 alias d='docker'
-alias dockeri='docker image'
-alias dockerc='docker container'
 alias fig='docker-compose'
 
 # tmux new -s {Session Name}
@@ -193,82 +184,6 @@ alias tkillserver='tmux kill-server'
 ########################################
 # functions
 
-# Rubymineで開くコマンド
-# git grep の結果をpecoに渡してrubymineで開く。cutの1はファイル名,2は行数
-function ggmine(){
-  name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
-  if [ -n "$name_number" ]; then
-    mine $name_number
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function ggvim(){
-  name_number=$(git grep $@ | peco | cut -d ":" -f 1,2)
-  if [ -n "$name_number" ]; then
-    name=$(echo $name_number | cut -d ":" -f 1)
-    number=$(echo $name_number | cut -d ":" -f 2)
-    vim -c $number $name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function treevim(){
-  name=$(tree -f | grep $@ | peco | awk '{print $NF}')
-  if [ -n "$name" ]; then
-    vim $name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function treecat(){
-  name=$(tree -f | grep $@ | peco | awk '{print $NF}')
-  if [ -n "$name" ]; then
-    cat $name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function statusmine(){
-  file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
-  if [ -n "$file_name" ]; then
-    mine $file_name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function statusvim(){
-  file_name=$(git status -s | peco | rev | cut -d " " -f 1 | rev)
-  if [ -n "$file_name" ]; then
-    vim $file_name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function findmine(){
-  file_name=$(find . -type f | peco)
-  if [ -n "$file_name" ]; then
-    mine $file_name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
-function findvim(){
-  file_name=$(find . -type f | peco)
-  if [ -n "$file_name" ]; then
-    vim $file_name
-  else
-    echo 'fileが見つかりません'
-  fi
-}
-
 # checkout branch
 function co(){
   branch_name=$(git branch --sort=-committerdate | peco | cut -d ' ' -f 3)
@@ -279,49 +194,9 @@ function co(){
   fi
 }
 
-# hash copy
-function hashcp(){
-  commit_hash=$(git log --date=iso --pretty=format:"[%ad] %h %an : %s" | peco | cut -d ' ' -f 4)
-  if [ -n "$commit_hash" ]; then
-    echo $commit_hash | pbcopy
-  else
-    echo 'hashが見つかりません'
-  fi
-}
-
-function sp() {
-  now_dir=$(pwd)
-  rails_root=$(ghq root)/$(ghq list Qualizm)
-  (cd $rails_root; bin/rspec $now_dir/$@)
-}
-
-# browse PR
-function browsepr(){
-  prno=$(git showpr $@ | cut -d ' ' -f 5 | cut -d '#' -f 2)
-  echo $prno
-  hub browse -- issues/$prno
-}
-
-function searchpr() {
-  open "https://github.com/search?q=is:merged $@"
-}
-
-function full() {
-  realpath $@
-  realpath $@ | pbcopy
-}
-
 # stash list & diff
 function stshow() {
   git stash show -p stash@{$@}
-}
-
-function google() {
-  open "https://www.google.co.jp/search?q=$@"
-}
-
-function github() {
-  open "https://github.com/pulls/review-requested"
 }
 
 function fixupstashautosquash() {
@@ -338,27 +213,12 @@ function tls() {
 }
 
 
-function tabname() {
-  if [ "$1" = "" ]; then
-    echo -ne "\033]0;$PWD\007"
-  else
-    echo -ne "\033]0;$1\007"
-  fi
-}
-
 # $1: dir, $2: tabname
 function tabnew() {
   cd `pwd`
   tabset $1
   tabset --title $1
   tmux new -s $1
-}
-
-function hardco() {
-  branch=`git symbolic-ref --short HEAD`
-  git fetch
-  git checkout $branch
-  git reset --hard origin/$branch
 }
 
 function ggx(){
@@ -404,8 +264,7 @@ eval "$(anyenv init -)"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ########################################
-# ghq
-# https://blog.kentarok.org/entry/2014/06/03/135300
+# go
 export GO_VERSION=1.19.0
 export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
 export GOPATH=$HOME/go
@@ -414,6 +273,8 @@ export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export GO111MODULE=on
 
+########################################
+# gemsrc
 export GEMSRC_USE_GHQ=true
 
 ########################################
