@@ -172,7 +172,7 @@ alias ghl='cd $(ghq root)/$(ghq list | peco)'
 alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
 
 alias d='docker'
-alias fig='docker-compose'
+alias fig='docker compose'
 
 # tmux new -s {Session Name}
 alias tn='tmux new -s'
