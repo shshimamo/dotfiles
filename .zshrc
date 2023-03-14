@@ -164,6 +164,7 @@ alias com="git checkout master; git fetch; git merge origin/master"
 alias codev="git checkout develop; git fetch; git merge origin/develop"
 #alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
+alias lf='git log --stat -p --follow'
 
 alias see='gh browse'
 
@@ -246,8 +247,9 @@ function ggxl(){
 
 function lo(){
   if [ "$1" = "" ]; then
-    # 引数なし -> developと比較
     git log --reverse develop..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+  elif [[ "$1" =~ ^[0-9]+$ ]]; then
+    git log --reverse head~$1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   else
     git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   fi
@@ -270,7 +272,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ########################################
 # go
-export GO_VERSION=1.19.0
+export GO_VERSION=1.20.1
 export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
 export GOPATH=$HOME/go
 export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
