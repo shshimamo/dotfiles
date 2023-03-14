@@ -244,7 +244,7 @@
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
-            { "shell_command": "open -a 'GitHub Desktop'" }
+            { "shell_command": "open -a 'Goland'" }
           ]
         },
         {
@@ -258,6 +258,32 @@
           },
           "to": [
             { "shell_command": "open -a 'Rubymine'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'DataGrip'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk1", "value": 1 }
+          ],
+          "from": {
+            "key_code": "w",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'WebStorm'" }
           ]
         },
         {
@@ -511,7 +537,7 @@
             "modifiers": { "optional": [ "any" ] }
           },
           "to": [
-            { "shell_command": "open -a 'GitHub Desktop'" }
+            { "shell_command": "open -a 'Goland'" }
           ]
         },
         {
@@ -525,6 +551,32 @@
           },
           "to": [
             { "shell_command": "open -a 'Rubymine'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk2", "value": 1 }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'DataGrip'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            { "type": "variable_if", "name": "vk2", "value": 1 }
+          ],
+          "from": {
+            "key_code": "w",
+            "modifiers": { "optional": [ "any" ] }
+          },
+          "to": [
+            { "shell_command": "open -a 'WebStorm'" }
           ]
         },
         {
@@ -905,6 +957,29 @@
     },
 
     {
+      "description": "[Chrome] Bind 'Shift + Cmd + w' 無効",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com\\.google\\.Chrome"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "mandatory": ["left_shift", "command"]
+            }
+          },
+          "to": [
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
       "description": "[Quiver]Vimモードキーバインド",
       "manipulators": [
         {
@@ -1203,9 +1278,58 @@
           ]
         }
       ]
+    },
+
+    {
+      "description": "[GoodNotes] F123 -> hli",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com\\.goodnotesapp\\.x"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "f1"
+          },
+          "to": [
+            { "key_code": "h" }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com\\.goodnotesapp\\.x"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "f2"
+          },
+          "to": [
+            { "key_code": "l" }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^com\\.goodnotesapp\\.x"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "f3"
+          },
+          "to": [
+            { "key_code": "i" }
+          ],
+          "type": "basic"
+        }
+      ]
     }
-
-
   ]
 }
 
