@@ -46,6 +46,11 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey -e
 
+
+######################################## kube-ps1
+source $(ghq root)/github.com/jonmosco/kube-ps1/kube-ps1.sh
+# PROMPT='$(kube_ps1)'$PROMPT
+
 ########################################
 # vcs_info
 autoload -Uz vcs_info
@@ -66,7 +71,7 @@ function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
     # RPROMPT="${vcs_info_msg_0_}"
 
-    PROMPT="%{${bg[black]} ${fg[white]}%}%~%{${reset_color}%} %* ${vcs_info_msg_0_}
+    PROMPT="%{${bg[black]} ${fg[white]}%}%~%{${reset_color}%} ${vcs_info_msg_0_} $(kube_ps1) %*
 %# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -186,6 +191,8 @@ alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
 
 alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
+
+alias k="kubectl"
 
 ########################################
 # functions
@@ -330,3 +337,8 @@ if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
         [ -r $file ] && source $file
     done
 fi
+
+
+######################################## kubectl & eksctl completion
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+fpath=($fpath ~/.zsh/completion)
