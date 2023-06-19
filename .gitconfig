@@ -49,14 +49,15 @@
   gE = grep -B 0 -C 0 -A 3 -E
   gl = grep -l
   cob = !"f(){ \
-          read -p '(1)feature (2)bugfix (3)migration (4)refactor (5)chore: ' NUM ;\
-          case \"$NUM\" in [12345]*) ;; *) echo '12345から選択.' ; exit ;; esac ;\
+          read -p '(1)feature (2)bugfix (3)migration (4)refactor (5)chore (6)hotfix: ' NUM ;\
+          case \"$NUM\" in [123456]*) ;; *) echo '123456から選択してください' ; exit ;; esac ;\
           case \"$NUM\" in\
             '1') PREFIX='feature' ;;\
             '2') PREFIX='bugfix' ;;\
             '3') PREFIX='migration' ;;\
             '4') PREFIX='refactor' ;;\
             '5') PREFIX='chore' ;;\
+            '6') PREFIX='hotfix' ;;\
           esac;\
           read -p \"$PREFIX/に続くブランチ名を入力: \" BRANCH ;\
           git checkout -b $PREFIX/$BRANCH ;\
@@ -88,3 +89,5 @@
 	templatedir = ~/.git-templates/git-secrets
 [credential]
 	helper = osxkeychain
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
