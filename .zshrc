@@ -257,6 +257,8 @@ function lo(){
     git log --reverse develop..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   elif [[ "$1" =~ ^[0-9]+$ ]]; then
     git log --reverse head~$1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+  elif [ "$1" = "." ]; then
+    git log --reverse --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   else
     git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
   fi
@@ -270,22 +272,8 @@ function his() {
 }
 
 ########################################
-# anyenv
-eval "$(anyenv init -)"
-
-########################################
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-########################################
-# go
-export GO_VERSION=1.20.1
-export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
-export GOPATH=$HOME/go
-export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export GO111MODULE=on
 
 ########################################
 # gemsrc
@@ -342,3 +330,17 @@ fi
 ######################################## kubectl & eksctl completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 fpath=($fpath ~/.zsh/completion)
+autoload -Uz compinit && compinit -i
+
+########################################
+# anyenv
+eval "$(anyenv init -)"
+
+########################################
+# go
+# export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
+# export GOPATH=$HOME/go
+export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+export GO111MODULE=on
