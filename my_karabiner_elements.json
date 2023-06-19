@@ -1038,29 +1038,7 @@
             }
           ],
           "from": {
-            "key_code": "d",
-            "modifiers": {
-              "mandatory": ["left_control"],
-              "optional": ["any"]
-            }
-          },
-          "to": [
-            {
-              "key_code": "tab",
-              "modifiers": ["left_control"]
-            }
-          ],
-          "type": "basic"
-        },
-        {
-          "conditions": [
-            {
-              "bundle_identifiers": ["^com\\.google\\.Chrome"],
-              "type": "frontmost_application_if"
-            }
-          ],
-          "from": {
-            "key_code": "s",
+            "key_code": "f",
             "modifiers": {
               "mandatory": ["left_control"],
               "optional": ["any"]
@@ -1104,7 +1082,7 @@
             }
           ],
           "from": {
-            "key_code": "a",
+            "key_code": "s",
             "modifiers": {
               "mandatory": ["left_control"],
               "optional": ["any"]
