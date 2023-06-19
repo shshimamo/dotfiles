@@ -149,9 +149,9 @@ alias fg='find . -type f | grep '
 alias fdxg='find . -type d | xargs grep '
 alias b='bundle'
 alias bl='BUNDLE_GEMFILE=Gemfile.local bundle'
-alias ls='/usr/local/bin/gls --color=auto'
+alias ls='ls -G'
 alias ll='ls -lahG'
-alias la='ls -a'
+alias la='ls -laG'
 
 ### for git
 alias g='git'
