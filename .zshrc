@@ -1,7 +1,3 @@
-export PATH=/usr/local/bin:$PATH
-export PATH="/usr/local/sbin:$PATH"
-
-# 環境変数
 export LANG=ja_JP.UTF-8
 
 # 色を使用出来るようにする
@@ -15,16 +11,8 @@ SAVEHIST=1000000
 HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
 HISTIGNORE=history:history
 
-# プロンプト
-# 1行表示
-# PROMPT="%~ %# "
-# 2行表示
-#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-#PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
-#%# "
-
 ########################################
-# 補完
+# completion
 # 補完機能を有効にする
 autoload -Uz compinit
 compinit
@@ -46,8 +34,18 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey -e
 
+#######################################
+# プロンプト
 
-######################################## kube-ps1
+# 1行表示
+# PROMPT="%~ %# "
+
+# 2行表示
+#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+#PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
+#%# "
+
+# kube-ps1
 source $(ghq root)/github.com/jonmosco/kube-ps1/kube-ps1.sh
 # PROMPT='$(kube_ps1)'$PROMPT
 
@@ -78,12 +76,13 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 
 ########################################
-# オプション
+# setopt
 # 日本語ファイル名を表示可能にする
 setopt print_eight_bit
 
 # beep を無効にする
 setopt no_beep
+setopt nolistbeep
 
 # フローコントロールを無効にする
 setopt no_flow_control
@@ -118,48 +117,48 @@ setopt hist_reduce_blanks
 setopt extended_glob
 
 ########################################
-# shima
-setopt nolistbeep
-
-########################################
 # Color
 # 色の設定
 export LSCOLORS=Exfxcxdxbxegedabagacad
 # 補完時の色の設定
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# ZLS_COLORSとは？
+# ZLS_COLORS
 export ZLS_COLORS=$LS_COLORS
-# lsコマンド時、自動で色がつく(ls -Gのようなもの？)
+# lsコマンド時、自動で色がつく
 export CLICOLOR=true
 # 補完候補に色を付ける
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 ########################################
-# エイリアス
+# alias
 alias rm='rm -i' # 削除前に確認
 alias cp='cp -i' # 上書き前に確認
 alias mv='mv -i' # 上書き前に確認
 alias mkdir='mkdir -p' # ディレクトリがなければ作成
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
-
 alias ei='exit'
 alias fxg='find . -type f | xargs grep '
 alias fg='find . -type f | grep '
-alias fdxg='find . -type d | xargs grep '
 alias b='bundle'
-alias bl='BUNDLE_GEMFILE=Gemfile.local bundle'
 alias ls='ls -G'
 alias ll='ls -lahG'
 alias la='ls -laG'
 
-### for git
+alias d='docker'
+alias fig='docker compose'
+
+alias k="kubectl"
+
+alias ghl='cd $(ghq root)/$(ghq list | peco)'
+
+alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
+
+### Git alias
 alias g='git'
-# -B, -C は意味なし
+# -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
-alias ggpull='git pull --rebase origin $(git current-branch)'
 alias gl='git log --stat --submodule -p'
-alias glo='git log --reverse --date=iso --pretty=format:"[%ad] %C(blue)%h%Creset %an : %C(cyan)%s%Creset"'
 alias s='git status'
 alias di='git diff'
 alias br='git branch -vv --sort=-committerdate'
@@ -167,19 +166,11 @@ alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authord
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
 alias codev="git checkout develop; git fetch; git merge origin/develop"
-#alias lo='git log --reverse master..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"'
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias lf='git log --stat -p --follow'
-
 alias see='gh browse'
 
-alias ghl='cd $(ghq root)/$(ghq list | peco)'
-
-alias ct='ctags -R --exclude=.git --exclude=node_modules --exclude=log --exclude=*.min.js --exclude=*.min.css --exclude=*.md'
-
-alias d='docker'
-alias fig='docker compose'
-
+### tmux alias
 # tmux new -s {Session Name}
 alias tn='tmux new -s'
 # tmux a -t {Session Name}
@@ -190,9 +181,6 @@ alias trename='tmux rename -t'
 alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
 
-alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
-
-alias k="kubectl"
 
 ########################################
 # functions
@@ -280,67 +268,24 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export GEMSRC_USE_GHQ=true
 
 ########################################
-# See https://github.com/BetterErrors/better_errors/wiki/Link-to-your-editor
-export EDITOR="rubymine"
-
-########################################
-# glsをsolarizedする為の設定
-# ghq get https://github.com/seebi/dircolors-solarized.git する
-if [ -f $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal ]; then
-  eval $(/usr/local/bin/gdircolors $GOPATH/src/github.com/seebi/dircolors-solarized/dircolors.ansi-universal)
-fi
-
-########################################
-# source zsh-syntax-highlighting
-# http://blog.glidenote.com/blog/2012/12/15/zsh-syntax-highlighting/
-if [ -f $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source $GOPATH/src/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-########################################
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-export BUILDKITE_TOKEN=hoge
-export PATH="$HOME/.anyenv/bin:$PATH"
-
-
-########################################
-# For WARNING `pyenv init -`
-# https://github.com/pyenv/pyenv/issues/1906
-export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
-
-########################################
+# zsh local settings
 ZSH_DIR="${HOME}/.zsh_local"
-
-# .zsh_localがディレクトリで、読み取り、実行、が可能なとき
 if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
-    # zshディレクトリより下にある、.zshファイルの分、繰り返す
     for file in ${ZSH_DIR}/**/*.zsh; do
-        # 読み取り可能ならば実行する
         [ -r $file ] && source $file
     done
 fi
 
-
-######################################## kubectl & eksctl completion
+########################################
+# kubectl & eksctl completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 fpath=($fpath ~/.zsh/completion)
 autoload -Uz compinit && compinit -i
 
 ########################################
-# anyenv
-eval "$(anyenv init -)"
+# brew
+eval $(/opt/homebrew/bin/brew shellenv)
 
 ########################################
-# go
-# export GOROOT=$HOME/.anyenv/envs/goenv/versions/$GO_VERSION
-# export GOPATH=$HOME/go
-export PATH=$HOME/.anyenv/envs/goenv/shims/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export GO111MODULE=on
+# anyenv
+eval "$(anyenv init -)"
