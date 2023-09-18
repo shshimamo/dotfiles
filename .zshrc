@@ -161,7 +161,8 @@ alias gg='git grep -B 0 -C 0 -A 3'
 alias gl='git log --stat --submodule -p'
 alias s='git status'
 alias di='git diff'
-alias br='git branch -vv --sort=-committerdate'
+# alias br='git branch -vv --sort=-committerdate'
+alias br='git rev-parse --abbrev-ref HEAD | pbcopy'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout master; git fetch; git merge origin/master"
@@ -169,6 +170,8 @@ alias codev="git checkout develop; git fetch; git merge origin/develop"
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias lf='git log --stat -p --follow'
 alias see='gh browse'
+alias pr='gh pr view --web $(git rev-parse --abbrev-ref HEAD)'
+alias che='gh pr checkout'
 
 ### tmux alias
 # tmux new -s {Session Name}
