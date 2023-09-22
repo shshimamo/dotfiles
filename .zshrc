@@ -243,17 +243,28 @@ function ggxl(){
   eval "git grep -l $1 $excepts"
 }
 
-function lo(){
+function lo() {
+  local base_branch=""
+
   if [ "$1" = "" ]; then
-    git log --reverse develop..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+    for branch in develop master main; do
+      if git show-ref --quiet refs/heads/$branch; then
+          base_branch=$branch
+          break
+      fi
+    done
   elif [[ "$1" =~ ^[0-9]+$ ]]; then
-    git log --reverse head~$1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
-  elif [ "$1" = "." ]; then
-    git log --reverse --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+    base_branch=head~$1
+  elif [ "$1" = "up" ]; then
+    base_branch=$(git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null)
   else
-    git log --reverse $1..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+    base_branch=$1
   fi
+
+  echo "log $base_branch..head"
+  git log --reverse $base_branch..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
 }
+
 
 function his() {
   command=`history -n 1 | tac  | awk '!a[$0]++' | peco`
