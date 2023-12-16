@@ -106,21 +106,8 @@
     },
 
     {
-      "description": "ALT_R + hjkl => アプリ起動, ALT_R 単体でエスケープ",
+      "description": "ALT_R + hjkl => アプリ起動",
       "manipulators": [
-        {
-          "type": "basic",
-          "from": {
-            "key_code": "right_alt",
-            "modifiers": { "optional": [ "any" ] }
-          },
-          "to": [
-            { "key_code": "right_alt" }
-          ],
-          "to_if_alone": [
-            { "key_code": "escape", "lazy": true }
-          ]
-        },
         {
           "type": "basic",
           "from": {
@@ -194,7 +181,7 @@
             }
           },
           "to": [
-            { "shell_command": "open -a 'Goland'" }
+            { "shell_command": "open -a 'Google Chrome'" }
           ]
         },
         {
@@ -208,7 +195,7 @@
             }
           },
           "to": [
-            { "shell_command": "open -a 'Google Chrome'" }
+            { "shell_command": "open -a 'Goland'" }
           ]
         },
         {
@@ -236,9 +223,9 @@
             }
           },
           "to": [
-            { "shell_command": "open -a 'iTerm'" }
+            { "shell_command": "open -a 'Google Chrome'" }
           ]
-        },
+        }, 
         {
           "type": "basic",
           "from": {
@@ -250,7 +237,7 @@
             }
           },
           "to": [
-            { "shell_command": "open -a 'Goland'" }
+            { "shell_command": "open -a 'iTerm'" }
           ]
         },
         {
@@ -264,7 +251,38 @@
             }
           },
           "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "mandatory": [
+                "right_alt"
+              ]
+            }
+          },
+          "to": [
             { "shell_command": "open -a 'WebStorm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "mandatory": [
+                "right_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a '1Password 7'" }
           ]
         },
         {
@@ -661,6 +679,260 @@
             }
           ]
         }
+      ]
+    },
+
+    {
+      "description": "ALT_L + hjkl => アプリ起動, ALT_L + asdw => 矢印キー",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "open_bracket",
+              "modifiers": ["left_shift","left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "close_bracket",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "close_bracket",
+              "modifiers": ["left_shift","left_command"]
+            }
+          ]
+        }, 
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "left_arrow" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "right_arrow" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Google Chrome'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "g",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Google Chrome'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Goland'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Inkdrop'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Google Chrome'" }
+          ]
+        }, 
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'iTerm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab",
+              "modifiers": ["left_command"]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'WebStorm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a '1Password 7'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'Rubymine'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "down_arrow" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "shell_command": "open -a 'iTerm'" }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "mandatory": [
+                "left_alt"
+              ]
+            }
+          },
+          "to": [
+            { "key_code": "up_arrow" }
+          ]
+        }
+
       ]
     },
 
@@ -1336,7 +1608,7 @@
     },
 
     {
-      "description": "Left Shift + Space => =(イコール)",
+      "description": "Shift + Space => =(イコール)",
       "manipulators": [
         {
           "type": "basic",
@@ -1345,6 +1617,22 @@
             "modifiers": {
               "mandatory": [
                 "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "equal_sign"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "right_shift"
               ]
             }
           },
