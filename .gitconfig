@@ -4,6 +4,7 @@
 [color]
 	ui = auto
 [core]
+  pager = delta
 	editor = vim
 	excludesfile = ~/.gitignore_global
 [alias]
@@ -62,12 +63,6 @@
           read -p \"$PREFIX/に続くブランチ名を入力: \" BRANCH ;\
           git checkout -b $PREFIX/$BRANCH ;\
         }; f"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -88,6 +83,15 @@
 [init]
 	templatedir = ~/.git-templates/git-secrets
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  # delta detects terminal colors automatically; set one of these to disable auto-detection
+  # dark = true
+  # light = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
