@@ -1,86 +1,40 @@
-
 {
-    "editor.minimap.enabled": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.codeActionsOnSave": {},
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
     "editor.wordWrap": "on",
-
-    "bookmarks.navigateThroughAllFiles": true,
-
+    "workbench.tree.renderIndentGuides": "always",
     // vim
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j","j"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["k","k"],
-            "after": ["<Esc>"]
-        }
-    ],
-    "vim.visualModeKeyBindings": [
-        {
-            "before": ["x"],
-            "after": ["\"","_","x"]
-        }
-    ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["x"],
-            "after": ["\"","_","x"]
+            "before": [
+                "<C-h>"
+            ],
+            "after": [
+                "^"
+            ]
         },
         {
-            "before": ["<down>"],
-            "after": ["7","j"]
+            "before": [
+                "<C-l>"
+            ],
+            "after": [
+                "$"
+            ]
         },
         {
-            "before": ["<up>"],
-            "after": ["7","k"]
-        },
-        {
-            "before": ["<leader>","h"],
-            "after": ["<C-w>","h"]
-        },
-        {
-            "before": ["<leader>","j"],
-            "after": ["<C-w>","j"]
-        },
-        {
-            "before": ["<leader>","k"],
-            "after": ["<C-w>","k"]
-        },
-        {
-            "before": ["<leader>","l"],
-            "after": ["<C-w>","l"]
-        },
-        {
-            "before": ["<C-h>"],
-            "after": ["^"]
-        },
-        {
-            "before": ["<C-l>"],
-            "after": ["$"]
-        },
-        {
-            "before": ["*"],
+            "before": [
+                "*"
+            ],
             "after": [],
-            "commands": ["actions.findWithSelection"]
-        },
-        {
-            "before": ["<leader>","["],
-            "after": [],
-            "commands": ["workbench.action.moveEditorToFirstGroup"]
-        },
-        {
-            "before": ["<leader>","]"],
-            "after": [],
-            "commands": ["workbench.action.moveEditorToLastGroup"]
+            "commands": [
+                "actions.findWithSelection"
+            ]
         }
     ],
-    "editor.tabSize": 2,
-    "workbench.editor.enablePreview": false,
-    "workbench.colorTheme": "Material Theme High Contrast",
-    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
-    "window.zoomLevel": 0
+    "json.schemas": []
 }
-

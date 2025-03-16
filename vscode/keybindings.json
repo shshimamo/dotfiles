@@ -1,99 +1,80 @@
-
-// Place your key bindings in this file to override the defaultsauto[]
+// 既定値を上書きするには、このファイル内にキー バインドを挿入します
 [
-    {
-        "key": "ctrl+k ctrl+k",
-        "command": "editor.action.revealDefinition",
-        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-    },
-    {
-        "key": "f12",
-        "command": "-editor.action.revealDefinition",
-        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-    },
-    {
-        "key": "cmd+[",
-        "command": "-editor.action.outdentLines",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "cmd+]",
-        "command": "-editor.action.indentLines",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "cmd+[",
-        "command": "workbench.action.navigateBack"
-    },
-    {
-        "key": "ctrl+-",
-        "command": "-workbench.action.navigateBack"
-    },
-    {
-        "key": "cmd+]",
-        "command": "workbench.action.navigateForward"
-    },
-    {
-        "key": "ctrl+shift+-",
-        "command": "-workbench.action.navigateForward"
-    },
-    {
-        "key": "ctrl+j ctrl+p",
-        "command": "workbench.action.replaceInFiles"
-    },
-    {
-        "key": "shift+cmd+h",
-        "command": "-workbench.action.replaceInFiles"
-    },
-    {
-        "key": "ctrl+j ctrl+p",
-        "command": "workbench.action.previousEditor"
-    },
-    {
-        "key": "ctrl+j ctrl+p",
-        "command": "workbench.action.previousEditor"
-    },
-    {
-        "key": "ctrl+j ctrl+n",
-        "command": "workbench.action.nextEditor"
-    },
-    {
-        "key": "ctrl+j v",
-        "command": "workbench.action.splitEditor"
-    },
-    {
-        "key": "ctrl+j s",
-        "command": "workbench.action.splitEditorOrthogonal"
-    },
-    {
-        "key": "ctrl+j t",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
-    {
-        "key": "ctrl+j ctrl+o",
-        "command": "workbench.action.navigateBack"
-    },
-    {
-        "key": "ctrl+j ctrl+i",
-        "command": "workbench.action.navigateForward"
-    },
-    {
-        "key": "shift+cmd+g",
-        "command": "workbench.view.extension.gitlens"
-    },
-    { 
-        "key": "ctrl+j ctrl+k",
-        "command": "bookmarks.toggle",
-        "when": "editorTextFocus"
-    },
-    { 
-        "key": "ctrl+k ctrl+n",
-        "command": "bookmarks.jumpToNext",
-        "when": "editorTextFocus"
-    },
-    { 
-        "key": "ctrl+k ctrl+p",
-        "command": "bookmarks.jumpToPrevious",
-        "when": "editorTextFocus"
-    }
+  {
+    "key": "ctrl+k",
+    "command": "-deleteAllRight",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "-extension.vim_ctrl+k",
+    "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-editor.action.joinLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-extension.vim_ctrl+j",
+    "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+j ctrl+o",
+    "command": "workbench.action.navigateBack",
+    "when": "canNavigateBack"
+  },
+  {
+    "key": "ctrl+j ctrl+i",
+    "command": "workbench.action.navigateForward",
+    "when": "canNavigateForward"
+  },
+  {
+    "key": "ctrl+j v",
+    "command": "workbench.action.splitEditorRight"
+  },
+  {
+    "key": "ctrl+j s",
+    "command": "workbench.action.splitEditorDown"
+  },
+  {
+    "key": "cmd+k cmd+\\",
+    "command": "-workbench.action.splitEditorDown"
+  },
+  {
+    "key": "ctrl+k ctrl+i",
+    "command": "editor.action.goToImplementation",
+    "when": "editorHasImplementationProvider && editorTextFocus"
+  },
+  {
+    "key": "cmd+f12",
+    "command": "-editor.action.goToImplementation",
+    "when": "editorHasImplementationProvider && editorTextFocus"
+  },
+  {
+    "key": "ctrl+j ctrl+n",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+j ctrl+p",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+j n",
+    "command": "workbench.action.openNextRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+j p",
+    "command": "workbench.action.openPreviousRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+j e",
+    "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
+  }
 ]
