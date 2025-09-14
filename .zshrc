@@ -65,19 +65,6 @@ eval "$(starship init zsh)"
 
 ########################################
 # setopt
-# 日本語ファイル名を表示可能にする
-setopt print_eight_bit
-
-# beep を無効にする
-setopt no_beep
-setopt nolistbeep
-
-# フローコントロールを無効にする
-setopt no_flow_control
-
-# Ctrl+Dでzshを終了しない
-# setopt ignore_eof
-
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
 
@@ -126,8 +113,46 @@ alias mkdir='mkdir -p' # ディレクトリがなければ作成
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 alias ei='exit'
-alias fxg='find . -type f | xargs grep '
-alias fg='find . -type f | grep '
+# ファイル内容を検索（ripgrepベース）
+function fxg() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: fxg <search_pattern>"
+    return 1
+  fi
+  rg --files-with-matches --no-heading --color=always "$1" | fzf --ansi --preview "rg --color=always --line-number --no-heading --smart-case '$1' {} || cat {}" --bind "enter:execute(${EDITOR:-vim} {})"
+}
+
+# ファイル名を検索
+alias fg='find . -type f -not -path "./.git/*" | fzf --preview "head -100 {}" --bind "enter:execute(${EDITOR:-vim} {})"'
+
+# ライブ検索（入力しながらリアルタイム検索）
+function rgf() {
+  rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --delimiter : \
+      --preview 'bat --color=always {1} --highlight-line {2}' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
+}
+
+# TODO/FIXME/HACK等のコメント検索
+function todos() {
+  rg --color=always --line-number --no-heading "TODO|FIXME|HACK|XXX|BUG" | \
+  fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1) --highlight-line $(echo {} | cut -d: -f2)' \
+      --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'
+}
+
+# 関数・クラス定義検索
+function defs() {
+  rg --color=always --line-number --no-heading "(class|function|def|const|let|var).*" | \
+  fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1) --highlight-line $(echo {} | cut -d: -f2)' \
+      --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'
+}
+
+# 特定ファイルタイプ内を検索
+function rgjs() { rg --type js --color=always --line-number --no-heading "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
+function rgpy() { rg --type py --color=always --line-number --no-heading "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
 alias b='bundle'
 alias ls='ls -G'
 alias ll='ls -lahG'
