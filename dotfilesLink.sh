@@ -9,7 +9,6 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.aws/cli/alias ~/.aws/cli/ali
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gitconfig ~/.gitconfig
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.tmux.conf ~/.tmux.conf
 #ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.vimrc ~/.vimrc
-#ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.vrapperrc ~/.vrapperrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.zshrc ~/.zshrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.xvimrc ~/.xvimrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ideavimrc ~/.ideavimrc
