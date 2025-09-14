@@ -168,7 +168,8 @@ alias g='git'
 # -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
 # gl: git log (fzf) - 詳細なログ表示
-alias gl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1} | delta" --bind "enter:execute(git show {1} --color=always | delta | less -R)"'
+alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --color=always {1} | delta" --bind "enter:execute(git show {1} --color=always | delta | less -R)"'
+
 alias s='git status'
 alias di='git diff'
 # alias br='git branch -vv --sort=-committerdate'
@@ -203,8 +204,20 @@ alias tkillserver='tmux kill-server'
 function co(){
   branch_name=$(git branch --sort=-committerdate | fzf \
     --height 50% \
-    --preview 'git log --oneline --color=always -10 $(echo {} | sed "s/^[* ] //")' \
-    --preview-window=right:50% \
+    --preview 'branch=$(echo {} | sed "s/^[* ] //");
+               base_branch="";
+               for b in main master; do
+                 if git show-ref --quiet refs/heads/$b; then
+                   base_branch=$b;
+                   break;
+                 fi;
+               done;
+               if [ "$branch" != "$base_branch" ] && [ -n "$base_branch" ]; then
+                 git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always $base_branch..$branch;
+               else
+                 git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always -10 $branch;
+               fi' \
+    --preview-window=right:70% \
     | sed 's/^[* ] //')
 
   if [ -n "$branch_name" ]; then
@@ -245,7 +258,12 @@ function lo() {
   fi
 
   echo "log $base_branch..head"
-  git log --reverse $base_branch..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
+  git log $base_branch..head --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=relative --color=always | \
+    fzf --ansi \
+        --preview "git show --color=always {1} | delta" \
+        --bind "enter:execute(git show {1} --color=always | delta | less -R)" \
+        --height 50%
+#         --header "Commits from $base_branch to HEAD (Enter: show details)"
 }
 
 ########################################
