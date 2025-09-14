@@ -13,7 +13,7 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.zshrc ~/.zshrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.xvimrc ~/.xvimrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ideavimrc ~/.ideavimrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gemrc ~/.gemrc
-ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.pryrc ~/.pryrc
+# ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.pryrc ~/.pryrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gitignore_global ~/.gitignore_global
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
