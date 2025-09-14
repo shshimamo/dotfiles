@@ -30,50 +30,38 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
-# インクリメンタルサーチをglobで
-bindkey '^R' history-incremental-pattern-search-backward
+# fzf history search (Ctrl+R)
+function fzf-history-widget() {
+  local selected num
+  selected=( $(fc -rl 1 | awk '!a[$2]++' | fzf --height 50% --layout=reverse --border --query="$LBUFFER" --expect=ctrl-x) )
+  local ret=$?
+  if [ -n "$selected" ]; then
+    if [ "$selected[1]" = ctrl-x ]; then
+      # Ctrl+X pressed - execute immediately
+      num=${selected[2]%% *}
+      if [ -n "$num" ]; then
+        zle vi-fetch-history -n $num
+        zle accept-line
+      fi
+    else
+      # Enter pressed - put in command line
+      num=${selected[1]%% *}
+      if [ -n "$num" ]; then
+        zle vi-fetch-history -n $num
+      fi
+    fi
+  fi
+  zle reset-prompt
+  return $ret
+}
+zle -N fzf-history-widget
+bindkey '^R' fzf-history-widget
+
 bindkey -e
 
 #######################################
-# プロンプト
-
-# 1行表示
-# PROMPT="%~ %# "
-
-# 2行表示
-#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-#PROMPT="%{${bg[white]} ${fg[black]}%}%~%{${reset_color}%}
-#%# "
-
-# kube-ps1
-source $(ghq root)/github.com/jonmosco/kube-ps1/kube-ps1.sh
-# PROMPT='$(kube_ps1)'$PROMPT
-
-########################################
-# vcs_info
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
-
-# See http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Configuration-1
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-# zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' formats "%F{green}%c%u %b %f"
-# zstyle ':vcs_info:*' actionformats '%F{red}[%b|%a]%f'
-zstyle ':vcs_info:*' actionformats '%F{red} %b|%a %f'
-# zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-# zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-
-function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    # RPROMPT="${vcs_info_msg_0_}"
-
-    PROMPT="%{${bg[black]} ${fg[yellow]}%}%~%{${reset_color}%} ${vcs_info_msg_0_} $(kube_ps1) %*
-%# "
-}
-add-zsh-hook precmd _update_vcs_info_msg
-
+# Starship prompt
+eval "$(starship init zsh)"
 
 ########################################
 # setopt
@@ -150,7 +138,24 @@ alias fig='docker compose'
 
 alias k="kubectl"
 
+# ghq + fzf でリポジトリ選択
 alias ghl='cd $(ghq root)/$(ghq list | fzf --height 40% --layout=reverse --border --preview "echo {} | sed \"s|.*/||g\"")'
+
+# プロセス検索・kill
+alias fkill='ps aux | fzf --header-lines=1 --preview "echo {}" | awk "{print \$2}" | xargs kill'
+
+# ファイル検索・編集
+alias fe='find . -type f | fzf --preview "head -100 {}" | xargs ${EDITOR:-vim}'
+
+# docker コンテナ操作
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | fzf --header-lines=1 --preview "docker inspect {1}" | awk "{print \$1}"'
+alias dexec='container=$(docker ps --format "{{.Names}}" | fzf) && docker exec -it $container /bin/bash'
+
+# git log with fzf
+alias fgl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1}" --bind "enter:execute(git show {1} | less -R)"'
+
+# 最近変更されたファイルを選択して編集
+alias recent='find . -type f -not -path "./.git/*" -exec ls -lt {} + | head -20 | fzf --header-lines=0 | awk "{print \$NF}" | xargs ${EDITOR:-vim}'
 
 alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
 
@@ -275,11 +280,39 @@ function lo() {
 
 
 function his() {
-  command=`history -n 1 | tac  | awk '!a[$0]++' | fzf`
+  command=`history -n 1 | tac  | awk '!a[$0]++' | fzf --height 50% --layout=reverse --border`
   # eval $command
   echo $command | tr -d '\n' | pbcopy
   echo "COPY> ${command}"
 }
+
+# ディレクトリ履歴をfzfで選択
+function cd_history() {
+  local dir
+  dir=$(dirs -p | fzf --height 40% --layout=reverse --border --preview 'ls -la {}') && cd "$dir"
+}
+alias cdh='cd_history'
+
+# AWS プロファイル切り替え
+function aws_profile() {
+  local profile
+  profile=$(cat ~/.aws/config | grep '\[profile' | sed 's/\[profile //g' | sed 's/\]//g' | fzf --height 40% --layout=reverse --border)
+  if [ -n "$profile" ]; then
+    export AWS_PROFILE=$profile
+    echo "AWS_PROFILE set to: $profile"
+  fi
+}
+alias ap='aws_profile'
+
+# kubectl context切り替え
+function kube_context() {
+  local context
+  context=$(kubectl config get-contexts -o name | fzf --height 40% --layout=reverse --border)
+  if [ -n "$context" ]; then
+    kubectl config use-context $context
+  fi
+}
+alias kc='kube_context'
 
 ########################################
 # Added by the Heroku Toolbelt

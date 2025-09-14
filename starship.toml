@@ -1,0 +1,34 @@
+# symbol用  🅰 🅱 🅲 🅳 🅴 🅵 🅶 🅷 🅸 🅹 🅺 🅻 🅼 🅽 🅾 🅿 🆀 🆁 🆂 🆃 🆄 🆅 🆆 🆇 🆈 🆉
+
+# エディターの補完を設定スキーマに合わせて取得
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# シェルのプロンプトの間に空行を挿入する
+add_newline = true
+
+[git_branch]
+symbol = '* '
+
+[aws]
+symbol = '🅰 '
+disabled = false
+format = 'on [$symbol$profile]($style) '
+style = 'bold blue'
+
+[aws.profile_aliases]
+Enterprise_Naming_Scheme-voidstars = 'void**'
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false
+contexts = [
+  { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
+]
+
+[golang]
+symbol = '🅶 '
+format = 'via [$symbol($version )($mod_version )]($style)'
+
