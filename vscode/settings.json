@@ -1,40 +1,30 @@
 {
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "editor.codeActionsOnSave": {},
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2,
-    "editor.wordWrap": "on",
-    "workbench.tree.renderIndentGuides": "always",
-    // vim
-    "vim.leader": "<space>",
-    "vim.useSystemClipboard": true,
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<C-h>"
-            ],
-            "after": [
-                "^"
-            ]
-        },
-        {
-            "before": [
-                "<C-l>"
-            ],
-            "after": [
-                "$"
-            ]
-        },
-        {
-            "before": [
-                "*"
-            ],
-            "after": [],
-            "commands": [
-                "actions.findWithSelection"
-            ]
-        }
-    ],
-    "json.schemas": []
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {},
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "workbench.tree.renderIndentGuides": "always",
+  // vim
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-h>"],
+      "after": ["^"]
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["$"]
+    },
+    {
+      "before": ["*"],
+      "after": [],
+      "commands": ["actions.fhvndWithSelection"]
+    }
+  ],
+  "json.schemas": [],
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "redhat.telemetry.enabled": true
 }
