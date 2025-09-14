@@ -151,127 +151,6 @@ alias mkdir='mkdir -p' # ディレクトリがなければ作成
 alias sudo='sudo '
 alias ei='exit'
 
-# ファイル名を検索
-alias fg='find . -type f -not -path "./.git/*" | fzf --preview "head -100 {}" --bind "enter:execute(${EDITOR:-vim} {})"'
-
-# ライブ検索(rg + fzf + bat)
-function search() {
-  rg "${*:-}" |
-  fzf --ansi \
-      --color "hl:-1:underline,hl+:-1:underline:reverse" \
-      --delimiter : \
-      --nth 3.. \
-      --preview 'bat --color=always {1} --highlight-line {2}' \
-      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
-      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
-}
-
-# ファイル名検索(fd + fzf)
-function searchf() {
-  fd --type f --hidden --exclude .git "${*:-}" |
-  fzf --ansi \
-      --color "hl:-1:underline,hl+:-1:underline:reverse" \
-      --preview 'bat --color=always {} --style=header,grid' \
-      --bind 'enter:become(${EDITOR:-vim} {})'
-}
-
-# TODO/FIXME/HACK等のコメント検索
-function todos() {
-  rg "TODO|FIXME|HACK|XXX|BUG" | \
-  fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1) --highlight-line $(echo {} | cut -d: -f2)' \
-      --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'
-}
-
-# 関数・クラス定義検索
-function defs() {
-  rg "(class|function|def|const|let|var).*" | \
-  fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1) --highlight-line $(echo {} | cut -d: -f2)' \
-      --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'
-}
-
-# 特定ファイルタイプ内を検索
-function rgjs() { rg --type js "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
-function rgpy() { rg --type py "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
-
-# ディレクトリ履歴を記録する関数（高速版）
-function record_dir_change() {
-  local recent_dirs_file="$HOME/.zsh_recent_dirs"
-  local current_dir="$PWD"
-
-  # ディレクトリを追加
-  echo "$current_dir" >> "$recent_dirs_file"
-
-  # ファイルサイズを1000行に制限（超えた場合は500行まで削減）
-  if (( $(wc -l < "$recent_dirs_file" 2>/dev/null || echo 0) > 1000 )); then
-    tail -500 "$recent_dirs_file" > "${recent_dirs_file}.tmp" && mv "${recent_dirs_file}.tmp" "$recent_dirs_file"
-  fi
-}
-
-# プロジェクト管理
-function ghl() {
-  local project_dirs=("$HOME/projects" "$(ghq root)/github.com")
-  local selected_dir=""
-
-  for dir in "${project_dirs[@]}"; do
-    if [ -d "$dir" ]; then
-      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --layout=reverse --border --preview 'ls -la {} | head -10')
-      break
-    fi
-  done
-
-  if [ -n "$selected_dir" ]; then
-    cd "$selected_dir"
-    echo "📁 Moved to: $selected_dir"
-    # プロジェクト移動時に履歴を記録
-    record_dir_change
-  fi
-}
-
-# 最近使ったプロジェクトディレクトリへの移動
-function work() {
-  local recent_dirs_file="$HOME/.zsh_recent_dirs"
-
-  # 最近のディレクトリファイルが存在しない場合は作成
-  if [ ! -f "$recent_dirs_file" ]; then
-    touch "$recent_dirs_file"
-  fi
-
-  # 最近使ったディレクトリから選択（重複排除して表示）
-  if [ -s "$recent_dirs_file" ]; then
-    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --layout=reverse --border --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
-    if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
-      cd "$selected_dir"
-      echo "💼 Moved to recent directory: $selected_dir"
-      return
-    fi
-  fi
-
-  # ファイルが空の場合はghlを実行
-  echo "No recent directories found. Running ghl..."
-  ghl
-}
-
-# Git worktree管理
-function gwt() {
-  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    local worktree=$(git worktree list | fzf --header="Select worktree" | awk '{print $1}')
-    if [ -n "$worktree" ]; then
-      cd "$worktree"
-    fi
-  else
-    echo "Not in a git repository"
-  fi
-}
-
-# 環境変数のクイック確認
-function envs() {
-  env | fzf --preview 'echo {} | cut -d= -f2-'
-}
-
-# ポート使用状況確認
-function ports() {
-  lsof -i -P -n | grep LISTEN | fzf --header="Listening ports" --preview 'echo {}'
-}
 alias b='bundle'
 alias ls='ls -G'
 alias ll='ls -lahG'
@@ -281,25 +160,6 @@ alias d='docker'
 alias fig='docker compose'
 
 alias k="kubectl"
-
-# ghq + fzf でリポジトリ選択
-# alias ghl='cd $(ghq root)/$(ghq list | fzf --height 40% --layout=reverse --border --preview "echo {} | sed \"s|.*/||g\"")'
-
-# プロセス検索・kill
-alias fkill='ps aux | fzf --header-lines=1 --preview "echo {}" | awk "{print \$2}" | xargs kill'
-
-# ファイル検索・編集
-alias fe='find . -type f | fzf --preview "head -100 {}" | xargs ${EDITOR:-vim}'
-
-# docker コンテナ操作
-alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | fzf --header-lines=1 --preview "docker inspect {1}" | awk "{print \$1}"'
-alias dexec='container=$(docker ps --format "{{.Names}}" | fzf) && docker exec -it $container /bin/bash'
-
-# git log with fzf
-alias fgl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1}" --bind "enter:execute(git show {1} | less -R)"'
-
-# 最近変更されたファイルを選択して編集
-alias recent='find . -type f -not -path "./.git/*" -exec ls -lt {} + | head -20 | fzf --header-lines=0 | awk "{print \$NF}" | xargs ${EDITOR:-vim}'
 
 alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
 
@@ -336,7 +196,7 @@ alias tkillserver='tmux kill-server'
 
 
 ########################################
-# functions
+# Gitコマンド
 
 # checkout branch
 function co(){
@@ -367,39 +227,6 @@ function fixupstashautosquash() {
   git rebase -i --autosquash $@~
 }
 
-# tmux ls
-function tls() {
-  session=$(tmux ls | fzf | cut -d ':' -f 1)
-  tmux a -t $session
-}
-
-
-# $1: dir, $2: tabname
-function tabnew() {
-  cd `pwd`
-  tabset $1
-  tabset --title $1
-  tmux new -s $1
-}
-
-function ggx(){
-  excepts="--"
-  for x in "${@:2}"
-  do
-    excepts="$excepts ':!$x'"
-  done
-  eval "git grep $1 $excepts"
-}
-
-function ggxl(){
-  excepts="--"
-  for x in "${@:2}"
-  do
-    excepts="$excepts ':!$x'"
-  done
-  eval "git grep -l $1 $excepts"
-}
-
 function lo() {
   local base_branch=""
 
@@ -422,12 +249,158 @@ function lo() {
   git log --reverse $base_branch..head --date=iso --pretty=format:"[%ad] %an : %C(cyan)%s%Creset / %C(yellow)%h%Creset"
 }
 
+########################################
+# 検索コマンド体系:
+#  - repos / ghl - 全リポジトリから検索・移動
+#  - recent - 最近使ったプロジェクトから選択
+#  - search - コード内容検索
+#  - searchf - ファイル名検索
+#  - searcht - 言語別検索
+
+# repos: 全リポジトリから検索・移動
+function repos() {
+  local project_dirs=("$HOME/projects" "$(ghq root)/github.com")
+  local selected_dir=""
+
+  for dir in "${project_dirs[@]}"; do
+    if [ -d "$dir" ]; then
+      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --layout=reverse --border --preview 'ls -la {} | head -10')
+      break
+    fi
+  done
+
+  if [ -n "$selected_dir" ]; then
+    cd "$selected_dir"
+    echo "📁 Moved to: $selected_dir"
+    # プロジェクト移動時に履歴を記録
+    record_dir_change
+  fi
+}
+alias ghl='repos'
+
+# recent: 最近使ったプロジェクトから選択
+function recent() {
+  local recent_dirs_file="$HOME/.zsh_recent_dirs"
+
+  # 最近のディレクトリファイルが存在しない場合は作成
+  if [ ! -f "$recent_dirs_file" ]; then
+    touch "$recent_dirs_file"
+  fi
+
+  # 最近使ったディレクトリから選択（重複排除して表示）
+  if [ -s "$recent_dirs_file" ]; then
+    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --layout=reverse --border --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
+    if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
+      cd "$selected_dir"
+      echo "💼 Moved to recent directory: $selected_dir"
+      return
+    fi
+  fi
+
+  # ファイルが空の場合はreposを実行
+  echo "No recent directories found. Running repos..."
+  repos
+}
+
+# search - コード内容検索(rg + fzf + bat)
+function search() {
+  rg "${*:-}" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --delimiter : \
+      --nth 3.. \
+      --preview 'bat --color=always {1} --highlight-line {2}' \
+      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
+      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
+}
+
+# searchf: ファイル名検索(fd + fzf + bat)
+function searchf() {
+  fd --type f --hidden --exclude .git "${*:-}" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --preview 'bat --color=always {} --style=header,grid' \
+      --bind 'enter:become(${EDITOR:-vim} {})'
+}
+
+# searcht: 言語別検索
+function searcht() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: searcht <file_type>"
+    echo "Examples: searcht js    # JavaScriptファイルをライブ検索"
+    echo "         searcht py    # Pythonファイルをライブ検索"
+    return 1
+  fi
+
+  local file_type="$1"
+
+  rg --type "$file_type" "" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --delimiter : \
+      --nth 3.. \
+      --preview 'bat --color=always {1} --highlight-line {2}' \
+      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
+      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
+}
+
+########################################
+# 便利コマンド:
 
 function his() {
   command=`history -n 1 | tac  | awk '!a[$0]++' | fzf --height 50% --layout=reverse --border`
   # eval $command
   echo $command | tr -d '\n' | pbcopy
   echo "COPY> ${command}"
+}
+
+# tmux ls
+function tls() {
+  session=$(tmux ls | fzf | cut -d ':' -f 1)
+  tmux a -t $session
+}
+
+# todos: TODO/FIXME/HACK等のコメント検索
+function todos() {
+  rg "TODO|FIXME|HACK|XXX|BUG" | \
+  fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1) --highlight-line $(echo {} | cut -d: -f2)' \
+      --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'
+}
+
+# record_dir_change: ディレクトリ履歴を記録する関数(recentコマンド用)
+function record_dir_change() {
+  local recent_dirs_file="$HOME/.zsh_recent_dirs"
+  local current_dir="$PWD"
+
+  # ディレクトリを追加
+  echo "$current_dir" >> "$recent_dirs_file"
+
+  # ファイルサイズを1000行に制限（超えた場合は500行まで削減）
+  if (( $(wc -l < "$recent_dirs_file" 2>/dev/null || echo 0) > 1000 )); then
+    tail -500 "$recent_dirs_file" > "${recent_dirs_file}.tmp" && mv "${recent_dirs_file}.tmp" "$recent_dirs_file"
+  fi
+}
+
+# gwt: Git worktree管理
+function gwt() {
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    local worktree=$(git worktree list | fzf --header="Select worktree" | awk '{print $1}')
+    if [ -n "$worktree" ]; then
+      cd "$worktree"
+    fi
+  else
+    echo "Not in a git repository"
+  fi
+}
+
+# envs: 環境変数のクイック確認
+function envs() {
+  env | fzf --preview 'echo {} | cut -d= -f2-'
+}
+
+# ports: ポート使用状況確認
+function ports() {
+  lsof -i -P -n | grep LISTEN | fzf --header="Listening ports" --preview 'echo {}'
 }
 
 # ディレクトリ履歴をfzfで選択
@@ -457,6 +430,17 @@ function kube_context() {
   fi
 }
 alias kc='kube_context'
+
+# fkill: プロセス検索・kill (fzf)
+alias fkill='ps aux | fzf --header-lines=1 --preview "echo {}" | awk "{print \$2}" | xargs kill'
+
+# docker コンテナ操作 (fzf)
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | fzf --header-lines=1 --preview "docker inspect {1}" | awk "{print \$1}"'
+alias dexec='container=$(docker ps --format "{{.Names}}" | fzf) && docker exec -it $container /bin/bash'
+
+# fgl: git log (fzf)
+alias fgl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1}" --bind "enter:execute(git show {1} | less -R)"'
+
 
 ########################################
 # Added by the Heroku Toolbelt
