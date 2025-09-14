@@ -6,6 +6,12 @@
 # シェルのプロンプトの間に空行を挿入する
 add_newline = true
 
+# カスタムフォーマットでボーダーを追加
+format = """
+[────────────────────────────────────────────](dimmed white)
+$all\
+$character"""
+
 [git_branch]
 symbol = '* '
 
