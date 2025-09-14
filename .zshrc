@@ -166,6 +166,15 @@ function search() {
       --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
 }
 
+# ファイル名検索(fd + fzf)
+function searchf() {
+  fd --type f --hidden --exclude .git "${*:-}" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --preview 'bat --color=always {} --style=header,grid' \
+      --bind 'enter:become(${EDITOR:-vim} {})'
+}
+
 # TODO/FIXME/HACK等のコメント検索
 function todos() {
   rg "TODO|FIXME|HACK|XXX|BUG" | \
