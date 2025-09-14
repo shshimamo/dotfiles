@@ -1,0 +1,18 @@
+# ripgrep default configuration
+--color=always
+--line-number
+--no-heading
+--smart-case
+--hidden
+
+# 除外パターン
+--glob=!.git/
+--glob=!node_modules/
+--glob=!target/
+--glob=!dist/
+--glob=!build/
+--glob=!*.min.js
+--glob=!*.min.css
+
+# バイナリファイルをスキップ
+--binary

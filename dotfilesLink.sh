@@ -18,3 +18,4 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gitignore_global ~/.gitignor
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/starship.toml ~/.config/starship.toml
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ripgreprc ~/.ripgreprc
