@@ -154,13 +154,15 @@ alias ei='exit'
 # ファイル名を検索
 alias fg='find . -type f -not -path "./.git/*" | fzf --preview "head -100 {}" --bind "enter:execute(${EDITOR:-vim} {})"'
 
-# ライブ検索（入力しながらリアルタイム検索）
+# ライブ検索(rg + fzf + bat)
 function search() {
-  rg --no-filename "${*:-}" | fzf --ansi \
+  rg "${*:-}" |
+  fzf --ansi \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
+      --nth 3.. \
       --preview 'bat --color=always {1} --highlight-line {2}' \
-      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
       --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
 }
 
