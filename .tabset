@@ -1,9 +1,0 @@
-{
-  "colors": {
-    "server": "#F0F4C3",
-    "console": "#B2DFDB",
-    "develop": "#F0F4C3",
-    "yarn": "#B2DFDB",
-    "docker": "#F0F4C3"
-  }
-}
