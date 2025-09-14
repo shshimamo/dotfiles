@@ -49,7 +49,7 @@ setopt auto_param_slash
 # fzf history search (Ctrl+R)
 function fzf-history-widget() {
   local selected num
-  selected=( $(fc -rl 1 | awk '!a[$2]++' | fzf --height 50% --layout=reverse --border --query="$LBUFFER" --expect=ctrl-x) )
+  selected=( $(fc -rl 1 | awk '!a[$2]++' | fzf --height 50% --query="$LBUFFER" --expect=ctrl-x) )
   local ret=$?
   if [ -n "$selected" ]; then
     if [ "$selected[1]" = ctrl-x ]; then
@@ -167,7 +167,8 @@ alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
 alias g='git'
 # -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
-alias gl='git log --stat --submodule -p'
+# gl: git log (fzf) - 詳細なログ表示
+alias gl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1} | delta" --bind "enter:execute(git show {1} --color=always | delta | less -R)"'
 alias s='git status'
 alias di='git diff'
 # alias br='git branch -vv --sort=-committerdate'
@@ -202,8 +203,6 @@ alias tkillserver='tmux kill-server'
 function co(){
   branch_name=$(git branch --sort=-committerdate | fzf \
     --height 50% \
-    --layout=reverse \
-    --border \
     --preview 'git log --oneline --color=always -10 $(echo {} | sed "s/^[* ] //")' \
     --preview-window=right:50% \
     | sed 's/^[* ] //')
@@ -252,7 +251,7 @@ function lo() {
 ########################################
 # 検索コマンド体系:
 #  - repos / ghl - 全リポジトリから検索・移動
-#  - recent - 最近使ったプロジェクトから選択
+#  - proj - 最近使ったプロジェクトから選択
 #  - search - コード内容検索
 #  - searchf - ファイル名検索
 #  - searcht - 言語別検索
@@ -264,7 +263,7 @@ function repos() {
 
   for dir in "${project_dirs[@]}"; do
     if [ -d "$dir" ]; then
-      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --layout=reverse --border --preview 'ls -la {} | head -10')
+      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
       break
     fi
   done
@@ -278,8 +277,8 @@ function repos() {
 }
 alias ghl='repos'
 
-# recent: 最近使ったプロジェクトから選択
-function recent() {
+# proj: 最近使ったプロジェクトから選択
+function proj() {
   local recent_dirs_file="$HOME/.zsh_recent_dirs"
 
   # 最近のディレクトリファイルが存在しない場合は作成
@@ -289,7 +288,7 @@ function recent() {
 
   # 最近使ったディレクトリから選択（重複排除して表示）
   if [ -s "$recent_dirs_file" ]; then
-    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --layout=reverse --border --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
+    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
     if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
       cd "$selected_dir"
       echo "💼 Moved to recent directory: $selected_dir"
@@ -348,7 +347,7 @@ function searcht() {
 # 便利コマンド:
 
 function his() {
-  command=`history -n 1 | tac  | awk '!a[$0]++' | fzf --height 50% --layout=reverse --border`
+  command=`history -n 1 | tac  | awk '!a[$0]++' | fzf --height 50%`
   # eval $command
   echo $command | tr -d '\n' | pbcopy
   echo "COPY> ${command}"
@@ -406,14 +405,14 @@ function ports() {
 # ディレクトリ履歴をfzfで選択
 function cd_history() {
   local dir
-  dir=$(dirs -p | fzf --height 40% --layout=reverse --border --preview 'ls -la {}') && cd "$dir"
+  dir=$(dirs -p | fzf --height 40% --preview 'ls -la {}') && cd "$dir"
 }
 alias cdh='cd_history'
 
 # AWS プロファイル切り替え
 function aws_profile() {
   local profile
-  profile=$(cat ~/.aws/config | grep '\[profile' | sed 's/\[profile //g' | sed 's/\]//g' | fzf --height 40% --layout=reverse --border)
+  profile=$(cat ~/.aws/config | grep '\[profile' | sed 's/\[profile //g' | sed 's/\]//g' | fzf --height 40%)
   if [ -n "$profile" ]; then
     export AWS_PROFILE=$profile
     echo "AWS_PROFILE set to: $profile"
@@ -424,23 +423,19 @@ alias ap='aws_profile'
 # kubectl context切り替え
 function kube_context() {
   local context
-  context=$(kubectl config get-contexts -o name | fzf --height 40% --layout=reverse --border)
+  context=$(kubectl config get-contexts -o name | fzf --height 40%)
   if [ -n "$context" ]; then
     kubectl config use-context $context
   fi
 }
 alias kc='kube_context'
 
-# fkill: プロセス検索・kill (fzf)
-alias fkill='ps aux | fzf --header-lines=1 --preview "echo {}" | awk "{print \$2}" | xargs kill'
+# procs: プロセス検索 (fzf)
+alias procs='ps aux | fzf --header-lines=1 --preview "echo {}"'
 
 # docker コンテナ操作 (fzf)
 alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | fzf --header-lines=1 --preview "docker inspect {1}" | awk "{print \$1}"'
 alias dexec='container=$(docker ps --format "{{.Names}}" | fzf) && docker exec -it $container /bin/bash'
-
-# fgl: git log (fzf)
-alias fgl='git log --oneline --color=always | fzf --ansi --preview "git show --color=always {1}" --bind "enter:execute(git show {1} | less -R)"'
-
 
 ########################################
 # Added by the Heroku Toolbelt
@@ -482,3 +477,8 @@ fpath=(/Users/shshimamo/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+########################################
+# fzf
+# fzf デフォルト設定 https://www.mankier.com/1/fzf#Options
+export FZF_DEFAULT_OPTS='--layout=reverse --border --bind ctrl-d:half-page-down,ctrl-u:half-page-up,down:preview-down,up:preview-up,shift-down:preview-half-page-down,shift-up:preview-half-page-up'
