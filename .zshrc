@@ -69,7 +69,7 @@ function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
     # RPROMPT="${vcs_info_msg_0_}"
 
-    PROMPT="%{${bg[black]} ${fg[white]}%}%~%{${reset_color}%} ${vcs_info_msg_0_} $(kube_ps1) %*
+    PROMPT="%{${bg[black]} ${fg[yellow]}%}%~%{${reset_color}%} ${vcs_info_msg_0_} $(kube_ps1) %*
 %# "
 }
 add-zsh-hook precmd _update_vcs_info_msg
@@ -150,7 +150,7 @@ alias fig='docker compose'
 
 alias k="kubectl"
 
-alias ghl='cd $(ghq root)/$(ghq list | peco)'
+alias ghl='cd $(ghq root)/$(ghq list | fzf --height 40% --layout=reverse --border --preview "echo {} | sed \"s|.*/||g\"")'
 
 alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
 
@@ -165,7 +165,8 @@ alias di='git diff'
 alias br='git rev-parse --abbrev-ref HEAD | pbcopy'
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
-alias com="git checkout master; git fetch; git merge origin/master"
+alias com="git checkout main; git fetch; git merge origin/main"
+alias comaster="git checkout master; git fetch; git merge origin/master"
 alias codev="git checkout develop; git fetch; git merge origin/develop"
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias lf='git log --stat -p --follow'
@@ -190,7 +191,14 @@ alias tkillserver='tmux kill-server'
 
 # checkout branch
 function co(){
-  branch_name=$(git branch --sort=-committerdate | peco | cut -d ' ' -f 3)
+  branch_name=$(git branch --sort=-committerdate | fzf \
+    --height 50% \
+    --layout=reverse \
+    --border \
+    --preview 'git log --oneline --color=always -10 $(echo {} | sed "s/^[* ] //")' \
+    --preview-window=right:50% \
+    | sed 's/^[* ] //')
+
   if [ -n "$branch_name" ]; then
     git checkout $branch_name
   else
@@ -212,7 +220,7 @@ function fixupstashautosquash() {
 
 # tmux ls
 function tls() {
-  session=$(tmux ls | peco | cut -d ':' -f 1)
+  session=$(tmux ls | fzf | cut -d ':' -f 1)
   tmux a -t $session
 }
 
@@ -267,7 +275,7 @@ function lo() {
 
 
 function his() {
-  command=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+  command=`history -n 1 | tac  | awk '!a[$0]++' | fzf`
   # eval $command
   echo $command | tr -d '\n' | pbcopy
   echo "COPY> ${command}"
@@ -303,3 +311,13 @@ eval $(/opt/homebrew/bin/brew shellenv)
 ########################################
 # anyenv
 eval "$(anyenv init -)"
+
+########################################
+# Docker
+export PATH="/Users/shshimamo/docker/bin:$PATH"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/shshimamo/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
