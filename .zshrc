@@ -20,6 +20,19 @@ compinit
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# 補完候補をメニューから選択する
+zstyle ':completion:*:default' menu select=2
+
+# 補完の詳細な説明を表示
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+
+# 補完候補をキャッシュする
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 # ../ の後は今いるディレクトリを補完しない
 zstyle ':completion:*' ignore-parents parent pwd ..
 
@@ -29,6 +42,9 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+# ディレクトリ補完で末尾にスラッシュを付ける
+setopt auto_param_slash
 
 # fzf history search (Ctrl+R)
 function fzf-history-widget() {
@@ -90,6 +106,25 @@ setopt hist_reduce_blanks
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
+
+# コマンドラインでの編集機能強化
+setopt correct                   # コマンドのスペルチェック
+setopt list_packed               # 補完候補を詰めて表示
+setopt noautoremoveslash         # パスの最後のスラッシュを削除しない
+
+# インストール: brew install zsh-syntax-highlighting
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# インストール: brew install zsh-autosuggestions (利用可能な場合のみ有効化)
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 ########################################
 # Color
@@ -153,6 +188,86 @@ function defs() {
 # 特定ファイルタイプ内を検索
 function rgjs() { rg --type js --color=always --line-number --no-heading "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
 function rgpy() { rg --type py --color=always --line-number --no-heading "$1" | fzf --ansi --preview 'bat --color=always $(echo {} | cut -d: -f1)' --bind 'enter:become(${EDITOR:-vim} $(echo {} | cut -d: -f1) +$(echo {} | cut -d: -f2))'; }
+
+# ディレクトリ履歴を記録する関数（高速版）
+function record_dir_change() {
+  local recent_dirs_file="$HOME/.zsh_recent_dirs"
+  local current_dir="$PWD"
+
+  # ディレクトリを追加
+  echo "$current_dir" >> "$recent_dirs_file"
+
+  # ファイルサイズを1000行に制限（超えた場合は500行まで削減）
+  if (( $(wc -l < "$recent_dirs_file" 2>/dev/null || echo 0) > 1000 )); then
+    tail -500 "$recent_dirs_file" > "${recent_dirs_file}.tmp" && mv "${recent_dirs_file}.tmp" "$recent_dirs_file"
+  fi
+}
+
+# プロジェクト管理
+function ghl() {
+  local project_dirs=("$HOME/projects" "$(ghq root)/github.com")
+  local selected_dir=""
+
+  for dir in "${project_dirs[@]}"; do
+    if [ -d "$dir" ]; then
+      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --layout=reverse --border --preview 'ls -la {} | head -10')
+      break
+    fi
+  done
+
+  if [ -n "$selected_dir" ]; then
+    cd "$selected_dir"
+    echo "📁 Moved to: $selected_dir"
+    # プロジェクト移動時に履歴を記録
+    record_dir_change
+  fi
+}
+
+# 最近使ったプロジェクトディレクトリへの移動
+function work() {
+  local recent_dirs_file="$HOME/.zsh_recent_dirs"
+
+  # 最近のディレクトリファイルが存在しない場合は作成
+  if [ ! -f "$recent_dirs_file" ]; then
+    touch "$recent_dirs_file"
+  fi
+
+  # 最近使ったディレクトリから選択（重複排除して表示）
+  if [ -s "$recent_dirs_file" ]; then
+    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --layout=reverse --border --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
+    if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
+      cd "$selected_dir"
+      echo "💼 Moved to recent directory: $selected_dir"
+      return
+    fi
+  fi
+
+  # ファイルが空の場合はghlを実行
+  echo "No recent directories found. Running ghl..."
+  ghl
+}
+
+# Git worktree管理
+function gwt() {
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    local worktree=$(git worktree list | fzf --header="Select worktree" | awk '{print $1}')
+    if [ -n "$worktree" ]; then
+      cd "$worktree"
+    fi
+  else
+    echo "Not in a git repository"
+  fi
+}
+
+# 環境変数のクイック確認
+function envs() {
+  env | fzf --preview 'echo {} | cut -d= -f2-'
+}
+
+# ポート使用状況確認
+function ports() {
+  lsof -i -P -n | grep LISTEN | fzf --header="Listening ports" --preview 'echo {}'
+}
 alias b='bundle'
 alias ls='ls -G'
 alias ll='ls -lahG'
@@ -164,7 +279,7 @@ alias fig='docker compose'
 alias k="kubectl"
 
 # ghq + fzf でリポジトリ選択
-alias ghl='cd $(ghq root)/$(ghq list | fzf --height 40% --layout=reverse --border --preview "echo {} | sed \"s|.*/||g\"")'
+# alias ghl='cd $(ghq root)/$(ghq list | fzf --height 40% --layout=reverse --border --preview "echo {} | sed \"s|.*/||g\"")'
 
 # プロセス検索・kill
 alias fkill='ps aux | fzf --header-lines=1 --preview "echo {}" | awk "{print \$2}" | xargs kill'
