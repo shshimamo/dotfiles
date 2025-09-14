@@ -14,7 +14,6 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.xvimrc ~/.xvimrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ideavimrc ~/.ideavimrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gemrc ~/.gemrc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.pryrc ~/.pryrc
-#ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ctags ~/.ctags
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.gitignore_global ~/.gitignore_global
 #ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.tabset ~/.tabset
 #ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/rails-log-tail-tmux.sh ~/rails-log-tail-tmux.sh
