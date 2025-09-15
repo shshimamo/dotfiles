@@ -325,9 +325,10 @@ function search() {
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
       --nth 3.. \
+      --header "Directory: $(pwd)" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
-      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
+      --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
 }
 
 # searchf: ファイル名検索(fd + fzf + bat)
@@ -335,8 +336,9 @@ function searchf() {
   fd --type f --hidden --exclude .git "${*:-}" |
   fzf --ansi \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --header "Directory: $(pwd)" \
       --preview 'bat --color=always {} --style=header,grid' \
-      --bind 'enter:become(${EDITOR:-vim} {})'
+      --bind 'enter:execute-silent(echo {} | pbcopy && echo "Copied: {}")'
 }
 
 # searcht: 言語別検索
@@ -355,9 +357,10 @@ function searcht() {
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
       --nth 3.. \
+      --header "Directory: $(pwd) | Type: $file_type" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
-      --bind 'enter:become(${EDITOR:-vim} {1} +{2})'
+      --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
 }
 
 ########################################
