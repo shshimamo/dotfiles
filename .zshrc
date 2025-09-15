@@ -163,13 +163,24 @@ alias k="kubectl"
 
 alias sshadd='eval `ssh-agent` && ssh-add -K ~/.ssh/id_rsa'
 
+### tmux alias
+# tmux new -s {Session Name}
+alias tn='tmux new -s'
+# tmux a -t {Session Name}
+alias ta='tmux a -t'
+# tmux rename -t {Old Session Name} {New Session Name}
+alias trename='tmux rename -t'
+# tmux kill-session -t {Session Name}
+alias tkill='tmux kill-session -t'
+alias tkillserver='tmux kill-server'
+
+########################################
 ### Git alias
 alias g='git'
 # -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
 # gl: git log (fzf) - 詳細なログ表示
-alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --color=always {1} | delta" --bind "enter:execute(git show {1} --color=always | delta | less -R)"'
-
+alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --stat -p --color=always {1} | delta" --bind "enter:execute(git show --stat -p {1} --color=always | delta | less -R)"'
 alias s='git status'
 alias di='git diff'
 # alias br='git branch -vv --sort=-committerdate'
@@ -184,18 +195,6 @@ alias lf='git log --stat -p --follow'
 alias see='gh browse'
 alias pr='gh pr view --web $(git rev-parse --abbrev-ref HEAD)'
 alias che='gh pr checkout'
-
-### tmux alias
-# tmux new -s {Session Name}
-alias tn='tmux new -s'
-# tmux a -t {Session Name}
-alias ta='tmux a -t'
-# tmux rename -t {Old Session Name} {New Session Name}
-alias trename='tmux rename -t'
-# tmux kill-session -t {Session Name}
-alias tkill='tmux kill-session -t'
-alias tkillserver='tmux kill-server'
-
 
 ########################################
 # Gitコマンド
@@ -243,7 +242,7 @@ function lo() {
   local base_branch=""
 
   if [ "$1" = "" ]; then
-    for branch in develop master main; do
+    for branch in develop main master; do
       if git show-ref --quiet refs/heads/$branch; then
           base_branch=$branch
           break
@@ -260,8 +259,8 @@ function lo() {
   echo "log $base_branch..head"
   git log $base_branch..head --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=relative --color=always | \
     fzf --ansi \
-        --preview "git show --color=always {1} | delta" \
-        --bind "enter:execute(git show {1} --color=always | delta | less -R)" \
+        --preview "git show --stat -p --color=always {1} | delta" \
+        --bind "enter:execute-silent(echo {1} | pbcopy)+abort" \
         --height 50%
 #         --header "Commits from $base_branch to HEAD (Enter: show details)"
 }
@@ -281,7 +280,7 @@ function repos() {
 
   for dir in "${project_dirs[@]}"; do
     if [ -d "$dir" ]; then
-      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
+      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --stat -p --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
       break
     fi
   done
@@ -499,4 +498,4 @@ compinit
 ########################################
 # fzf
 # fzf デフォルト設定 https://www.mankier.com/1/fzf#Options
-export FZF_DEFAULT_OPTS='--layout=reverse --border --bind ctrl-d:half-page-down,ctrl-u:half-page-up,down:preview-down,up:preview-up,shift-down:preview-half-page-down,shift-up:preview-half-page-up'
+export FZF_DEFAULT_OPTS='--layout=reverse --border -i --bind ctrl-d:half-page-down,ctrl-u:half-page-up,shift-down:preview-down,shift-up:preview-up'
