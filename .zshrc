@@ -303,15 +303,12 @@ function lo() {
 
 # repos: 全リポジトリから検索・移動
 function repos() {
-  local project_dirs=("$HOME/projects" "$(ghq root)/github.com")
+  # プロジェクトディレクトリのリスト（必要に応じて追加・変更）
+  # 例: local project_dirs=("$HOME/projects" "$(ghq root)/github.com")
+  local project_dirs=("$(ghq root)/github.com")
   local selected_dir=""
 
-  for dir in "${project_dirs[@]}"; do
-    if [ -d "$dir" ]; then
-      selected_dir=$(find "$dir" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --stat -p --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
-      break
-    fi
-  done
+  selected_dir=$(find "$project_dirs[@]" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --stat -p --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
 
   if [ -n "$selected_dir" ]; then
     cd "$selected_dir"
