@@ -13,9 +13,14 @@ HISTIGNORE=history:history
 
 ########################################
 # completion
-# 補完機能を有効にする
+# 補完機能を有効にする（最適化版）
 autoload -Uz compinit
-compinit
+# 1日1回だけcompinit -Cでスピードアップ
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -46,29 +51,40 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # ディレクトリ補完で末尾にスラッシュを付ける
 setopt auto_param_slash
 
-# fzf history search (Ctrl+R)
-function fzf-history-widget() {
-  local selected num
-  selected=( $(fc -rl 1 | awk '!a[$2]++' | fzf --height 50% --query="$LBUFFER" --expect=ctrl-x) )
-  local ret=$?
-  if [ -n "$selected" ]; then
-    if [ "$selected[1]" = ctrl-x ]; then
-      # Ctrl+X pressed - execute immediately
-      num=${selected[2]%% *}
-      if [ -n "$num" ]; then
-        zle vi-fetch-history -n $num
-        zle accept-line
+# fzf history search (Ctrl+R) - 遅延読み込み用ラッパー
+fzf-history-widget() {
+  # 実際の関数を初回呼び出し時に定義
+  if ! typeset -f _fzf-history-widget-impl >/dev/null; then
+    _fzf-history-widget-impl() {
+      local selected num
+      selected=( $(fc -rl 1 | awk '!a[$2]++' | fzf --height 50% --query="$LBUFFER" --expect=ctrl-x) )
+      local ret=$?
+      if [ -n "$selected" ]; then
+        if [ "$selected[1]" = ctrl-x ]; then
+          # Ctrl+X pressed - execute immediately
+          num=${selected[2]%% *}
+          if [ -n "$num" ]; then
+            zle vi-fetch-history -n $num
+            zle accept-line
+          fi
+        else
+          # Enter pressed - put in command line
+          num=${selected[1]%% *}
+          if [ -n "$num" ]; then
+            zle vi-fetch-history -n $num
+          fi
+        fi
       fi
-    else
-      # Enter pressed - put in command line
-      num=${selected[1]%% *}
-      if [ -n "$num" ]; then
-        zle vi-fetch-history -n $num
-      fi
-    fi
+      zle reset-prompt
+      return $ret
+    }
+    zle -N _fzf-history-widget-impl
+    # 以降は実装を直接呼び出す
+    zle -D fzf-history-widget
+    zle -N fzf-history-widget _fzf-history-widget-impl
+    bindkey '^R' fzf-history-widget
   fi
-  zle reset-prompt
-  return $ret
+  zle _fzf-history-widget-impl
 }
 zle -N fzf-history-widget
 bindkey '^R' fzf-history-widget
@@ -116,19 +132,31 @@ setopt correct                   # コマンドのスペルチェック
 setopt list_packed               # 補完候補を詰めて表示
 setopt noautoremoveslash         # パスの最後のスラッシュを削除しない
 
-# インストール: brew install zsh-syntax-highlighting
-if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+# zsh plugins遅延読み込み（起動速度改善）
+# プラグインを遅延読み込みする関数
+load_zsh_plugins() {
+  # インストール: brew install zsh-syntax-highlighting
+  if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  elif [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  fi
 
-# インストール: brew install zsh-autosuggestions (利用可能な場合のみ有効化)
-if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+  # インストール: brew install zsh-autosuggestions (利用可能な場合のみ有効化)
+  if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  elif [ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  fi
+}
+
+# 最初のコマンド入力時にプラグインを読み込む
+zle-line-init() {
+  load_zsh_plugins
+  unfunction load_zsh_plugins zle-line-init
+  zle -D zle-line-init
+}
+zle -N zle-line-init
 
 ########################################
 # Color
@@ -466,19 +494,20 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export GEMSRC_USE_GHQ=true
 
 ########################################
-# zsh local settings
+# zsh local settings（最適化版）
 ZSH_DIR="${HOME}/.zsh_local"
-if [ -d $ZSH_DIR ] && [ -r $ZSH_DIR ] && [ -x $ZSH_DIR ]; then
-    for file in ${ZSH_DIR}/**/*.zsh; do
-        [ -r $file ] && source $file
+if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
+    # globをより効率的に
+    for file in "$ZSH_DIR"/**/*.zsh(N); do
+        [ -r "$file" ] && source "$file"
     done
 fi
 
 ########################################
-# kubectl & eksctl completion
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-fpath=($fpath ~/.zsh/completion)
-autoload -Uz compinit && compinit -i
+# kubectl & eksctl completion（条件付き）
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion zsh)
+fi
 
 ########################################
 # brew
@@ -492,11 +521,10 @@ eval "$(anyenv init -)"
 # Docker
 export PATH="/Users/shshimamo/docker/bin:$PATH"
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/shshimamo/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# Docker CLI completions（条件付き）
+if command -v docker >/dev/null 2>&1; then
+  fpath=(/Users/shshimamo/.docker/completions $fpath)
+fi
 
 ########################################
 # fzf

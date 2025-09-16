@@ -1,6 +1,6 @@
 " 基本設定
 set nu                          " 行番号表示
-set relativenumber              " 相対行番号表示（現代的）
+" set relativenumber              " 相対行番号表示（現代的）
 set vb t_vb=                    " ビープ音をなくす
 set ignorecase                  " 大文字小文字を区別しない
 set smartcase                   " 大文字が含まれる場合は区別する
