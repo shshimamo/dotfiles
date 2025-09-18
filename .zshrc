@@ -112,8 +112,9 @@ setopt auto_pushd
 # 重複したディレクトリを追加しない
 setopt pushd_ignore_dups
 
-# 同時に起動したzshの間でヒストリを共有する
-setopt share_history
+# ヒストリー共有設定
+setopt share_history          # 同時に起動したzshの間でヒストリを共有する
+setopt inc_append_history     # コマンド実行時に即座にヒストリーに追加（リアルタイム共有）
 
 # 同じコマンドをヒストリに残さない
 setopt hist_ignore_all_dups
