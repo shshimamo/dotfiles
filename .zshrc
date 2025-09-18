@@ -321,6 +321,9 @@ function repos() {
     local project_name=$(basename "$selected_dir")
     printf "\e]1;%s\a" "$project_name"  # タブタイトル
     printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
+
+    # タブ色をランダムに設定
+    set_random_tab_color
   fi
 }
 alias ghl='repos'
@@ -345,6 +348,9 @@ function proj() {
       local project_name=$(basename "$selected_dir")
       printf "\e]1;%s\a" "$project_name"  # タブタイトル
       printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
+
+      # タブ色をランダムに設定
+      set_random_tab_color
 
       return
     fi
@@ -444,6 +450,32 @@ function set_tab_title() {
   printf "\e]2;%s\a" "$title"  # ウィンドウタイトル
 }
 alias tabname='set_tab_title'
+
+# iTerm2タブ色をランダムに設定する関数
+function set_random_tab_color() {
+  # カラフルで見やすい色のセット（RGB値）
+  local colors=(
+    "255,100,100"    # 明るい赤
+    "100,200,255"    # 明るい青
+    "100,255,100"    # 明るい緑
+    "255,200,100"    # オレンジ
+    "200,100,255"    # 紫
+    "255,255,100"    # 黄色
+    "100,255,200"    # シアン
+    "255,150,200"    # ピンク
+    "150,255,150"    # ライムグリーン
+    "200,200,255"    # ライトブルー
+  )
+
+  # ランダムに色を選択
+  local random_index=$((RANDOM % ${#colors[@]}))
+  local selected_color=${colors[$random_index]}
+
+  # iTerm2にタブ色を設定
+  printf "\e]6;1;bg;red;brightness;%s\a" "${selected_color%%,*}"
+  printf "\e]6;1;bg;green;brightness;%s\a" "${selected_color#*,}"; selected_color="${selected_color#*,}"
+  printf "\e]6;1;bg;blue;brightness;%s\a" "${selected_color#*,}"
+}
 
 # gwt: Git worktree管理
 function gwt() {
