@@ -313,8 +313,14 @@ function repos() {
   if [ -n "$selected_dir" ]; then
     cd "$selected_dir"
     echo "📁 Moved to: $selected_dir"
+
     # プロジェクト移動時に履歴を記録
     record_dir_change
+
+    # iTerm2のタブ名を変更（プロジェクト名を設定）
+    local project_name=$(basename "$selected_dir")
+    printf "\e]1;%s\a" "$project_name"  # タブタイトル
+    printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
   fi
 }
 alias ghl='repos'
@@ -334,6 +340,12 @@ function proj() {
     if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
       cd "$selected_dir"
       echo "💼 Moved to recent directory: $selected_dir"
+
+      # iTerm2のタブ名を変更（プロジェクト名を設定）
+      local project_name=$(basename "$selected_dir")
+      printf "\e]1;%s\a" "$project_name"  # タブタイトル
+      printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
+
       return
     fi
   fi
@@ -424,6 +436,14 @@ function record_dir_change() {
     tail -500 "$recent_dirs_file" > "${recent_dirs_file}.tmp" && mv "${recent_dirs_file}.tmp" "$recent_dirs_file"
   fi
 }
+
+# iTerm2タブ名を変更する関数
+function set_tab_title() {
+  local title="${1:-$(basename "$PWD")}"
+  printf "\e]1;%s\a" "$title"  # タブタイトル
+  printf "\e]2;%s\a" "$title"  # ウィンドウタイトル
+}
+alias tabname='set_tab_title'
 
 # gwt: Git worktree管理
 function gwt() {
