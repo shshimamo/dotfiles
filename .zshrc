@@ -225,6 +225,27 @@ alias see='gh browse'
 alias pr='gh pr view --web $(git rev-parse --abbrev-ref HEAD)'
 alias che='gh pr checkout'
 
+# git status + fzf + diff preview (シンプル版)
+function gs() {
+  git status --porcelain | \
+  fzf --ansi \
+      --height 50% \
+      --preview-window 'right:50%' \
+      --header "Git Status with diff preview - Enter: copy filename and exit" \
+      --preview '
+        file=$(echo {} | cut -c4-)
+        git_status=$(echo {} | cut -c1-2)
+
+        if [[ "$git_status" == "??" ]]; then
+          echo "=== New file content ==="
+          bat --color=always --style=header,grid "$file" 2>/dev/null || cat "$file"
+        else
+          git diff --color=always "$file" 2>/dev/null || echo "No diff available"
+        fi
+      ' \
+      --bind 'enter:execute-silent(echo {} | cut -c4- | pbcopy && echo "Copied: $(echo {} | cut -c4-)")+abort'
+}
+
 ########################################
 # Gitコマンド
 
