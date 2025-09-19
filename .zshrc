@@ -212,8 +212,15 @@ alias gg='git grep -B 0 -C 0 -A 3'
 alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --stat -p --color=always {1} | delta" --bind "enter:execute(git show --stat -p {1} --color=always | delta | less -R)"'
 alias s='git status'
 alias di='git diff'
-# alias br='git branch -vv --sort=-committerdate'
-alias br='git rev-parse --abbrev-ref HEAD | pbcopy'
+# git branch + fzf + copy branch name
+function br() {
+  git branch --sort=-committerdate | \
+  fzf --ansi \
+      --height 50% \
+      --header "Git Branches - Enter: copy branch name and exit" \
+      --preview 'branch=$(echo {} | sed "s/^[* ] //"); git log --oneline -10 --color=always "$branch"' \
+      --bind 'enter:execute-silent(echo {} | sed "s/^[* ] //" | pbcopy && echo "Copied: $(echo {} | sed "s/^[* ] //")")+abort'
+}
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
 alias com="git checkout main; git fetch; git merge origin/main"
