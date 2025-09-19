@@ -322,6 +322,25 @@ function lo() {
 #         --header "Commits from $base_branch to HEAD (Enter: show details)"
 }
 
+function lsmergepr() {
+  # 引数チェック
+  if [ $# -ne 2 ]; then
+    echo "Usage: lsmergepr <base_branch> <compare_branch>"
+    echo "Example: lsmergepr main feature-branch"
+    return 1
+  fi
+
+  local base_branch="$1"
+  local compare_branch="$2"
+
+  echo "Merge PRs between $base_branch..$compare_branch:"
+  echo "================================================"
+
+  for pr in $(git log "$base_branch..$compare_branch" --oneline | grep 'Merge pull request' | grep -oE '#[0-9]+' | tr -d '#' | sort -u); do
+    echo "#$pr: $(gh pr view $pr --json title,author -q '[.title, .author.login] | join(" by ")')"
+  done
+}
+
 ########################################
 # 検索コマンド体系:
 #  - repos / ghl - 全リポジトリから検索・移動
