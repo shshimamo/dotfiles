@@ -12,6 +12,7 @@ vendor/cache/*
 .solargraph.yml
 
 .go-version
+.python-version
 
 # claude
 .claude/
