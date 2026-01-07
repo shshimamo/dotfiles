@@ -129,7 +129,7 @@ setopt hist_reduce_blanks
 setopt extended_glob
 
 # コマンドラインでの編集機能強化
-setopt correct                   # コマンドのスペルチェック
+# setopt correct                   # コマンドのスペルチェック
 setopt list_packed               # 補完候補を詰めて表示
 setopt noautoremoveslash         # パスの最後のスラッシュを削除しない
 
