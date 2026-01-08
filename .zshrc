@@ -499,7 +499,7 @@ function set_tab_title() {
 }
 alias tabname='set_tab_title'
 
-# iTerm2タブ色をランダムに設定する関数
+# iTerm2タブ色をディレクトリに基づいて設定する関数
 function set_random_tab_color() {
   # カラフルで見やすい色のセット（RGB値）
   local colors=(
@@ -515,9 +515,11 @@ function set_random_tab_color() {
     "200,200,255"    # ライトブルー
   )
 
-  # ランダムに色を選択
-  local random_index=$((RANDOM % ${#colors[@]}))
-  local selected_color=${colors[$random_index]}
+  # ディレクトリパスからハッシュ値を生成し、色のインデックスを決定
+  local hash=$(echo -n "$PWD" | md5)
+  local hash_num=$((0x${hash:0:8}))
+  local color_index=$((hash_num % ${#colors[@]}))
+  local selected_color=${colors[$color_index]}
 
   # iTerm2にタブ色を設定
   printf "\e]6;1;bg;red;brightness;%s\a" "${selected_color%%,*}"
