@@ -16,7 +16,7 @@ $character"""
 symbol = '* '
 
 [aws]
-symbol = '🅰 '
+# symbol = '🅰 '
 disabled = false
 format = 'on [$symbol$profile]($style) '
 style = 'bold blue'
@@ -34,7 +34,7 @@ contexts = [
   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
 ]
 
-[golang]
-symbol = '🅶 '
-format = 'via [$symbol($version )($mod_version )]($style)'
+# [golang]
+# symbol = '🅶 '
+# format = 'via [$symbol($version )($mod_version )]($style)'
 
