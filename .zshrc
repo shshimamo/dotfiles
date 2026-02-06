@@ -443,7 +443,7 @@ function proj() {
 
   # 最近使ったディレクトリから選択（重複排除して表示）
   if [ -s "$recent_dirs_file" ]; then
-    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 40% --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
+    local selected_dir=$(tac "$recent_dirs_file" | awk '!seen[$0]++' | head -20 | fzf --height 50% --header="Recent project directories" --preview 'ls -la {} 2>/dev/null | head -10')
     if [ -n "$selected_dir" ] && [ -d "$selected_dir" ]; then
       cd "$selected_dir"
       echo "💼 Moved to recent directory: $selected_dir"
@@ -477,7 +477,7 @@ function search() {
       --delimiter : \
       --header "Directory: $(pwd)" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
-      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
+      --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
       --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
 }
 
@@ -508,7 +508,7 @@ function searcht() {
       --delimiter : \
       --header "Directory: $(pwd) | Type: $file_type" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
-      --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
+      --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
       --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
 }
 
@@ -647,7 +647,7 @@ alias cdh='cd_history'
 # AWS プロファイル切り替え
 function aws_profile() {
   local profile
-  profile=$(cat ~/.aws/config | grep '\[profile' | sed 's/\[profile //g' | sed 's/\]//g' | fzf --height 40%)
+  profile=$(cat ~/.aws/config | grep '\[profile' | sed 's/\[profile //g' | sed 's/\]//g' | fzf --height 50%)
   if [ -n "$profile" ]; then
     export AWS_PROFILE=$profile
     echo "AWS_PROFILE set to: $profile"
@@ -658,7 +658,7 @@ alias ap='aws_profile'
 # kubectl context切り替え
 function kube_context() {
   local context
-  context=$(kubectl config get-contexts -o name | fzf --height 40%)
+  context=$(kubectl config get-contexts -o name | fzf --height 50%)
   if [ -n "$context" ]; then
     kubectl config use-context $context
   fi
