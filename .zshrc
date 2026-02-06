@@ -259,10 +259,10 @@ function gs() {
 # checkout branch
 function co(){
   branch_name=$(git branch --sort=-committerdate | fzf \
-    --height 50% \
+    --height 60% \
     --preview 'branch=$(echo {} | sed "s/^[* ] //");
                base_branch="";
-               for b in main master; do
+               for b in develop main master; do
                  if git show-ref --quiet refs/heads/$b; then
                    base_branch=$b;
                    break;
@@ -295,7 +295,38 @@ function fixupstashautosquash() {
   git rebase -i --autosquash $@~
 }
 
+function resethard() {
+  # 現在のブランチ名を取得
+  branch_name=$(git rev-parse --abbrev-ref HEAD)
+  # リモートの最新状態を取得
+  git fetch origin
+  # 現在のブランチをリモートの最新状態に更新
+  git reset --hard origin/$branch_name
+}
+
 function lo() {
+  local base_branch=""
+
+  if [ "$1" = "" ]; then
+    for branch in develop main master; do
+      if git show-ref --quiet refs/heads/$branch; then
+          base_branch=$branch
+          break
+      fi
+    done
+  elif [[ "$1" =~ ^[0-9]+$ ]]; then
+    base_branch=head~$1
+  elif [ "$1" = "up" ]; then
+    base_branch=$(git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null)
+  else
+    base_branch=$1
+  fi
+
+  echo "log $base_branch..head"
+  git log $base_branch..head --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=relative --color=always --reverse
+}
+
+function lo_() {
   local base_branch=""
 
   if [ "$1" = "" ]; then
@@ -318,8 +349,30 @@ function lo() {
     fzf --ansi \
         --preview "git show --stat -p --color=always {1} | delta" \
         --bind "enter:execute-silent(echo {1} | pbcopy)+abort" \
-        --height 50%
+        --height 60%
 #         --header "Commits from $base_branch to HEAD (Enter: show details)"
+}
+
+function l() {
+  local base_branch=""
+
+  if [ "$1" = "" ]; then
+    for branch in develop main master; do
+      if git show-ref --quiet refs/heads/$branch; then
+          base_branch=$branch
+          break
+      fi
+    done
+  elif [[ "$1" =~ ^[0-9]+$ ]]; then
+    base_branch=head~$1
+  elif [ "$1" = "up" ]; then
+    base_branch=$(git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null)
+  else
+    base_branch=$1
+  fi
+
+  echo "log $base_branch..head"
+  git log $base_branch..head --stat --submodule -p --no-merge
 }
 
 function lsmergepr() {
@@ -356,7 +409,7 @@ function repos() {
   local project_dirs=("$(ghq root)/github.com")
   local selected_dir=""
 
-  selected_dir=$(find "$project_dirs[@]" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 40% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --stat -p --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
+  selected_dir=$(find "$project_dirs[@]" -maxdepth 4 -type d -name ".git" | sed 's|/.git||' | fzf --height 50% --preview 'cd {} && echo "=== Recent Commits ===" && git log --oneline -5 --color=always 2>/dev/null && echo -e "\n=== Recent Changes ===" && git show --stat -p --color=always HEAD 2>/dev/null | head -20 || ls -la {} | head -10')
 
   if [ -n "$selected_dir" ]; then
     cd "$selected_dir"
@@ -370,8 +423,11 @@ function repos() {
     printf "\e]1;%s\a" "$project_name"  # タブタイトル
     printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
 
-    # タブ色をランダムに設定
-    set_random_tab_color
+    # まず固定色の設定を試みる
+    if ! set_fixed_tab_color_by_name "$project_name"; then
+      # 失敗した場合ランダム色を設定
+      set_random_tab_color
+    fi
   fi
 }
 alias ghl='repos'
@@ -397,8 +453,11 @@ function proj() {
       printf "\e]1;%s\a" "$project_name"  # タブタイトル
       printf "\e]2;%s\a" "$project_name"  # ウィンドウタイトル
 
-      # タブ色をランダムに設定
-      set_random_tab_color
+      # まず固定色の設定を試みる
+      if ! set_fixed_tab_color_by_name "$project_name"; then
+        # 失敗した場合ランダム色を設定
+        set_random_tab_color
+      fi
 
       return
     fi
@@ -410,12 +469,12 @@ function proj() {
 }
 
 # search - コード内容検索(rg + fzf + bat)
+# --nth 3.. # ファイル名検索除外するときnthオプション追加
 function search() {
   rg "${*:-}" |
   fzf --ansi \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
-      --nth 3.. \
       --header "Directory: $(pwd)" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
@@ -447,7 +506,6 @@ function searcht() {
   fzf --ansi \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --delimiter : \
-      --nth 3.. \
       --header "Directory: $(pwd) | Type: $file_type" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,40%,border-bottom,+{2}+3/3,~3' \
@@ -498,6 +556,36 @@ function set_tab_title() {
   printf "\e]2;%s\a" "$title"  # ウィンドウタイトル
 }
 alias tabname='set_tab_title'
+
+# 補助関数: RGB値を引数にしてタブ色を設定する
+function _set_iterm_tab_color() {
+  local r=$1 g=$2 b=$3
+  printf "\e]6;1;bg;red;brightness;%s\a" "$r"
+  printf "\e]6;1;bg;green;brightness;%s\a" "$g"
+  printf "\e]6;1;bg;blue;brightness;%s\a" "$b"
+}
+
+# プロジェクト名に応じて固定色を設定する関数
+# 色を設定したら true(0)、しなかったら false(1) を返す
+function set_fixed_tab_color_by_name() {
+  local project_name="$1"
+
+  case "$project_name" in
+    "dotfiles")
+      _set_iterm_tab_color 160 100 255 # 紫
+      return 0
+      ;;
+    # 必要に応じてここに追加してください
+    # "another-project")
+    #   _set_iterm_tab_color 100 255 100 # 緑
+    #   return 0
+    #   ;;
+    *)
+      # 一致するものがなければ false(1) を返す
+      return 1
+      ;;
+  esac
+}
 
 # iTerm2タブ色をディレクトリに基づいて設定する関数
 function set_random_tab_color() {
@@ -552,7 +640,7 @@ function ports() {
 # ディレクトリ履歴をfzfで選択
 function cd_history() {
   local dir
-  dir=$(dirs -p | fzf --height 40% --preview 'ls -la {}') && cd "$dir"
+  dir=$(dirs -p | fzf --height 50% --preview 'ls -la {}') && cd "$dir"
 }
 alias cdh='cd_history'
 
