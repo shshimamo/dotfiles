@@ -107,6 +107,6 @@
   commit-style = raw
   file-style = omit
   hunk-header-decoration-style = cyan box
-  hunk-header-file-style = red
+  hunk-header-file-style = yellow
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
