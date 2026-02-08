@@ -565,26 +565,30 @@ function _set_iterm_tab_color() {
   printf "\e]6;1;bg;blue;brightness;%s\a" "$b"
 }
 
+# プロジェクト名→タブ色の連想配列（.zsh_local/tab_colors.zsh で設定）
+# 設定例:
+#   TAB_COLOR_MAP[dotfiles]="160,100,255"    # 紫
+#   TAB_COLOR_MAP[my-api]="100,200,255"      # 青
+#   TAB_COLOR_MAP[my-frontend]="255,200,100" # オレンジ
+#   TAB_COLOR_MAP[my-infra]="100,255,100"    # 緑
+typeset -gA TAB_COLOR_MAP
+
 # プロジェクト名に応じて固定色を設定する関数
 # 色を設定したら true(0)、しなかったら false(1) を返す
 function set_fixed_tab_color_by_name() {
   local project_name="$1"
+  local color="${TAB_COLOR_MAP[$project_name]}"
 
-  case "$project_name" in
-    "dotfiles")
-      _set_iterm_tab_color 160 100 255 # 紫
-      return 0
-      ;;
-    # 必要に応じてここに追加してください
-    # "another-project")
-    #   _set_iterm_tab_color 100 255 100 # 緑
-    #   return 0
-    #   ;;
-    *)
-      # 一致するものがなければ false(1) を返す
-      return 1
-      ;;
-  esac
+  if [[ -n "$color" ]]; then
+    local r="${color%%,*}"
+    local rest="${color#*,}"
+    local g="${rest%%,*}"
+    local b="${rest#*,}"
+    _set_iterm_tab_color "$r" "$g" "$b"
+    return 0
+  fi
+
+  return 1
 }
 
 # iTerm2タブ色をディレクトリに基づいて設定する関数
