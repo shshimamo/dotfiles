@@ -1,5 +1,8 @@
 export LANG=ja_JP.UTF-8
 
+# PROMPT_EOL_MARK を無効にする（行末の%マーク非表示）
+PROMPT_EOL_MARK=""
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
