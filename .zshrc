@@ -256,12 +256,12 @@ function gs() {
       --bind 'enter:execute-silent(echo {} | cut -c4- | pbcopy && echo "Copied: $(echo {} | cut -c4-)")+abort'
 }
 
-# gdf: git diff (fzf interactive)
-# 使い方: gdf                  -> git diff (作業ツリーの変更)
-#         gdf abc..def         -> レンジを直接指定
-#         gdf abc...def        -> 3点レンジを直接指定
-#         gdf abc def          -> FROM TOを直接指定
-function gdf() {
+# gd: git diff (fzf interactive)
+# 使い方: gd                  -> git diff (作業ツリーの変更)
+#         gd abc..def         -> レンジを直接指定
+#         gd abc...def        -> 3点レンジを直接指定
+#         gd abc def          -> FROM TOを直接指定
+function gd() {
   local range diff_cmd
 
   if [ $# -eq 0 ]; then
@@ -279,7 +279,7 @@ function gdf() {
   elif [ $# -eq 2 ]; then
     range="$1..$2"
   else
-    echo "Usage: gdf [range]|[from to]"
+    echo "Usage: gd [range]|[from to]"
     return 1
   fi
 
