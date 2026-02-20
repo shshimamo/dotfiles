@@ -256,38 +256,28 @@ function gs() {
       --bind 'enter:execute-silent(echo {} | cut -c4- | pbcopy && echo "Copied: $(echo {} | cut -c4-)")+abort'
 }
 
-# gdf: git diff between two commits (fzf interactive)
-# 使い方: gdf                  -> fzfでFROM/TOを選択
+# gdf: git diff (fzf interactive)
+# 使い方: gdf                  -> git diff (作業ツリーの変更)
 #         gdf abc..def         -> レンジを直接指定
 #         gdf abc...def        -> 3点レンジを直接指定
 #         gdf abc def          -> FROM TOを直接指定
 function gdf() {
-  local range log_line
+  local range diff_cmd
 
-  if [ $# -eq 1 ]; then
+  if [ $# -eq 0 ]; then
+    diff_cmd="git diff"
+    git diff --name-only | \
+    fzf --ansi \
+        --height 80% \
+        --header "git diff  (Enter: 詳細 / Ctrl+C: 終了)" \
+        --preview "git diff --color=always -- {} | delta" \
+        --preview-window 'right:70%' \
+        --bind "enter:execute(git diff --color=always -- {} | delta | less -R)"
+    return
+  elif [ $# -eq 1 ]; then
     range="$1"
   elif [ $# -eq 2 ]; then
     range="$1..$2"
-  elif [ $# -eq 0 ]; then
-    local from_commit to_commit
-    log_line=$(git log \
-        --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" \
-        --date=format:"%m/%d %H:%M" --color=always | \
-      fzf --ansi --height 60% \
-          --header "FROM commit を選択 (Ctrl+C でキャンセル)" \
-          --preview "git show --stat -p --color=always {1} | delta" \
-          --preview-window 'right:60%') || return
-    from_commit=$(echo "$log_line" | awk '{print $1}')
-
-    log_line=$(git log \
-        --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" \
-        --date=format:"%m/%d %H:%M" --color=always | \
-      fzf --ansi --height 60% \
-          --header "TO commit を選択 (FROM: $from_commit)" \
-          --preview "git show --stat -p --color=always {1} | delta" \
-          --preview-window 'right:60%') || return
-    to_commit=$(echo "$log_line" | awk '{print $1}')
-    range="$from_commit..$to_commit"
   else
     echo "Usage: gdf [range]|[from to]"
     return 1
