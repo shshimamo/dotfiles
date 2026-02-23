@@ -19,3 +19,4 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/settings.json ~/Librar
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/starship.toml ~/.config/starship.toml
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ripgreprc ~/.ripgreprc
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/settings.json ~/.claude/settings.json
