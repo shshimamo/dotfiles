@@ -20,3 +20,4 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/vscode/keybindings.json ~/Lib
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/starship.toml ~/.config/starship.toml
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ripgreprc ~/.ripgreprc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/settings.json ~/.claude/settings.json
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md

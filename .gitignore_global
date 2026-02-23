@@ -14,9 +14,5 @@ vendor/cache/*
 .go-version
 .python-version
 
-# claude
-.claude/
-CLAUDE.md
-
 # claude用参考資料など
 .reference-for-claude
