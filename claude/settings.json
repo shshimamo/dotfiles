@@ -1,5 +1,27 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "language": "japanese",
+  "autoUpdatesChannel": "stable",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
+  },
+  "permissions": {
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(bash -c:*)",
+      "Bash(echo:*)",
+      "Bash(cd:*)",
+      "Bash(git -C:*)",
+      "Bash(git --git-dir:*)",
+      "Bash(git --work-tree:*)",
+      "Bash(git add .:*)",
+      "Bash(git add -A:*)",
+      "Bash(git add --all:*)",
+      "Bash(git checkout:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./.envrc)",
+      "Read(./secrets/**)"
+    ]
   }
 }
