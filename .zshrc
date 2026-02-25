@@ -262,17 +262,16 @@ function gs() {
 #         gd abc...def        -> 3点レンジを直接指定
 #         gd abc def          -> FROM TOを直接指定
 function gd() {
-  local range diff_cmd
+  local range
 
   if [ $# -eq 0 ]; then
-    diff_cmd="git diff"
-    git diff --name-only | \
+    git status --short | awk '{print $NF}' | \
     fzf --ansi \
         --height 80% \
         --header "git diff  (Enter: 詳細 / Ctrl+C: 終了)" \
-        --preview "git diff --color=always -- {} | delta" \
+        --preview 'st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {}; else git diff --color=always -- {} | delta; fi' \
         --preview-window 'right:70%' \
-        --bind "enter:execute(git diff --color=always -- {} | delta | less -R)"
+        --bind 'enter:execute(st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {} | less; else git diff --color=always -- {} | delta | less -R; fi)'
     return
   elif [ $# -eq 1 ]; then
     range="$1"
