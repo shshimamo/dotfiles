@@ -258,6 +258,8 @@ function gs() {
 
 # gd: git diff (fzf interactive)
 # 使い方: gd                  -> git diff (作業ツリーの変更)
+#         gd ..               -> fzfでFROM/TOコミットを選択して .. 比較
+#         gd ...              -> fzfでFROM/TOコミットを選択して ... 比較
 #         gd abc..def         -> レンジを直接指定
 #         gd abc...def        -> 3点レンジを直接指定
 #         gd abc def          -> FROM TOを直接指定
@@ -273,12 +275,32 @@ function gd() {
         --preview-window 'right:70%' \
         --bind 'enter:execute(st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {} | less; else git diff --color=always -- {} | delta | less -R; fi)'
     return
+  elif [ "$1" = ".." ] || [ "$1" = "..." ]; then
+    local sep="$1"
+    local from to
+    from=$(git log --oneline --color=always | \
+      fzf --ansi \
+          --height 80% \
+          --header "FROM コミットを選択 (Ctrl+C: 終了)" \
+          --preview 'git show --color=always {1} | delta' \
+          --preview-window 'right:70%' | \
+      awk '{print $1}')
+    [ -z "$from" ] && return 1
+    to=$(git log --oneline --color=always | \
+      fzf --ansi \
+          --height 80% \
+          --header "TO コミットを選択  FROM: $from  (Ctrl+C: 終了)" \
+          --preview 'git show --color=always {1} | delta' \
+          --preview-window 'right:70%' | \
+      awk '{print $1}')
+    [ -z "$to" ] && return 1
+    range="${from}${sep}${to}"
   elif [ $# -eq 1 ]; then
     range="$1"
   elif [ $# -eq 2 ]; then
     range="$1..$2"
   else
-    echo "Usage: gd [range]|[from to]"
+    echo "Usage: gd [..|...] | [range] | [from to]"
     return 1
   fi
 
