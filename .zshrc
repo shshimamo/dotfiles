@@ -782,8 +782,8 @@ fi
 eval $(/opt/homebrew/bin/brew shellenv)
 
 ########################################
-# anyenv
-eval "$(anyenv init -)"
+# mise
+eval "$(mise activate zsh)"
 
 ########################################
 # Docker
