@@ -330,6 +330,35 @@ function gd() {
       --bind "enter:execute(git diff --color=always $range -- {} | delta | less -R)"
 }
 
+# gshow: git show (fzf interactive)
+# 使い方: gshow          -> fzfでコミットを選択してファイル一覧へ
+#         gshow <commit> -> 指定コミットのファイル一覧へ
+function gshow() {
+  local commit
+
+  if [ $# -eq 0 ]; then
+    commit=$(git log --oneline --color=always | \
+      fzf --ansi \
+          --height 80% \
+          --header "コミットを選択 (Enter: ファイル一覧へ / Ctrl+C: 終了)" \
+          --preview 'git show --stat -p --color=always {1} | delta' \
+          --preview-window 'right:70%' | \
+      awk '{print $1}')
+    [ -z "$commit" ] && return 1
+  else
+    commit="$1"
+  fi
+
+  echo "git show $commit"
+  git diff-tree --no-commit-id -r --name-only "$commit" | \
+  fzf --ansi \
+      --height 80% \
+      --header "show: $commit  (Enter: 詳細 / Ctrl+C: 終了)" \
+      --preview "git show --color=always $commit -- {} | delta" \
+      --preview-window 'right:70%' \
+      --bind "enter:execute(git show --color=always $commit -- {} | delta | less -R)"
+}
+
 ########################################
 # Gitコマンド
 
@@ -798,3 +827,7 @@ fi
 # fzf
 # fzf デフォルト設定 https://www.mankier.com/1/fzf#Options
 export FZF_DEFAULT_OPTS='--layout=reverse --border -i --bind ctrl-d:half-page-down,ctrl-u:half-page-up,shift-down:preview-down,shift-up:preview-up'
+
+########################################
+# claude
+export PATH="/Users/shshimamo/.local/bin:$PATH"
