@@ -1,16 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "language": "japanese",
-  "autoUpdatesChannel": "stable",
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
-  },
   "permissions": {
     "deny": [
       "Bash(sudo:*)",
       "Bash(bash -c:*)",
       "Bash(echo:*)",
       "Bash(cd:*)",
+      "Bash(rm -rf *)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rm -rf /*)",
       "Bash(git -C:*)",
       "Bash(git --git-dir:*)",
       "Bash(git --work-tree:*)",
@@ -18,10 +18,33 @@
       "Bash(git add -A:*)",
       "Bash(git add --all:*)",
       "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./.envrc)",
-      "Read(./secrets/**)"
+      "Read(./.envrc.*)",
+      "Read(./secrets/**)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*key*)"
+    ],
+    "allow": [
+      "Read(./.env.example)"
     ]
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "language": "japanese",
+  "autoUpdatesChannel": "stable",
+  "model": "opus",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh ~/.claude/statusline-command.sh"
   }
 }

@@ -21,3 +21,4 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/starship.toml ~/.config/stars
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ripgreprc ~/.ripgreprc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/settings.json ~/.claude/settings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
