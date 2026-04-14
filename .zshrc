@@ -211,8 +211,6 @@ alias tkillserver='tmux kill-server'
 alias g='git'
 # -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
-# gl: git log (fzf) - 詳細なログ表示
-alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --stat -p --color=always {1} | delta" --bind "enter:execute(git show --stat -p {1} --color=always | delta --side-by-side --width \$(tput cols) | less -R)"'
 alias s='git status'
 alias di='git diff'
 # git branch + fzf + copy branch name
@@ -234,27 +232,6 @@ alias lf='git log --stat -p --follow'
 alias see='gh browse'
 alias pr='gh pr view --web $(git rev-parse --abbrev-ref HEAD)'
 alias che='gh pr checkout'
-
-# git status + fzf + diff preview (シンプル版)
-function gs() {
-  git status --porcelain | \
-  fzf --ansi \
-      --height 50% \
-      --preview-window 'right:50%' \
-      --header "Git Status with diff preview - Enter: copy filename and exit" \
-      --preview '
-        file=$(echo {} | cut -c4-)
-        git_status=$(echo {} | cut -c1-2)
-
-        if [[ "$git_status" == "??" ]]; then
-          echo "=== New file content ==="
-          bat --color=always --style=header,grid "$file" 2>/dev/null || cat "$file"
-        else
-          git diff --color=always "$file" 2>/dev/null || echo "No diff available"
-        fi
-      ' \
-      --bind 'enter:execute-silent(echo {} | cut -c4- | pbcopy && echo "Copied: $(echo {} | cut -c4-)")+abort'
-}
 
 # gd: git diff (fzf interactive)
 # 使い方: gd                  -> git diff (作業ツリーの変更)
@@ -330,10 +307,10 @@ function gd() {
       --bind "enter:execute(git diff --color=always $range -- {} | delta --side-by-side --width \$(tput cols) | less -R)"
 }
 
-# gshow: git show (fzf interactive)
-# 使い方: gshow          -> fzfでコミットを選択してファイル一覧へ
-#         gshow <commit> -> 指定コミットのファイル一覧へ
-function gshow() {
+# gl: git log/show (fzf interactive)
+# 使い方: gl          -> fzfでコミットを選択してファイル一覧へ
+#         gl <commit> -> 指定コミットのファイル一覧へ
+function gl() {
   local commit
 
   if [ $# -eq 0 ]; then
@@ -799,10 +776,8 @@ function help() {
   codev      checkout develop & merge origin
 
 [Git (fzf)]
-  gl         git log (Enter: side-by-side)
+  gl         git log → ファイル選択 (Enter: side-by-side)
   gd         git diff (Enter: side-by-side)
-  gshow      git show (Enter: side-by-side)
-  gs         git status + diff preview
   co         checkout branch
   lo         log (base branch比較)
   br         branch一覧 → コピー
