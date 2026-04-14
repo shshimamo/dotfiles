@@ -212,7 +212,7 @@ alias g='git'
 # -A:後, -B:前, -C:前後
 alias gg='git grep -B 0 -C 0 -A 3'
 # gl: git log (fzf) - 詳細なログ表示
-alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --stat -p --color=always {1} | delta" --bind "enter:execute(git show --stat -p {1} --color=always | delta | less -R)"'
+alias gl='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always | fzf --ansi --preview "git show --stat -p --color=always {1} | delta" --bind "enter:execute(git show --stat -p {1} --color=always | delta --side-by-side --width \$(tput cols) | less -R)"'
 alias s='git status'
 alias di='git diff'
 # git branch + fzf + copy branch name
@@ -273,7 +273,7 @@ function gd() {
         --header "git diff  (Enter: 詳細 / Ctrl+C: 終了)" \
         --preview 'st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {}; else git diff --color=always -- {} | delta; fi' \
         --preview-window 'right:70%' \
-        --bind 'enter:execute(st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {} | less; else git diff --color=always -- {} | delta | less -R; fi)'
+        --bind 'enter:execute(st=$(git status --porcelain -- {} 2>/dev/null | head -1 | cut -c1-2); if [ "$st" = "??" ]; then cat {} | less; else git diff --color=always -- {} | delta --side-by-side --width $(tput cols) | less -R; fi)'
     return
   elif [ "$1" = ".." ]; then
     local from to
@@ -327,7 +327,7 @@ function gd() {
       --header "diff: $range  (Enter: 詳細 / Ctrl+C: 終了)" \
       --preview "git diff --color=always $range -- {} | delta" \
       --preview-window 'right:70%' \
-      --bind "enter:execute(git diff --color=always $range -- {} | delta | less -R)"
+      --bind "enter:execute(git diff --color=always $range -- {} | delta --side-by-side --width \$(tput cols) | less -R)"
 }
 
 # gshow: git show (fzf interactive)
@@ -356,7 +356,7 @@ function gshow() {
       --header "show: $commit  (Enter: 詳細 / Ctrl+C: 終了)" \
       --preview "git show --color=always $commit -- {} | delta" \
       --preview-window 'right:70%' \
-      --bind "enter:execute(git show --color=always $commit -- {} | delta | less -R)"
+      --bind "enter:execute(git show --color=always $commit -- {} | delta --side-by-side --width \$(tput cols) | less -R)"
 }
 
 ########################################
@@ -781,6 +781,82 @@ alias procs='ps aux | fzf --header-lines=1 --preview "echo {}"'
 # docker コンテナ操作 (fzf)
 alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | fzf --header-lines=1 --preview "docker inspect {1}" | awk "{print \$1}"'
 alias dexec='container=$(docker ps --format "{{.Names}}" | fzf) && docker exec -it $container /bin/bash'
+
+function help() {
+  cat <<'HELP'
+[Git]
+  g          git
+  s          git status
+  di         git diff
+  gg         git grep
+  l          log --stat -p (base branch比較)
+  lf         log --stat -p --follow
+  show       git show --stat -p
+  ref        branch一覧 (日付・作者順)
+  lsmergepr  マージ済みPR一覧
+  com        checkout main & merge origin
+  comaster   checkout master & merge origin
+  codev      checkout develop & merge origin
+
+[Git (fzf)]
+  gl         git log (Enter: side-by-side)
+  gd         git diff (Enter: side-by-side)
+  gshow      git show (Enter: side-by-side)
+  gs         git status + diff preview
+  co         checkout branch
+  lo         log (base branch比較)
+  br         branch一覧 → コピー
+  gwt        git worktree管理
+
+[Git (stash/rebase)]
+  stshow     stash show -p
+  fixupstashautosquash  fixup + autosquash
+  resethard  git reset --hard (確認付き)
+
+[GitHub (gh)]
+  see        gh browse
+  pr         gh pr view --web
+  che        gh pr checkout
+
+[AWS]
+  ap         AWS profile切り替え (fzf)
+
+[k8s]
+  k          kubectl
+  kc         kubectl context切り替え (fzf)
+
+[Docker]
+  d          docker
+  fig        docker compose
+  dps        docker ps (fzf)
+  dexec      docker exec -it (fzf)
+
+[tmux]
+  tn         tmux new -s
+  ta         tmux a -t
+  trename    tmux rename -t
+  tkill      tmux kill-session -t
+  tls        tmux session選択 (fzf)
+  tabname    iTerm2タブ名変更
+
+[検索]
+  search     rg + fzf (コード検索)
+  searchf    fd + fzf (ファイル名検索)
+  searcht    言語別検索
+  todos      TODO/FIXME/HACK検索
+
+[移動]
+  ghl/repos  全リポジトリ検索 → 移動 (fzf)
+  proj       最近のプロジェクト → 移動 (fzf)
+  cdh        ディレクトリ履歴 → 移動 (fzf)
+
+[ツール]
+  his        コマンド履歴 (fzf)
+  envs       環境変数確認 (fzf)
+  ports      ポート使用状況 (fzf)
+  procs      プロセス検索 (fzf)
+HELP
+}
 
 ########################################
 # Added by the Heroku Toolbelt
