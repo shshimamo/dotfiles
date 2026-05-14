@@ -224,9 +224,9 @@ function br() {
 }
 alias ref="git for-each-ref --sort=committerdate refs/heads/ --format='%(authordate:short)(%(color:red)%(authordate:relative)%(color:reset)) [%(color:green)%(authorname)%(color:reset)] --> %(color:yellow)%(refname:short)'"
 alias show="git show --stat -p"
-alias com="git checkout main; git fetch; git merge origin/main"
-alias comaster="git checkout master; git fetch; git merge origin/master"
-alias codev="git checkout develop; git fetch; git merge origin/develop"
+alias com="git switch main; git fetch; git merge origin/main"
+alias comaster="git switch master; git fetch; git merge origin/master"
+alias codev="git switch develop; git fetch; git merge origin/develop"
 alias l='git log --stat --submodule -p --no-merges master..head'
 alias lf='git log --stat -p --follow'
 alias see='gh browse'
@@ -360,7 +360,7 @@ function co(){
     | sed 's/^[* ] //')
 
   if [ -n "$branch_name" ]; then
-    git checkout $branch_name
+    git switch $branch_name
   else
     echo 'branchが見つかりません'
   fi
