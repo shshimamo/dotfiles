@@ -339,6 +339,26 @@ function gl() {
 ########################################
 # Gitコマンド
 
+# fetch して switch (引数あり: 指定ブランチ、なし: fzfで選択)
+function cof(){
+  git fetch
+  if [ -n "$1" ]; then
+    git switch $1
+  else
+    branch_name=$(git branch -a --sort=-committerdate | grep -v HEAD | sed 's|remotes/origin/||' | sort -u | fzf \
+      --height 60% \
+      --preview 'branch=$(echo {} | sed "s/^[* ] //" | xargs);
+                 git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset %s" --date=format:"%m/%d %H:%M" --color=always -10 $branch' \
+      --preview-window=right:70% \
+      | sed "s/^[* ] //")
+    if [ -n "$branch_name" ]; then
+      git switch $branch_name
+    else
+      echo 'branchが見つかりません'
+    fi
+  fi
+}
+
 # checkout branch
 function co(){
   branch_name=$(git branch --sort=-committerdate | fzf \
