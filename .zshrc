@@ -798,7 +798,8 @@ function help() {
 [Git (fzf)]
   gl         git log → ファイル選択 (Enter: side-by-side)
   gd         git diff (Enter: side-by-side)
-  co         checkout branch
+  co         checkout branch (ローカル)
+  cof        fetch + checkout branch (ローカル+リモート)
   lo         log (base branch比較)
   br         branch一覧 → コピー
   gwt        git worktree管理
@@ -806,7 +807,7 @@ function help() {
 [Git (stash/rebase)]
   stshow     stash show -p
   fixupstashautosquash  fixup + autosquash
-  resethard  git reset --hard (確認付き)
+  resethard  git reset --hard origin/<current-branch>
 
 [GitHub (gh)]
   see        gh browse
@@ -831,6 +832,7 @@ function help() {
   ta         tmux a -t
   trename    tmux rename -t
   tkill      tmux kill-session -t
+  tkillserver  tmux kill-server
   tls        tmux session選択 (fzf)
   tabname    iTerm2タブ名変更
 
