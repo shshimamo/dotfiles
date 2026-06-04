@@ -581,7 +581,7 @@ function search() {
       --header "Directory: $(pwd)" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
-      --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
+      --bind 'enter:execute(bat --color=always --style=header,grid --highlight-line {2} {1})'
 }
 
 # searchf: ファイル名検索(fd + fzf + bat)
@@ -591,7 +591,7 @@ function searchf() {
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
       --header "Directory: $(pwd)" \
       --preview 'bat --color=always {} --style=header,grid' \
-      --bind 'enter:execute-silent(echo {} | pbcopy && echo "Copied: {}")'
+      --bind 'enter:execute(bat --color=always --style=header,grid {})'
 }
 
 # searcht: 言語別検索
@@ -612,7 +612,7 @@ function searcht() {
       --header "Directory: $(pwd) | Type: $file_type" \
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
-      --bind 'enter:execute-silent(echo {1} | pbcopy && echo "Copied: {1}")'
+      --bind 'enter:execute(bat --color=always --style=header,grid --highlight-line {2} {1})'
 }
 
 ########################################
@@ -886,6 +886,10 @@ eval $(/opt/homebrew/bin/brew shellenv)
 ########################################
 # mise
 eval "$(mise activate zsh)"
+
+########################################
+# direnv
+eval "$(direnv hook zsh)"
 
 ########################################
 # Docker
