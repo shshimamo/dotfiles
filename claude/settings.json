@@ -43,7 +43,16 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "todo@shshimamo-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "shshimamo-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/shshimamo/claude-plugins.git"
+      }
+    }
   },
   "language": "japanese",
   "autoUpdatesChannel": "stable"
