@@ -207,6 +207,12 @@ alias tkill='tmux kill-session -t'
 alias tkillserver='tmux kill-server'
 
 ########################################
+### Claude alias
+alias c='claude'
+alias cc='claude -c'
+alias cr='claude -r'
+
+########################################
 ### Git alias
 alias g='git'
 # -A:後, -B:前, -C:前後
