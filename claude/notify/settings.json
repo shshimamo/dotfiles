@@ -1,0 +1,34 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh 入力待ち"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook Stop --claude-pid $PPID"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/notify.sh 許可待ち"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook PermissionRequest --claude-pid $PPID"
+          }
+        ]
+      }
+    ]
+  }
+}
