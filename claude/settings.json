@@ -3,7 +3,7 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "MAX_THINKING_TOKENS": "10000",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75"
   },
   "permissions": {
     "deny": [
@@ -36,7 +36,64 @@
       "Read(**/*key*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook SessionStart --claude-pid $PPID"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook UserPromptSubmit --claude-pid $PPID"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook AskUserQuestion --claude-pid $PPID"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook Stop --claude-pid $PPID"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-tabs/bin/claude-tabs hook PermissionRequest --claude-pid $PPID"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "sh ~/.claude/statusline-command.sh"
@@ -44,13 +101,15 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
-    "todo@shshimamo-plugins": true
+    "todo@shshimamo-plugins": true,
+    "prompt-insight@shshimamo-plugins": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "shshimamo-plugins": {
       "source": {
-        "source": "git",
-        "url": "https://github.com/shshimamo/claude-plugins.git"
+        "source": "github",
+        "repo": "shshimamo/claude-plugins"
       }
     }
   },
