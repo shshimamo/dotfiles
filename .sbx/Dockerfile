@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     delta \
     tmux \
     curl \
+    jq \
+    make \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
 # fd-find, bat は Debian系で別名なのでシンボリックリンク作成

@@ -717,15 +717,17 @@ function set_random_tab_color() {
   )
 
   # ディレクトリパスからハッシュ値を生成し、色のインデックスを決定
-  local hash=$(echo -n "$PWD" | md5 2>/dev/null || md5sum | cut -d' ' -f1)
+  local hash=$(echo -n "$PWD" | (md5 2>/dev/null || md5sum | cut -d' ' -f1))
   local hash_num=$((0x${hash:0:8}))
   local color_index=$((hash_num % ${#colors[@]}))
   local selected_color=${colors[$color_index]}
 
   # iTerm2にタブ色を設定
-  printf "\e]6;1;bg;red;brightness;%s\a" "${selected_color%%,*}"
-  printf "\e]6;1;bg;green;brightness;%s\a" "${selected_color#*,}"; selected_color="${selected_color#*,}"
-  printf "\e]6;1;bg;blue;brightness;%s\a" "${selected_color#*,}"
+  local r="${selected_color%%,*}"
+  local rest="${selected_color#*,}"
+  local g="${rest%%,*}"
+  local b="${rest#*,}"
+  _set_iterm_tab_color "$r" "$g" "$b"
 }
 
 # gwt: Git worktree管理
@@ -908,6 +910,10 @@ function create-sbx() {
     return 1
   fi
 
+  # sandbox 名を第1引数のディレクトリ名から生成
+  local primary=$(cd "$1" 2>/dev/null && pwd || echo "$1")
+  local name=$(basename "$primary")
+
   # 引数パス(primary workspace)を先に、デフォルトマウントを後に
   local paths=("$@")
   if [[ -n "$SBX_DEFAULT_MOUNTS" ]]; then
@@ -916,13 +922,20 @@ function create-sbx() {
     done
   fi
 
-  sbx create -t "$template" claude "${paths[@]}"
+  sbx create --name "$name" -t "$template" claude "${paths[@]}" || return 1
+
+  # setup-dotfiles + plugins install
+  sbx exec "$name" sh -c 'command -v setup-dotfiles >/dev/null && setup-dotfiles 2>/dev/null'
+  sbx exec "$name" claude plugins marketplace add /Users/shshimamo/devel/src/github.com/shshimamo/claude-plugins 2>/dev/null
+  for plugin in /Users/shshimamo/devel/src/github.com/shshimamo/claude-plugins/plugins/*/; do
+    sbx exec "$name" claude plugins install "$(basename "$plugin")@shshimamo-plugins" 2>/dev/null
+  done
 }
 
 # exec-sbx: fzf で sandbox 選択して zsh に入る
 function exec-sbx() {
   local sandbox=$(sbx ls -q | fzf --height 50% --header "Select sandbox")
-  [[ -n "$sandbox" ]] && sbx exec -it "$sandbox" sh -c 'command -v setup-dotfiles >/dev/null && setup-dotfiles 2>/dev/null; exec zsh'
+  [[ -n "$sandbox" ]] && sbx exec -it "$sandbox" zsh
 }
 
 # rm-sbx: fzf で sandbox 選択して削除
