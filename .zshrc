@@ -717,7 +717,7 @@ function set_random_tab_color() {
   )
 
   # ディレクトリパスからハッシュ値を生成し、色のインデックスを決定
-  local hash=$(echo -n "$PWD" | md5)
+  local hash=$(echo -n "$PWD" | md5 2>/dev/null || md5sum | cut -d' ' -f1)
   local hash_num=$((0x${hash:0:8}))
   local color_index=$((hash_num % ${#colors[@]}))
   local selected_color=${colors[$color_index]}
@@ -858,7 +858,77 @@ function help() {
   envs       環境変数確認 (fzf)
   ports      ポート使用状況 (fzf)
   procs      プロセス検索 (fzf)
+
+[sbx (Docker Sandboxes)]
+  build-sbx-template  Dockerfile からテンプレートをビルド・登録
+  create-sbx          テンプレート+デフォルトマウントで sandbox 作成
+  exec-sbx            sandbox 選択 → zsh で入る (fzf)
+  rm-sbx              sandbox 選択 → 削除 (fzf)
+  env: SBX_DEFAULT_MOUNTS, SBX_TEMPLATE, SBX_DOCKERFILE
 HELP
+}
+
+########################################
+# sbx (Docker Sandboxes)
+# 環境変数:
+#   SBX_DEFAULT_MOUNTS - デフォルトマウントパス (スペース区切り, 例: "$HOME/dotfiles $HOME/shared:ro")
+#   SBX_TEMPLATE       - テンプレート名 (デフォルト: my-sbx:latest)
+#   SBX_DOCKERFILE     - Dockerfile パス (デフォルト: ~/.sbx/Dockerfile)
+
+# build-sbx-template: Dockerfile からテンプレートをビルドして sbx に登録
+function build-sbx-template() {
+  local dockerfile="${1:-${SBX_DOCKERFILE:-$HOME/.sbx/Dockerfile}}"
+  local tag="${2:-${SBX_TEMPLATE:-my-sbx:latest}}"
+
+  if [[ ! -f "$dockerfile" ]]; then
+    echo "Dockerfile not found: $dockerfile"
+    return 1
+  fi
+
+  # シンボリックリンクを解決して実体パスを使う
+  local resolved=$(readlink -f "$dockerfile" 2>/dev/null || greadlink -f "$dockerfile" 2>/dev/null || realpath "$dockerfile")
+
+  echo "Building template '$tag' from $resolved ..."
+  local tmpfile=$(mktemp /tmp/sbx-template.XXXXXX)
+
+  docker build -t "$tag" -f "$resolved" "$(dirname "$resolved")" && \
+  docker save "$tag" -o "$tmpfile" && \
+  sbx template load "$tmpfile" && \
+  rm -f "$tmpfile" && \
+  echo "Template '$tag' loaded successfully"
+}
+
+# create-sbx: テンプレート + 引数パス(primary) + デフォルトマウントで sandbox 作成
+function create-sbx() {
+  local template="${SBX_TEMPLATE:-my-sbx:latest}"
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: create-sbx PATH [PATH...]"
+    echo "SBX_DEFAULT_MOUNTS も追加でマウントされる"
+    return 1
+  fi
+
+  # 引数パス(primary workspace)を先に、デフォルトマウントを後に
+  local paths=("$@")
+  if [[ -n "$SBX_DEFAULT_MOUNTS" ]]; then
+    for mount in ${(s: :)SBX_DEFAULT_MOUNTS}; do
+      paths+=("$mount")
+    done
+  fi
+
+  sbx create -t "$template" claude "${paths[@]}"
+}
+
+# exec-sbx: fzf で sandbox 選択して zsh に入る
+function exec-sbx() {
+  local sandbox=$(sbx ls -q | fzf --height 50% --header "Select sandbox")
+  [[ -n "$sandbox" ]] && sbx exec -it "$sandbox" sh -c 'command -v setup-dotfiles >/dev/null && setup-dotfiles 2>/dev/null; exec zsh'
+}
+
+# rm-sbx: fzf で sandbox 選択して削除
+function rm-sbx() {
+  local sandbox=$(sbx ls -q | fzf --height 50% --header "Select sandbox to remove")
+  [[ -n "$sandbox" ]] && sbx rm "$sandbox"
 }
 
 ########################################

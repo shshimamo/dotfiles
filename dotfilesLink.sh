@@ -22,3 +22,9 @@ ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.ripgreprc ~/.ripgreprc
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/settings.json ~/.claude/settings.json
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
+
+if [ ! -e ~/.sbx ]; then
+  mkdir -p ~/.sbx
+fi
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.sbx/Dockerfile ~/.sbx/Dockerfile
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.sbx/setup-dotfiles.sh ~/.sbx/setup-dotfiles.sh

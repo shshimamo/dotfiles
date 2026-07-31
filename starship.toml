@@ -10,7 +10,11 @@ add_newline = true
 format = """
 [────────────────────────────────────────────](dimmed white)
 $all\
-$character"""
+${env_var.SBX}$character"""
+
+[env_var.SBX]
+format = '[\(sbx\) ](bold yellow)'
+style = 'bold yellow'
 
 [git_branch]
 symbol = '* '
