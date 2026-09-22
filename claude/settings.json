@@ -3,14 +3,13 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "MAX_THINKING_TOKENS": "10000",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75"
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75",
+    "CLAUDE_CODE_THRIFTY_SONIC": "0"
   },
   "permissions": {
     "deny": [
       "Bash(sudo:*)",
       "Bash(bash -c:*)",
-      "Bash(echo:*)",
-      "Bash(cd:*)",
       "Bash(rm -rf *)",
       "Bash(rm -rf /)",
       "Bash(rm -rf ~)",
@@ -38,46 +37,13 @@
   },
   "model": "opus",
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude-tabs/bin/claude-tabs hook SessionStart --claude-pid $PPID"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude-tabs/bin/claude-tabs hook UserPromptSubmit --claude-pid $PPID"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "AskUserQuestion",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude-tabs/bin/claude-tabs hook AskUserQuestion --claude-pid $PPID"
-          }
-        ]
-      }
-    ],
     "Stop": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude-tabs/bin/claude-tabs hook Stop --claude-pid $PPID"
+            "command": "~/.claude-sbx/bin/notify.sh Stop"
           }
         ]
       }
@@ -88,7 +54,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude-tabs/bin/claude-tabs hook PermissionRequest --claude-pid $PPID"
+            "command": "~/.claude-sbx/bin/notify.sh PermissionRequest"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude-sbx/bin/notify.sh AskUserQuestion"
           }
         ]
       }
@@ -114,5 +91,8 @@
     }
   },
   "language": "japanese",
-  "autoUpdatesChannel": "stable"
+  "autoUpdatesChannel": "stable",
+  "preferredNotifChannel": "terminal_bell",
+  "agentPushNotifEnabled": true,
+  "tui": "fullscreen"
 }
