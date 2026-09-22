@@ -17,3 +17,5 @@ vendor/cache/*
 
 # claude用参考資料など
 .reference-for-claude
+
+**/.claude/settings.local.json
