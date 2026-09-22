@@ -23,35 +23,12 @@ ln -sfv "$DOTFILES/starship.toml" ~/.config/starship.toml
 mkdir -p ~/.claude
 cp -v "$DOTFILES/claude/settings.json" ~/.claude/settings.json
 
-# claude-plugins, claude-tabs のリンク
+# claude-plugins のリンク
 ln -sfv /Users/shshimamo/.claude-plugins ~/.claude-plugins
-ln -sfv /Users/shshimamo/.claude-tabs ~/.claude-tabs
 
-# hooks 設定:
-#   1. ホスト用 claude-tabs hooks を削除
-#   2. linux 用 claude-tabs hooks を追加
-#   3. prompt-insight hook を追加
+# hooks 設定: prompt-insight hook を追加
+# （通知・ステータス表示の hooks は claude-sbx の post_create_cmds が設定する）
 if command -v jq >/dev/null; then
-  # 1. ホスト用 claude-tabs hooks を削除
-  jq '
-    .hooks //= {} |
-    .hooks |= with_entries(
-      .value |= map(select(.hooks | all(.command | contains("claude-tabs") | not)))
-    )
-  ' ~/.claude/settings.json > ~/.claude/settings.json.tmp && mv ~/.claude/settings.json.tmp ~/.claude/settings.json
-
-  # 2. linux 用 claude-tabs hooks を追加
-  CLAUDE_TABS="/Users/shshimamo/devel/src/github.com/shshimamo/claude-tabs"
-  HOOKS_JSON="$CLAUDE_TABS/hooks-setup-linux.json"
-  if [ -f "$HOOKS_JSON" ]; then
-    jq --slurpfile h "$HOOKS_JSON" '
-      reduce ($h[0].hooks | to_entries[]) as $e (.;
-        .hooks[$e.key] = ((.hooks[$e.key] // []) + $e.value)
-      )
-    ' ~/.claude/settings.json > ~/.claude/settings.json.tmp && mv ~/.claude/settings.json.tmp ~/.claude/settings.json
-  fi
-
-  # 3. prompt-insight hook を追加
   PROMPT_HOOK="bash ~/.claude-plugins/prompt-insight/hook.sh"
   jq --arg cmd "$PROMPT_HOOK" '
     .hooks.UserPromptSubmit //= [] |
