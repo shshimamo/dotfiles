@@ -949,14 +949,14 @@ function rm-sbx() {
   [[ -n "$sandbox" ]] && sbx rm "$sandbox"
 }
 
-# claude-tabs 環境変数
-# export CLAUDE_TABS_WORKTREE_BASE="$(ghq root)/worktrees"  # デフォルト
-# CLAUDE_TABS_SBX_TEMPLATE, CLAUDE_TABS_SBX_DEFAULT_MOUNTS は ~/.zsh_local/sbx.zsh で設定
-export CLAUDE_TABS_CLAUDE_PLUGINS_DIRS="$HOME/devel/src/github.com/shshimamo/claude-plugins"
+# worktree / sbx 環境変数
+# export WORKTREE_BASE="$(ghq root)/worktrees"  # デフォルト
+# SBX_TEMPLATE, SBX_DEFAULT_MOUNTS は ~/.zsh_local/sbx.zsh で設定
+export CLAUDE_PLUGINS_DIRS="$HOME/devel/src/github.com/shshimamo/claude-plugins"
 
 # wtcd: worktree一覧からfzfで選択してcd
 function wtcd() {
-  local wt_base="${CLAUDE_TABS_WORKTREE_BASE:-$(ghq root)/worktrees}"
+  local wt_base="${WORKTREE_BASE:-$(ghq root)/worktrees}"
   if [[ ! -d "$wt_base" ]]; then
     echo "No worktrees directory: $wt_base"
     return 1
@@ -972,7 +972,7 @@ function wtcd() {
 
 # wtrm: worktree + sbx をfzfで選択して削除
 function wtrm() {
-  local wt_base="${CLAUDE_TABS_WORKTREE_BASE:-$(ghq root)/worktrees}"
+  local wt_base="${WORKTREE_BASE:-$(ghq root)/worktrees}"
   if [[ ! -d "$wt_base" ]]; then
     echo "No worktrees directory: $wt_base"
     return 1
@@ -1017,10 +1017,10 @@ function wt-sbx() {
     return 1
   fi
 
-  local wt_base="${CLAUDE_TABS_WORKTREE_BASE:-$(ghq root)/worktrees}"
+  local wt_base="${WORKTREE_BASE:-$(ghq root)/worktrees}"
   local wt_path="${wt_base}/${repo}/${branch}"
   local sbx_name="${repo}-${branch}"
-  local template="${CLAUDE_TABS_SBX_TEMPLATE:-my-sbx:latest}"
+  local template="${SBX_TEMPLATE:-my-sbx:latest}"
 
   # worktree作成
   if [[ -d "$wt_path" ]]; then
@@ -1040,8 +1040,8 @@ function wt-sbx() {
 
   # sbx create (create-sbx相当)
   local paths=("$wt_path")
-  if [[ -n "$CLAUDE_TABS_SBX_DEFAULT_MOUNTS" ]]; then
-    for mount in ${(s: :)CLAUDE_TABS_SBX_DEFAULT_MOUNTS}; do
+  if [[ -n "$SBX_DEFAULT_MOUNTS" ]]; then
+    for mount in ${(s: :)SBX_DEFAULT_MOUNTS}; do
       paths+=("$mount")
     done
   fi
@@ -1049,11 +1049,11 @@ function wt-sbx() {
   sbx create --name "$sbx_name" -t "$template" claude "${paths[@]}" || return 1
 
   # setup command + plugins
-  if [[ -n "$CLAUDE_TABS_SBX_SETUP_CMD" ]]; then
-    sbx exec "$sbx_name" sh -c "$CLAUDE_TABS_SBX_SETUP_CMD" 2>/dev/null
+  if [[ -n "$SBX_SETUP_CMD" ]]; then
+    sbx exec "$sbx_name" sh -c "$SBX_SETUP_CMD" 2>/dev/null
   fi
-  if [[ -n "$CLAUDE_TABS_CLAUDE_PLUGINS_DIRS" ]]; then
-    for plugins_dir in ${(s: :)CLAUDE_TABS_CLAUDE_PLUGINS_DIRS}; do
+  if [[ -n "$CLAUDE_PLUGINS_DIRS" ]]; then
+    for plugins_dir in ${(s: :)CLAUDE_PLUGINS_DIRS}; do
       local marketplace_name=$(python3 -c "import json; print(json.load(open('${plugins_dir}/.claude-plugin/marketplace.json'))['name'])" 2>/dev/null)
       if [[ -n "$marketplace_name" ]]; then
         sbx exec "$sbx_name" claude plugins marketplace add "$plugins_dir" 2>/dev/null
@@ -1134,4 +1134,3 @@ export PATH="/Users/shshimamo/.local/bin:$PATH"
 ########################################
 # 1password cli
 source /Users/shshimamo/.config/op/plugins.sh
-
