@@ -22,7 +22,10 @@ symbol = '* '
 [aws]
 # symbol = '🅰 '
 disabled = false
-format = 'on [$symbol$profile]($style) '
+# aws login の鍵（~/.aws/login/cache）は Starship が見つけられないので、プロファイル名だけで表示する
+force_display = true
+# プロファイルが無いときは何も出さない（force_display だけだと空の ☁️ が出る）
+format = '(on [$symbol$profile]($style) )'
 style = 'bold blue'
 
 [aws.profile_aliases]
@@ -32,10 +35,13 @@ Enterprise_Naming_Scheme-voidstars = 'void**'
 disabled = true
 
 [kubernetes]
-format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+format = 'on [⛵ ($user on )$context \($namespace\)]($style) '
+style = 'dimmed green'
 disabled = false
 contexts = [
   { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
+  # EKS は ARN が長いので短くし、課金中と気づけるよう赤にする
+  { context_pattern = "eks-.*", user_alias = "", style = "bold red" },
 ]
 
 # [golang]
