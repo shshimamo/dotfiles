@@ -1130,7 +1130,3 @@ export FZF_DEFAULT_OPTS='--layout=reverse --border -i --bind ctrl-d:half-page-do
 ########################################
 # claude
 export PATH="/Users/shshimamo/.local/bin:$PATH"
-
-########################################
-# 1password cli
-source /Users/shshimamo/.config/op/plugins.sh

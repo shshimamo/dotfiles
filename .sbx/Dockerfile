@@ -44,10 +44,6 @@ RUN mkdir -p /opt/homebrew/bin && \
     printf '#!/bin/sh\n' > /opt/homebrew/bin/brew && \
     chmod +x /opt/homebrew/bin/brew
 
-# 1password CLI のソース先を空ファイルで用意（エラー回避）
-RUN mkdir -p /Users/shshimamo/.config/op && \
-    touch /Users/shshimamo/.config/op/plugins.sh
-
 # dotfiles リンク用スクリプト
 COPY setup-dotfiles.sh /usr/local/bin/setup-dotfiles
 RUN chmod +x /usr/local/bin/setup-dotfiles
