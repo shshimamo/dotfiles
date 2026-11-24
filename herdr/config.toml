@@ -1,0 +1,9 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+j"
+next_tab = ["prefix+n", "prefix+ctrl+n"]
+previous_tab = ["prefix+p", "prefix+ctrl+p"]
+
+[ui]
+agent_panel_sort = "spaces"

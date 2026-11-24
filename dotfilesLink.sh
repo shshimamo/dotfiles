@@ -28,3 +28,6 @@ if [ ! -e ~/.sbx ]; then
 fi
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.sbx/Dockerfile ~/.sbx/Dockerfile
 ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/.sbx/setup-dotfiles.sh ~/.sbx/setup-dotfiles.sh
+
+mkdir -p ~/.config/herdr
+ln -ivs $ghqroot/src/github.com/shshimamo/dotfiles/herdr/config.toml ~/.config/herdr/config.toml
