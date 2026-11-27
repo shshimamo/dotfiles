@@ -212,6 +212,36 @@ alias c='claude'
 alias cc='claude -c'
 alias cr='claude -r'
 
+# 過去の Claude Code セッションを fzf で探し、再開コマンドをクリップボードにコピー
+# 名前は /rename の名前 → 自動タイトル → 最後のプロンプトの順で使う
+cs() {
+  local f selected
+  selected=$(
+    for f in $(ls -t ~/.claude/projects/*/*.jsonl(N)); do
+      jq -rn --arg path "$f" --arg mtime "$(stat -f %m "$f")" '
+        reduce inputs as $r ({};
+          if $r.type == "custom-title" then .ct = $r.customTitle
+          elif $r.type == "ai-title" then .at = $r.aiTitle
+          elif $r.type == "last-prompt" then .lp = $r.lastPrompt
+          else . end
+          | if .cwd == null and $r.cwd then .cwd = $r.cwd else . end)
+        | select(.cwd)
+        | [$path, .cwd, ($path | split("/")[-1] | rtrimstr(".jsonl")),
+           ($mtime | tonumber | strflocaltime("%m/%d %H:%M")),
+           (.cwd | sub("^" + env.HOME; "~")),
+           ((.ct // .at // .lp // "") | gsub("[\t\n]"; " "))]
+        | @tsv' "$f" 2>/dev/null
+    done | fzf --delimiter '\t' --with-nth 4.. --tabstop 2 \
+      --preview "jq -r 'select(.type == \"user\" and (.message.content | type) == \"string\") | \"> \" + .message.content' {1} | tail -40" \
+      --preview-window 'down,50%,wrap'
+  ) || return
+  local cwd=${${selected#*$'\t'}%%$'\t'*}
+  local id=$(cut -f3 <<< "$selected")
+  local cmd="cd ${(q-)cwd} && claude --resume $id"
+  print -rn -- "$cmd" | pbcopy
+  echo "copied: $cmd"
+}
+
 ########################################
 ### Git alias
 alias g='git'
